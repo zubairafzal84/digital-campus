@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { createServerClient } from '@/lib/supabase/server'
+import { NextResponse } from 'next/server'
 
-export async function POST(request: NextRequest) {
-  const supabase = await createServerClient()
-  await supabase.auth.signOut()
-  return NextResponse.redirect(new URL('/', request.url))
+// Sign-out is handled by Clerk's UserButton component.
+export async function POST() {
+  return NextResponse.json(
+    { error: 'Sign-out is handled by Clerk. Call signOut() from @clerk/nextjs.' },
+    { status: 410 },
+  )
 }

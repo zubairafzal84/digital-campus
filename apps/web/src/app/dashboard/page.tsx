@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { currentUser } from '@clerk/nextjs/server'
 import { SiteNav } from '@/components/layout/SiteNav'
 import styles from './dashboard.module.css'
 
@@ -8,29 +9,42 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const user = await currentUser()
+  const firstName = user?.firstName ?? 'Student'
+  const initials  = ((user?.firstName?.[0] ?? '') + (user?.lastName?.[0] ?? '')).toUpperCase() || 'DK'
+  const avatarUrl = user?.imageUrl
+
+  const hour = new Date().getHours()
+  const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening'
+
   return (
     <>
       <SiteNav />
       <div className={styles.layout}>
         <nav className={styles.sidebar} aria-label="Dashboard navigation">
           <div className={styles.sideUser}>
-            <div className={styles.avatar}>A</div>
+            <div className={styles.avatarWrap}>
+              {avatarUrl
+                ? <img src={avatarUrl} alt={firstName} className={styles.avatarImg} />
+                : <div className={styles.avatar}>{initials}</div>
+              }
+            </div>
             <div>
-              <p className={styles.userName}>Alex Martin</p>
-              <p className={styles.userSchool}>UBC · 3rd year</p>
+              <p className={styles.userName}>{user ? `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim() : 'Student'}</p>
+              <p className={styles.userSchool}>Digital Kampus</p>
             </div>
           </div>
           <ul className={styles.sideLinks}>
             {[
-              { href: '/dashboard', label: 'Overview', icon: '◉' },
-              { href: '/dashboard/grades', label: 'Grades', icon: '📊' },
-              { href: '/dashboard/clubs', label: 'Clubs', icon: '🤝' },
-              { href: '/dashboard/scholarships', label: 'Scholarships', icon: '🎓' },
-              { href: '/housing', label: 'Housing', icon: '🏠' },
-              { href: '/dashboard/chat', label: 'Messages', icon: '💬' },
-              { href: '/dashboard/notifications', label: 'Notifications', icon: '🔔' },
-              { href: '/profile', label: 'Profile', icon: '👤' },
+              { href: '/dashboard',              label: 'Overview',       icon: '◉' },
+              { href: '/dashboard/grades',       label: 'Grades',         icon: '📊' },
+              { href: '/dashboard/clubs',        label: 'Clubs',          icon: '🤝' },
+              { href: '/dashboard/scholarships', label: 'Scholarships',   icon: '🎓' },
+              { href: '/dashboard/housing',       label: 'Housing',        icon: '🏠' },
+              { href: '/dashboard/chat',         label: 'Messages',       icon: '💬' },
+              { href: '/dashboard/notifications',label: 'Notifications',  icon: '🔔' },
+              { href: '/profile',                label: 'Profile',        icon: '👤' },
             ].map(({ href, label, icon }) => (
               <li key={href}>
                 <Link
@@ -48,56 +62,32 @@ export default function DashboardPage() {
         <main className={styles.main}>
           <div className={styles.topBar}>
             <div>
-              <h1 className={styles.h1}>Good morning, Alex 👋</h1>
-              <p className={styles.sub}>Here's what's happening at UBC today.</p>
+              <h1 className={styles.h1}>{greeting}, {firstName} 👋</h1>
+              <p className={styles.sub}>Welcome to your Digital Kampus dashboard.</p>
             </div>
           </div>
 
-          <div className={styles.grid}>
-            {/* Grades card */}
-            <section className={styles.card} aria-labelledby="grades-h">
-              <div className={styles.cardHeader}>
-                <h2 className={styles.cardH} id="grades-h">Current grades</h2>
-                <Link href="/dashboard/grades" className={styles.cardLink}>View all →</Link>
-              </div>
-              <div className={styles.gradeList}>
-                {[
-                  { code: 'CPSC 310', name: 'Software Engineering', grade: 87, letter: 'A' },
-                  { code: 'CPSC 340', name: 'ML & Data Mining', grade: 91, letter: 'A+' },
-                  { code: 'MATH 221', name: 'Linear Algebra', grade: 78, letter: 'B+' },
-                ].map(({ code, name, grade, letter }) => (
-                  <div key={code} className={styles.gradeRow}>
-                    <div className={styles.gradeInfo}>
-                      <span className={styles.courseCode}>{code}</span>
-                      <span className={styles.courseName}>{name}</span>
-                    </div>
-                    <div className={styles.gradeRight}>
-                      <div className={styles.progressBar}>
-                        <div className={styles.progressFill} style={{ width: `${grade}%` }} />
-                      </div>
-                      <span className={styles.gradeNum}>{grade}%</span>
-                      <span className={styles.gradeLetter}>{letter}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className={styles.cardFooter}>
-                <span className={styles.gpa}>GPA: 3.7 / 4.0</span>
-                <span className={styles.gpaTrend}>↑ +0.1 this term</span>
-              </div>
-            </section>
+          {/* Verification upsell */}
+          <div className={styles.verifyBanner}>
+            <span className={styles.verifyIcon}>🎓</span>
+            <div>
+              <strong>Verify your student status</strong> to unlock scholarship matching and trusted peer connections.
+            </div>
+            <Link href="/profile#education" className={styles.verifyBtn}>Verify now →</Link>
+          </div>
 
+          <div className={styles.grid}>
             {/* Scholarships card */}
             <section className={styles.card} aria-labelledby="funding-h">
               <div className={styles.cardHeader}>
                 <h2 className={styles.cardH} id="funding-h">Matched scholarships</h2>
-                <Link href="/scholarships" className={styles.cardLink}>See all →</Link>
+                <Link href="/dashboard/scholarships" className={styles.cardLink}>See all →</Link>
               </div>
               <div className={styles.fundingList}>
                 {[
-                  { name: 'Trek Excellence Scholarship', amount: 5000, match: 96, deadline: 'Jan 15' },
-                  { name: 'UBC International Student Award', amount: 8000, match: 88, deadline: 'Feb 1' },
-                  { name: 'BC Access Grant', amount: 4000, match: 82, deadline: 'Rolling' },
+                  { name: 'Vanier Canada Graduate Scholarships', amount: 50000, match: 94, deadline: 'Nov 1' },
+                  { name: 'NSERC Postgraduate Scholarships', amount: 21000, match: 87, deadline: 'Oct 15' },
+                  { name: 'RBC Future Launch Scholarship', amount: 5000, match: 78, deadline: 'Apr 30' },
                 ].map(({ name, amount, match, deadline }) => (
                   <div key={name} className={styles.fundingRow}>
                     <div className={styles.fundingInfo}>
@@ -111,30 +101,34 @@ export default function DashboardPage() {
                   </div>
                 ))}
               </div>
-              <Link href="/scholarships" className={styles.ctaFull}>Match more scholarships →</Link>
+              <p className={styles.freeNote}>Scholarship matching is always free.</p>
+              <Link href="/dashboard/scholarships" className={styles.ctaFull}>View all matched scholarships →</Link>
             </section>
 
-            {/* Clubs / social card */}
+            {/* Grades card */}
+            <section className={styles.card} aria-labelledby="grades-h">
+              <div className={styles.cardHeader}>
+                <h2 className={styles.cardH} id="grades-h">Grades</h2>
+                <Link href="/dashboard/grades" className={styles.cardLink}>View all →</Link>
+              </div>
+              <div className={styles.emptyState}>
+                <span className={styles.emptyIcon}>📊</span>
+                <p>Add your courses to start tracking grades.</p>
+                <Link href="/dashboard/grades" className={styles.emptyLink}>Add courses →</Link>
+              </div>
+            </section>
+
+            {/* Clubs card */}
             <section className={styles.card} aria-labelledby="clubs-h">
               <div className={styles.cardHeader}>
-                <h2 className={styles.cardH} id="clubs-h">Your clubs</h2>
+                <h2 className={styles.cardH} id="clubs-h">Clubs</h2>
                 <Link href="/clubs" className={styles.cardLink}>Browse →</Link>
               </div>
-              <div className={styles.clubList}>
-                {[
-                  { name: 'UBC Computer Science Club', members: 340, nextEvent: 'Hackathon — Nov 8' },
-                  { name: 'UBC Hiking Club', members: 520, nextEvent: 'Garibaldi hike — Nov 2' },
-                ].map(({ name, members, nextEvent }) => (
-                  <div key={name} className={styles.clubRow}>
-                    <div className={styles.clubIcon}>{name.charAt(0)}</div>
-                    <div className={styles.clubInfo}>
-                      <span className={styles.clubName}>{name}</span>
-                      <span className={styles.clubMeta}>{members} members · {nextEvent}</span>
-                    </div>
-                  </div>
-                ))}
+              <div className={styles.emptyState}>
+                <span className={styles.emptyIcon}>🤝</span>
+                <p>Join clubs to meet students with shared interests.</p>
+                <Link href="/clubs" className={styles.emptyLink}>Browse clubs →</Link>
               </div>
-              <Link href="/clubs" className={styles.ctaFull}>Discover more clubs →</Link>
             </section>
 
             {/* Messages card */}
@@ -143,21 +137,10 @@ export default function DashboardPage() {
                 <h2 className={styles.cardH} id="chat-h">Messages</h2>
                 <Link href="/dashboard/chat" className={styles.cardLink}>Open inbox →</Link>
               </div>
-              <div className={styles.msgList}>
-                {[
-                  { from: 'Jordan Lee', preview: 'Hey, are you going to the hackathon?', time: '2h ago', unread: true },
-                  { from: 'CS Club Announcements', preview: 'New event posted: AI Workshop Nov 15', time: '5h ago', unread: true },
-                  { from: 'Housing Office', preview: 'Your application has been received.', time: 'Yesterday', unread: false },
-                ].map(({ from, preview, time, unread }) => (
-                  <div key={from} className={`${styles.msgRow} ${unread ? styles.msgUnread : ''}`}>
-                    <div className={styles.msgAvatar}>{from.charAt(0)}</div>
-                    <div className={styles.msgInfo}>
-                      <div className={styles.msgFrom}>{from} {unread && <span className={styles.unreadDot} />}</div>
-                      <div className={styles.msgPreview}>{preview}</div>
-                    </div>
-                    <span className={styles.msgTime}>{time}</span>
-                  </div>
-                ))}
+              <div className={styles.emptyState}>
+                <span className={styles.emptyIcon}>💬</span>
+                <p>Connect with students to start messaging.</p>
+                <Link href="/schools" className={styles.emptyLink}>Find students →</Link>
               </div>
             </section>
           </div>

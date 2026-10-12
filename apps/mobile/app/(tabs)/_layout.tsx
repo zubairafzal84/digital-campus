@@ -20,11 +20,12 @@ export default function TabLayout() {
         },
       }}
     >
-      <Tabs.Screen name="index" options={{ title: 'Home', tabBarIcon: ({ color }) => <TabIcon label="◉" color={color} /> }} />
-      <Tabs.Screen name="grades" options={{ title: 'Grades', tabBarIcon: ({ color }) => <TabIcon label="📊" color={color} /> }} />
-      <Tabs.Screen name="clubs" options={{ title: 'Clubs', tabBarIcon: ({ color }) => <TabIcon label="🤝" color={color} /> }} />
+      <Tabs.Screen name="index"   options={{ title: 'Home',    tabBarIcon: ({ color }) => <TabIcon label="◉"  color={color} /> }} />
+      <Tabs.Screen name="grades"  options={{ title: 'Grades',  tabBarIcon: ({ color }) => <TabIcon label="📊" color={color} /> }} />
+      <Tabs.Screen name="clubs"   options={{ title: 'Clubs',   tabBarIcon: ({ color }) => <TabIcon label="🤝" color={color} /> }} />
       <Tabs.Screen name="funding" options={{ title: 'Funding', tabBarIcon: ({ color }) => <TabIcon label="🎓" color={color} /> }} />
-      <Tabs.Screen name="chat" options={{ title: 'Chat', tabBarIcon: ({ color }) => <TabIcon label="💬" color={color} /> }} />
+      <Tabs.Screen name="chat"    options={{ title: 'Chat',    tabBarIcon: ({ color }) => <TabIcon label="💬" color={color} /> }} />
+      <Tabs.Screen name="profile" options={{ title: 'Profile', tabBarIcon: ({ color }) => <TabIcon label="👤" color={color} /> }} />
     </Tabs>
   )
 }

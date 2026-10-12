@@ -7,7 +7,7 @@ const SCHOOL_SLUGS = [
   'queens', 'ualberta', 'uvic', 'dal', 'bcit', 'seneca', 'humber',
 ]
 
-const COMPARE_SLUGS = ['ubc-vs-sfu', 'uoft-vs-ubc', 'mcgill-vs-uoft', 'waterloo-vs-uoft']
+const COMPARE_SLUGS = ['ubc-vs-sfu', 'uoft-vs-ubc', 'uoft-vs-mcgill', 'sfu-vs-uvic']
 
 const HOUSING_SLUGS = [
   'kitsilano-1br-near-ubc',
@@ -58,5 +58,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  return [...staticPages, ...schoolPages, ...comparePages, ...housingPages]
+  const scholarshipPages: MetadataRoute.Sitemap = [
+    'vanier-cgs', 'trudeau-foundation', 'nserc-pgsd', 'sshrc-doctoral', 'ontario-grad', 'rbc-future-launch',
+  ].map((slug) => ({
+    url: `${BASE}/scholarships/${slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.75,
+  }))
+
+  return [...staticPages, ...schoolPages, ...comparePages, ...housingPages, ...scholarshipPages]
 }

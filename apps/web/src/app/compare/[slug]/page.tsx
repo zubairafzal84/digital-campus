@@ -111,19 +111,103 @@ const COMPARISONS: Record<string, CompareData> = {
   },
 }
 
+const COMPARISONS_EXTRA: Record<string, CompareData> = {
+  'uoft-vs-mcgill': {
+    slug: 'uoft-vs-mcgill',
+    lastUpdated: '2026-10',
+    verdict: 'U of T for scope & rankings; McGill for culture & value.',
+    verdictDetail:
+      'The University of Toronto is Canada\'s highest-ranked university globally, with more than 700 programmes, a massive research budget, and strong placement in finance and law. McGill offers a comparable academic calibre in a bilingual Montreal culture, with significantly lower international tuition and a tight-knit residential feel. Choose U of T if career placement in Toronto matters most; choose McGill for a more affordable, culturally rich university experience.',
+    relatedSlugs: ['uoft-vs-ubc', 'ubc-vs-sfu'],
+    a: {
+      name: 'University of Toronto',
+      shortName: 'U of T',
+      slug: 'uoft',
+      city: 'Toronto',
+      province: 'ON',
+      tuitionDomestic: 6100,
+      tuitionIntl: 58000,
+      enrolment: 97000,
+      programmes: 700,
+      rankMacleans: 1,
+      rankTimes: 21,
+      highlights: ['Top 25 globally (THE)', '10 Nobel Prizes', 'Largest university in Canada', 'Rotman & Osgoode'],
+      bestFor: ['Finance & consulting', 'Academic research', 'Largest alumni network'],
+    },
+    b: {
+      name: 'McGill University',
+      shortName: 'McGill',
+      slug: 'mcgill',
+      city: 'Montreal',
+      province: 'QC',
+      tuitionDomestic: 3800,
+      tuitionIntl: 26000,
+      enrolment: 40000,
+      programmes: 300,
+      rankMacleans: 2,
+      rankTimes: 46,
+      highlights: ['Top 50 globally', 'Bilingual Montreal campus', 'Strong medicine & law', 'Lower international fees'],
+      bestFor: ['Bilingual environment', 'Medicine & life sciences', 'Budget-conscious international students'],
+    },
+  },
+  'sfu-vs-uvic': {
+    slug: 'sfu-vs-uvic',
+    lastUpdated: '2026-10',
+    verdict: 'SFU for co-op & urban access; UVic for environment & community.',
+    verdictDetail:
+      'Simon Fraser has campuses in Burnaby, Surrey, and Vancouver with deep co-op and industry connections and a fast-growing business and tech ecosystem. The University of Victoria sits in a scenic mid-sized city with a strong co-op tradition of its own, world-class ocean science programmes, and a tight campus community. If you want big-city internships, SFU. If you want a more contained, community-oriented campus where ocean and environmental research lead, UVic.',
+    relatedSlugs: ['ubc-vs-sfu', 'uoft-vs-ubc'],
+    a: {
+      name: 'Simon Fraser University',
+      shortName: 'SFU',
+      slug: 'sfu',
+      city: 'Burnaby',
+      province: 'BC',
+      tuitionDomestic: 5200,
+      tuitionIntl: 38000,
+      enrolment: 35000,
+      programmes: 200,
+      rankMacleans: 2,
+      rankTimes: 251,
+      highlights: ['#1 comprehensive (Maclean\'s)', 'Co-op in 50+ countries', 'Tri-semester calendar', 'Three Metro Vancouver campuses'],
+      bestFor: ['Co-op & industry links', 'Flexible scheduling', 'Business & computing'],
+    },
+    b: {
+      name: 'University of Victoria',
+      shortName: 'UVic',
+      slug: 'uvic',
+      city: 'Victoria',
+      province: 'BC',
+      tuitionDomestic: 5500,
+      tuitionIntl: 32000,
+      enrolment: 22000,
+      programmes: 150,
+      rankMacleans: 4,
+      rankTimes: 601,
+      highlights: ['Strong co-op tradition', 'Ocean & climate research', 'Smaller campus community', 'Victoria lifestyle'],
+      bestFor: ['Environmental & ocean sciences', 'Close-knit campus feel', 'Pacific coast lifestyle'],
+    },
+  },
+}
+
+const ALL_COMPARISONS = { ...COMPARISONS, ...COMPARISONS_EXTRA }
+
 const RELATED_LABELS: Record<string, string> = {
   'ubc-vs-sfu': 'UBC vs SFU',
   'uoft-vs-ubc': 'U of T vs UBC',
-  'mcgill-vs-udem': 'McGill vs UdeM',
   'uoft-vs-mcgill': 'U of T vs McGill',
   'sfu-vs-uvic': 'SFU vs UVic',
 }
 
 type Props = { params: Promise<{ slug: string }> }
 
+export async function generateStaticParams() {
+  return Object.keys(ALL_COMPARISONS).map((slug) => ({ slug }))
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const cmp = COMPARISONS[slug]
+  const cmp = ALL_COMPARISONS[slug]
   if (!cmp) return {}
   return {
     title: `${cmp.a.shortName} vs ${cmp.b.shortName}: Tuition, Rankings & Programmes | Digital Kampus`,
@@ -150,7 +234,7 @@ function Row({ label, valA, valB }: { label: string; valA: string; valB: string 
 
 export default async function ComparisonPage({ params }: Props) {
   const { slug } = await params
-  const cmp = COMPARISONS[slug]
+  const cmp = ALL_COMPARISONS[slug]
   if (!cmp) notFound()
 
   const { a, b } = cmp

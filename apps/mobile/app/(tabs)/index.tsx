@@ -1,13 +1,19 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useUser } from '@clerk/clerk-expo'
 
 export default function HomeScreen() {
+  const { user } = useUser()
+  const firstName = user?.firstName ?? 'Student'
+  const hour = new Date().getHours()
+  const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening'
+
   return (
     <SafeAreaView style={s.safe}>
       <ScrollView contentContainerStyle={s.scroll}>
         <View style={s.header}>
-          <Text style={s.greeting}>Good morning, Alex 👋</Text>
-          <Text style={s.school}>UBC · 3rd year</Text>
+          <Text style={s.greeting}>{greeting}, {firstName} 👋</Text>
+          <Text style={s.school}>Digital Kampus</Text>
         </View>
 
         <View style={s.section}>
