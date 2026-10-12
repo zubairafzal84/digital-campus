@@ -209,6 +209,8 @@ export interface StudentProfile {
   bio: string | null
   pronouns: string | null
   is_public: boolean              // private by default — never publicly indexed
+  /** JSONB blob: {courses: [{id, code, name, credits, assessments: [{name, weight, score, maxScore}]}]} */
+  grade_data: Record<string, unknown> | null
   created_at: string
   updated_at: string
 }

@@ -448,6 +448,22 @@ export default async function SchoolPage({ params }: Props) {
             </div>
           </div>
         </div>
+
+        <section className={styles.connectSection}>
+          <div className={styles.inner}>
+            <h2 className={styles.connectH}>Meet students at {school.name}</h2>
+            <div className={styles.connectCard}>
+              <div className={styles.connectText}>
+                <p className={styles.connectBody}>
+                  Find and connect with students at {school.name} through student profiles.
+                </p>
+              </div>
+              <Link href={`/students?school=${slug}`} className={styles.btnConnectPrimary}>
+                Browse students →
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
       <SiteFooter />
     </>

@@ -10,14 +10,14 @@ const COLS = [
       { label: 'Clubs & Events', href: '/clubs' },
       { label: 'Scholarships', href: '/scholarships' },
       { label: 'Housing', href: '/housing' },
-      { label: 'Student Deals', href: '/deals' },
+      { label: 'Student Profiles', href: '/students' },
     ],
   },
   {
     title: 'Discover',
     links: [
       { label: 'Schools', href: '/schools' },
-      { label: 'Programmes', href: '/programmes' },
+      { label: 'Scholarships', href: '/scholarships' },
       { label: 'Compare', href: '/compare' },
       { label: 'Cities', href: '/schools?view=city' },
       { label: 'Provinces', href: '/schools?view=province' },
@@ -26,10 +26,10 @@ const COLS = [
   {
     title: 'Partners',
     links: [
-      { label: 'Institutions', href: '/institution' },
-      { label: 'Merchants', href: '/merchant' },
-      { label: 'Landlords', href: '/landlord' },
-      { label: 'Employers', href: '/employer' },
+      { label: 'Institutions', href: '/schools' },
+      { label: 'Merchants', href: '/partners/merchants' },
+      { label: 'Landlords', href: '/partners/landlords' },
+      { label: 'Employers', href: '/partners/employers' },
       { label: 'Clubs', href: '/clubs/register' },
     ],
   },
@@ -39,8 +39,8 @@ const COLS = [
       { label: 'About', href: '/about' },
       { label: 'Privacy', href: '/privacy' },
       { label: 'Terms', href: '/terms' },
-      { label: 'Accessibility', href: '/accessibility' },
-      { label: 'Contact', href: '/contact' },
+      { label: 'Accessibility', href: '/about' },
+      { label: 'Contact', href: '/about' },
     ],
   },
 ]

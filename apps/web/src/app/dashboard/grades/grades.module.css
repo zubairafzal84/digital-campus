@@ -217,6 +217,211 @@
   line-height: 1.5;
 }
 
+/* ── Grade Tracker ── */
+
+.tracker {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.courseHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.creditsBadge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--purple);
+  background: var(--lav);
+  border-radius: 6px;
+  padding: 2px 8px;
+  letter-spacing: 0.04em;
+}
+
+.assessmentRow {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+}
+
+.assessmentRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.gpaBar {
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.gpaBar > div {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.gpaNumber {
+  font-size: 36px;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.letterGrade {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.04em;
+}
+
+.gradeBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.gradeLetter {
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.gradePct {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.addCourseForm,
+.addGradeForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--lav);
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 4px;
+}
+
+.formTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0 0 4px;
+}
+
+.formActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.gradeInput {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  background: var(--white);
+  color: var(--fg);
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+.gradeInput:focus {
+  border-color: var(--purple);
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  background: var(--purple);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.btnPrimary:hover {
+  background: var(--purple-hi);
+}
+
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  background: transparent;
+  color: var(--purple);
+  font-size: 13px;
+  font-weight: 600;
+  border: 1.5px solid var(--purple);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.btnGhost:hover {
+  background: var(--lav);
+}
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+
+.deleteBtn:hover {
+  color: #e76f51;
+  background: rgba(231, 111, 81, 0.1);
+}
+
+/* dark mode additions */
+@media (prefers-color-scheme: dark) {
+  .addCourseForm,
+  .addGradeForm {
+    background: rgba(107, 62, 242, 0.12);
+  }
+
+  .gradeInput {
+    background: var(--surface, #1e1e2e);
+    color: var(--fg);
+    border-color: var(--border);
+  }
+
+  .creditsBadge {
+    background: rgba(107, 62, 242, 0.2);
+  }
+}
+
 @media (max-width: 640px) {
   .page {
     padding: 20px 16px;
@@ -236,5 +441,14 @@
 
   .gpaValue {
     font-size: 32px;
+  }
+
+  .gpaNumber {
+    font-size: 28px;
+  }
+
+  .addCourseForm,
+  .addGradeForm {
+    padding: 14px;
   }
 }

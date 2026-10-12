@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { href: '/scholarships', label: 'Scholarships', labelFr: 'Bourses' },
   { href: '/housing', label: 'Housing', labelFr: 'Logement' },
   { href: '/student-life', label: 'Student Life', labelFr: 'Vie étudiante' },
+  { href: '/students', label: 'Students', labelFr: 'Étudiants' },
 ]
 
 export function SiteNav() {

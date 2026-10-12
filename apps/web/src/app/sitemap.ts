@@ -36,6 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/scholarships`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
     { url: `${BASE}/clubs`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${BASE}/housing`, lastModified: now, changeFrequency: 'daily', priority: 0.8 },
+    { url: `${BASE}/students`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${BASE}/compare`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${BASE}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${BASE}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },

@@ -281,6 +281,63 @@
   padding: 8px 0;
 }
 
+/* Connect section */
+.connectSection {
+  background: var(--lav);
+  padding: 48px 0;
+}
+
+.connectH {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.connectCard {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.connectText {
+  flex: 1;
+  min-width: 200px;
+}
+
+.connectBody {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.btnConnectPrimary {
+  height: 44px;
+  padding: 0 24px;
+  background: var(--purple);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.btnConnectPrimary:hover { background: var(--purple-hi); }
+
 @media (max-width: 960px) {
   .layout {
     grid-template-columns: 1fr;

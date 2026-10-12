@@ -365,6 +365,23 @@
   background: var(--purple-hi);
 }
 
+/* Loading / status message inside the messages pane */
+.loadingMsg {
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+  padding: 24px 0;
+  align-self: center;
+  margin: auto;
+}
+
+/* Thread button reset (threads are <button> elements) */
+.thread {
+  width: 100%;
+  background: none;
+  text-align: left;
+}
+
 @media (max-width: 768px) {
   .layout {
     grid-template-columns: 1fr;

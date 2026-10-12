@@ -79,6 +79,15 @@ VALUES
    'https://rbc.com/futurelaunch',
    'Supports young Canadians who face barriers to entering the workforce, with funding and mentorship.',
    ARRAY['AB','BC','MB','NB','NL','NS','ON','PE','QC','SK']::province[],
+   true, true),
+
+  (gen_random_uuid(),
+   'BMO First Canadian Scholarship', 'Bourse BMO Premier Canadien',
+   'scholarship', 'foundation', 'BMO Financial Group',
+   5000, 5000, true, '2025-04-30',
+   'https://bmo.com/scholarship',
+   'Awarded to students from underrepresented communities entering their first year of post-secondary education at a Canadian institution. Covers tuition and living expenses.',
+   ARRAY['AB','BC','MB','NB','NL','NS','ON','PE','QC','SK']::province[],
    true, true)
 ON CONFLICT DO NOTHING;
 

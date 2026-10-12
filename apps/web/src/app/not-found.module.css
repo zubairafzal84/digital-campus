@@ -74,3 +74,46 @@
   border-color: var(--purple);
   color: var(--purple);
 }
+
+.navGrid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  text-align: left;
+}
+
+.navCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.navCard:hover {
+  border-color: var(--purple);
+  box-shadow: 0 2px 8px rgba(107, 62, 242, 0.1);
+}
+
+.navLabel {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.navDesc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+@media (max-width: 560px) {
+  .navGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
