@@ -1,194 +1,148 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { currentUser } from '@clerk/nextjs/server'
+import { SiteNav } from '@/components/layout/SiteNav'
 import styles from '../dashboard.module.css'
 import schStyles from './scholarships.module.css'
 
 export const metadata: Metadata = {
-  title: 'My Scholarships | Digital Kampus',
+  title: 'Scholarships | Dashboard | Digital Kampus',
   robots: { index: false, follow: false },
 }
 
-const NAV_LINKS = [
-  { href: '/dashboard', label: 'Overview', icon: '🏠' },
-  { href: '/dashboard/scholarships', label: 'Scholarships', icon: '🎓' },
-  { href: '/dashboard/clubs', label: 'Clubs', icon: '🤝' },
-  { href: '/dashboard/notifications', label: 'Notifications', icon: '🔔' },
-  { href: '/profile', label: 'Profile', icon: '👤' },
-]
-
-const MATCHED: Award[] = [
+const SCHOLARSHIPS = [
   {
-    id: '1',
-    name: 'TD Bank Future Leaders Scholarship',
-    amount: 10000,
-    deadline: '2027-01-15',
-    status: 'open',
-    matchScore: 94,
-    sponsor: 'TD Bank',
-    note: 'Strong match: STEM major, first-generation student, Ontario resident',
+    name: 'Vanier Canada Graduate Scholarships',
+    amount: 50000,
+    match: 94,
+    deadline: 'Nov 1',
+    href: '/scholarships/vanier-cgs',
+    type: 'Graduate',
   },
   {
-    id: '2',
-    name: 'Loran Award',
-    amount: 100000,
-    deadline: '2026-11-01',
-    status: 'open',
-    matchScore: 88,
-    sponsor: 'Loran Scholars Foundation',
-    note: 'Strong match: demonstrated leadership, academic excellence',
+    name: 'NSERC Postgraduate Scholarships-D',
+    amount: 21000,
+    match: 87,
+    deadline: 'Oct 15',
+    href: '/scholarships/nserc-pgsd',
+    type: 'Graduate',
   },
   {
-    id: '3',
     name: 'RBC Future Launch Scholarship',
     amount: 5000,
-    deadline: '2026-12-31',
-    status: 'open',
-    matchScore: 82,
-    sponsor: 'RBC',
-    note: 'Match: undergraduate student, community involvement',
+    match: 78,
+    deadline: 'Apr 30',
+    href: '/scholarships/rbc-future-launch',
+    type: 'Undergraduate',
   },
   {
-    id: '4',
-    name: 'Indspire Post-Secondary Award',
-    amount: 7500,
-    deadline: '2027-03-31',
-    status: 'open',
-    matchScore: 0,
-    sponsor: 'Indspire',
-    note: 'Complete verification to unlock eligibility check',
-    requiresVerification: true,
+    name: 'Trudeau Foundation Scholarship',
+    amount: 60000,
+    match: 71,
+    deadline: 'Dec 1',
+    href: '/scholarships/trudeau-foundation',
+    type: 'Graduate',
+  },
+  {
+    name: 'Ontario Graduate Scholarship',
+    amount: 15000,
+    match: 68,
+    deadline: 'Feb 1',
+    href: '/scholarships/ontario-grad',
+    type: 'Graduate',
+  },
+  {
+    name: 'SSHRC Doctoral Fellowship',
+    amount: 20000,
+    match: 63,
+    deadline: 'Oct 15',
+    href: '/scholarships/sshrc-doctoral',
+    type: 'Graduate',
   },
 ]
 
-const APPLIED: Award[] = [
-  {
-    id: '5',
-    name: 'UBC Science Entrance Scholarship',
-    amount: 4000,
-    deadline: '2026-10-01',
-    status: 'applied',
-    matchScore: 91,
-    sponsor: 'University of British Columbia',
-    note: 'Submitted 2026-09-28',
-  },
-]
+export default async function DashboardScholarshipsPage() {
+  const user = await currentUser()
+  const firstName = user?.firstName ?? 'Student'
+  const initials = ((user?.firstName?.[0] ?? '') + (user?.lastName?.[0] ?? '')).toUpperCase() || 'DK'
+  const avatarUrl = user?.imageUrl
 
-interface Award {
-  id: string
-  name: string
-  amount: number
-  deadline: string
-  status: string
-  matchScore: number
-  sponsor: string
-  note: string
-  requiresVerification?: boolean
-}
-
-function formatDeadline(iso: string) {
-  return new Date(iso).toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' })
-}
-
-export default function DashboardScholarshipsPage() {
   return (
-    <div className={styles.shell}>
-      <nav className={styles.sidebar}>
-        <Link href="/" className={styles.sideBrand}>DK</Link>
-        {NAV_LINKS.map((l) => (
-          <Link
-            key={l.href}
-            href={l.href}
-            className={`${styles.sideLink} ${l.href === '/dashboard/scholarships' ? styles.sideLinkActive : ''}`}
-          >
-            <span>{l.icon}</span>
-            <span>{l.label}</span>
-          </Link>
-        ))}
-      </nav>
-
-      <main className={styles.content}>
-        <header className={styles.pageHeader}>
-          <div>
-            <h1 className={styles.pageTitle}>Scholarships</h1>
-            <p className={styles.pageSub}>Matching is always free. Deadlines are in your time zone.</p>
-          </div>
-          <Link href="/scholarships" className={schStyles.browseBtn}>Browse all awards →</Link>
-        </header>
-
-        <div className={schStyles.freeNote}>
-          🎓 Scholarship and bursary matching is permanently free for all students on Digital Kampus.
-        </div>
-
-        {MATCHED.length > 0 && (
-          <section className={schStyles.section}>
-            <h2 className={schStyles.sectionH}>Matched for you</h2>
-            <div className={schStyles.list}>
-              {MATCHED.map((award) => (
-                <div key={award.id} className={schStyles.card}>
-                  <div className={schStyles.cardTop}>
-                    <div className={schStyles.cardMeta}>
-                      <span className={schStyles.sponsor}>{award.sponsor}</span>
-                      {award.matchScore > 0 && (
-                        <span className={schStyles.score}>{award.matchScore}% match</span>
-                      )}
-                      {award.requiresVerification && (
-                        <span className={schStyles.locked}>🔒 Verify to check</span>
-                      )}
-                    </div>
-                    <span className={schStyles.amount}>${award.amount.toLocaleString()}</span>
-                  </div>
-                  <h3 className={schStyles.cardName}>{award.name}</h3>
-                  <p className={schStyles.cardNote}>{award.note}</p>
-                  <div className={schStyles.cardFooter}>
-                    <span className={schStyles.deadline}>
-                      Deadline: {formatDeadline(award.deadline)}
-                    </span>
-                    {award.requiresVerification ? (
-                      <Link href="/dashboard/profile" className={schStyles.btnVerify}>Complete profile →</Link>
-                    ) : (
-                      <Link href={`/scholarships`} className={schStyles.btnApply}>View & apply →</Link>
-                    )}
-                  </div>
-                </div>
-              ))}
+    <>
+      <SiteNav />
+      <div className={styles.layout}>
+        <nav className={styles.sidebar} aria-label="Dashboard navigation">
+          <div className={styles.sideUser}>
+            <div className={styles.avatarWrap}>
+              {avatarUrl
+                ? <img src={avatarUrl} alt={firstName} className={styles.avatarImg} />
+                : <div className={styles.avatar}>{initials}</div>
+              }
             </div>
-          </section>
-        )}
-
-        {APPLIED.length > 0 && (
-          <section className={schStyles.section}>
-            <h2 className={schStyles.sectionH}>Applied</h2>
-            <div className={schStyles.list}>
-              {APPLIED.map((award) => (
-                <div key={award.id} className={`${schStyles.card} ${schStyles.cardApplied}`}>
-                  <div className={schStyles.cardTop}>
-                    <div className={schStyles.cardMeta}>
-                      <span className={schStyles.sponsor}>{award.sponsor}</span>
-                      <span className={schStyles.statusPill}>Applied</span>
-                    </div>
-                    <span className={schStyles.amount}>${award.amount.toLocaleString()}</span>
-                  </div>
-                  <h3 className={schStyles.cardName}>{award.name}</h3>
-                  <p className={schStyles.cardNote}>{award.note}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        <section className={schStyles.section}>
-          <div className={schStyles.verifyBanner}>
             <div>
-              <h3 className={schStyles.verifyH}>Unlock more matches</h3>
-              <p className={schStyles.verifyP}>
-                Verifying your enrollment and completing your profile improves matching accuracy and
-                unlocks need-based bursaries and institution-specific awards.
-              </p>
+              <p className={styles.userName}>{user ? `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim() : 'Student'}</p>
+              <p className={styles.userSchool}>Digital Kampus</p>
             </div>
-            <Link href="/profile" className={schStyles.btnPrimary}>Complete profile →</Link>
           </div>
-        </section>
-      </main>
-    </div>
+          <ul className={styles.sideLinks}>
+            {[
+              { href: '/dashboard',               label: 'Overview',      icon: '◉' },
+              { href: '/dashboard/grades',        label: 'Grades',        icon: '📊' },
+              { href: '/dashboard/clubs',         label: 'Clubs',         icon: '🤝' },
+              { href: '/dashboard/scholarships',  label: 'Scholarships',  icon: '🎓' },
+              { href: '/dashboard/housing',       label: 'Housing',       icon: '🏠' },
+              { href: '/dashboard/chat',          label: 'Messages',      icon: '💬' },
+              { href: '/dashboard/notifications', label: 'Notifications', icon: '🔔' },
+              { href: '/profile',                 label: 'Profile',       icon: '👤' },
+            ].map(({ href, label, icon }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className={`${styles.sideLink} ${href === '/dashboard/scholarships' ? styles.sideLinkActive : ''}`}
+                >
+                  <span className={styles.sideIcon}>{icon}</span>
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <main className={styles.main}>
+          <div className={styles.topBar}>
+            <div>
+              <h1 className={styles.h1}>Scholarships</h1>
+              <p className={styles.sub}>Matched awards sorted by fit. Apply before each deadline.</p>
+            </div>
+          </div>
+
+          <div className={schStyles.freeNotice} role="note">
+            <span className={schStyles.freeIcon}>🎓</span>
+            <strong>Scholarship matching is always free — we never charge students.</strong>
+          </div>
+
+          <section aria-label="Matched scholarships">
+            <div className={schStyles.list}>
+              {SCHOLARSHIPS.map((s) => (
+                <div key={s.href} className={schStyles.card}>
+                  <div className={schStyles.cardTop}>
+                    <div className={schStyles.badges}>
+                      <span className={schStyles.matchBadge}>{s.match}% match</span>
+                      <span className={schStyles.typeBadge}>{s.type}</span>
+                    </div>
+                    <span className={schStyles.amount}>${s.amount.toLocaleString()}</span>
+                  </div>
+                  <h2 className={schStyles.cardName}>{s.name}</h2>
+                  <div className={schStyles.cardFooter}>
+                    <span className={schStyles.deadline}>Deadline: {s.deadline}</span>
+                    <Link href={s.href} className={schStyles.viewBtn}>View details →</Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </main>
+      </div>
+    </>
   )
 }

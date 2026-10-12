@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { currentUser } from '@clerk/nextjs/server'
 import { SiteNav } from '@/components/layout/SiteNav'
 import styles from '../dashboard.module.css'
 import clubStyles from './clubs.module.css'
@@ -70,17 +71,39 @@ const NAV_LINKS = [
   { href: '/profile', label: 'Profile', icon: '👤' },
 ]
 
-export default function DashboardClubsPage() {
+export default async function DashboardClubsPage() {
+  const user = await currentUser()
+
+  const fullName = user
+    ? [user.firstName, user.lastName].filter(Boolean).join(' ')
+    : 'Student'
+  const initials = fullName
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2)
+
   return (
     <>
       <SiteNav />
       <div className={styles.layout}>
         <nav className={styles.sidebar} aria-label="Dashboard navigation">
           <div className={styles.sideUser}>
-            <div className={styles.avatar}>A</div>
+            {user?.imageUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={user.imageUrl}
+                alt={fullName}
+                className={styles.avatar}
+                style={{ objectFit: 'cover' }}
+              />
+            ) : (
+              <div className={styles.avatar}>{initials}</div>
+            )}
             <div>
-              <p className={styles.userName}>Alex Martin</p>
-              <p className={styles.userSchool}>UBC · 3rd year</p>
+              <p className={styles.userName}>{fullName}</p>
+              <p className={styles.userSchool}>Digital Kampus</p>
             </div>
           </div>
           <ul className={styles.sideLinks}>
@@ -112,52 +135,59 @@ export default function DashboardClubsPage() {
             <h2 className={clubStyles.sectionH} id="my-clubs-h">
               Memberships <span className={clubStyles.count}>{MY_CLUBS.length}</span>
             </h2>
-            <div className={clubStyles.myList}>
+            <div className={clubStyles.clubList}>
               {MY_CLUBS.map((c) => (
-                <div key={c.id} className={clubStyles.myCard}>
-                  <div className={clubStyles.myCardTop}>
-                    <div className={clubStyles.clubIconWrap}>{c.icon}</div>
+                <div key={c.id} className={clubStyles.clubCard}>
+                  <div className={clubStyles.clubLeft}>
+                    <div className={clubStyles.clubIcon}>{c.icon}</div>
                     <div className={clubStyles.clubInfo}>
-                      <p className={clubStyles.clubName}>{c.name}</p>
+                      <div className={clubStyles.clubTop}>
+                        <p className={clubStyles.clubName}>{c.name}</p>
+                        <span className={clubStyles.roleBadge}>{c.role}</span>
+                      </div>
                       <div className={clubStyles.clubMeta}>
-                        <span className={clubStyles.category}>{c.category}</span>
+                        <span className={clubStyles.categoryBadge}>{c.category}</span>
                         <span>·</span>
                         <span>{c.members} members</span>
-                        <span>·</span>
-                        <span className={clubStyles.roleBadge}>{c.role}</span>
                       </div>
                     </div>
                   </div>
                   {c.nextEvent && (
                     <div className={clubStyles.nextEvent}>
-                      <span className={clubStyles.eventLabel}>Next event</span>
-                      <span className={clubStyles.eventName}>{c.nextEvent}</span>
-                      <span className={clubStyles.eventLoc}>{c.eventLocation}</span>
+                      <span className={clubStyles.nextEventLabel}>Next event</span>
+                      <span className={clubStyles.nextEventName}>{c.nextEvent}</span>
+                      <span className={clubStyles.nextEventLoc}>{c.eventLocation}</span>
                     </div>
                   )}
-                  <div className={clubStyles.myCardFooter}>
-                    <Link href="/clubs" className={clubStyles.viewLink}>View club →</Link>
-                    <button className={clubStyles.leaveBtn}>Leave club</button>
+                  <div className={clubStyles.clubActions}>
+                    <Link href="/clubs" className={clubStyles.viewBtn}>View club →</Link>
+                    <button className={clubStyles.leaveBtn}>Leave</button>
                   </div>
                 </div>
               ))}
             </div>
           </section>
 
-          {/* Suggested */}
+          {/* Suggested for you */}
           <section className={clubStyles.section} aria-labelledby="suggested-h">
             <h2 className={clubStyles.sectionH} id="suggested-h">Suggested for you</h2>
-            <div className={clubStyles.suggestedGrid}>
+            <div className={clubStyles.clubList}>
               {SUGGESTED.map((c) => (
-                <div key={c.id} className={clubStyles.sugCard}>
-                  <div className={clubStyles.sugTop}>
-                    <div className={clubStyles.sugIcon}>{c.icon}</div>
-                    <span className={clubStyles.sugCategory}>{c.category}</span>
+                <div key={c.id} className={clubStyles.clubCard}>
+                  <div className={clubStyles.clubLeft}>
+                    <div className={clubStyles.clubIconSuggested}>{c.icon}</div>
+                    <div className={clubStyles.clubInfo}>
+                      <div className={clubStyles.clubTop}>
+                        <p className={clubStyles.clubName}>{c.name}</p>
+                        <span className={clubStyles.categoryBadge}>{c.category}</span>
+                      </div>
+                      <p className={clubStyles.clubDesc}>{c.description}</p>
+                      <div className={clubStyles.clubMeta}>
+                        <span>{c.members} members</span>
+                      </div>
+                    </div>
                   </div>
-                  <p className={clubStyles.sugName}>{c.name}</p>
-                  <p className={clubStyles.sugDesc}>{c.description}</p>
-                  <div className={clubStyles.sugFooter}>
-                    <span className={clubStyles.sugMembers}>{c.members} members</span>
+                  <div className={clubStyles.clubActions}>
                     <button className={clubStyles.joinBtn}>Join →</button>
                   </div>
                 </div>
@@ -165,16 +195,18 @@ export default function DashboardClubsPage() {
             </div>
           </section>
 
-          {/* Register your own */}
-          <section className={clubStyles.registerCta}>
-            <div className={clubStyles.registerBox}>
-              <div>
-                <p className={clubStyles.registerH}>Running a club?</p>
-                <p className={clubStyles.registerP}>List your organization on Digital Kampus to reach students at UBC and beyond.</p>
-              </div>
-              <Link href="/clubs/register" className={clubStyles.registerBtn}>Register your club →</Link>
+          {/* Running a club CTA */}
+          <div className={clubStyles.ctaBox}>
+            <div className={clubStyles.ctaText}>
+              <p className={clubStyles.ctaHeading}>Running a club?</p>
+              <p className={clubStyles.ctaSub}>
+                List your organization on Digital Kampus to reach students at UBC and beyond.
+              </p>
             </div>
-          </section>
+            <Link href="/clubs/register" className={clubStyles.ctaBtn}>
+              Register your club →
+            </Link>
+          </div>
         </main>
       </div>
     </>

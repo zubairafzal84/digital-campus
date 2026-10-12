@@ -301,6 +301,70 @@
   cursor: pointer;
 }
 
+/* Empty states */
+.emptyThreads {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.emptyThreadsText {
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.emptyConvo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px;
+  text-align: center;
+  gap: 12px;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  line-height: 1;
+  display: block;
+}
+
+.emptyH {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0;
+}
+
+.emptyP {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 420px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.findBtn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 22px;
+  background: var(--purple);
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.findBtn:hover {
+  background: var(--purple-hi);
+}
+
 @media (max-width: 768px) {
   .layout {
     grid-template-columns: 1fr;

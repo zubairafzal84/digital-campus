@@ -60,8 +60,10 @@ export default async function ScholarshipsAdminPage() {
             </thead>
             <tbody>
               {scholarships.map((s) => (
-                <tr key={s.id}>
-                  <td className={styles.nameCell}>{s.name_en}</td>
+                <tr key={s.id} style={{ cursor: 'pointer' }}>
+                  <td className={styles.nameCell}>
+                    <Link href={`/scholarships/${s.id}`} className={styles.rowLink}>{s.name_en}</Link>
+                  </td>
                   <td>{s.amount_max ? `$${Number(s.amount_max).toLocaleString()}` : '—'}</td>
                   <td>{s.deadline_month ?? '—'}</td>
                   <td>

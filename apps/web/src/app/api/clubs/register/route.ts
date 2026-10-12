@@ -1,45 +1,44 @@
-import { type NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
 export async function POST(request: NextRequest) {
-  const form = await request.formData()
+  let body: Record<string, unknown>
 
-  const clubName    = (form.get('clubName')    as string | null)?.trim()
-  const school      = (form.get('school')      as string | null)?.trim()
-  const category    = (form.get('category')    as string | null)?.trim()
-  const contactName = (form.get('contactName') as string | null)?.trim()
-  const contactEmail= (form.get('contactEmail')as string | null)?.trim()
-  const description = (form.get('description') as string | null)?.trim()
-
-  if (!clubName || !school || !category || !contactName || !contactEmail || !description) {
-    return NextResponse.redirect(new URL('/clubs/register?error=missing_fields', request.url))
+  try {
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON body.' }, { status: 400 })
   }
 
-  // Basic school-email domain check — must look like an institutional address
-  if (!contactEmail.includes('.') || contactEmail.includes('+')) {
-    return NextResponse.redirect(new URL('/clubs/register?error=invalid_email', request.url))
+  const { clubName, school, category, description } = body
+
+  if (!clubName || !school || !category || !description) {
+    return NextResponse.json(
+      { error: 'clubName, school, category, and description are required.' },
+      { status: 400 }
+    )
   }
 
-  const supabase = await createClient()
-  const { error } = await supabase.from('partner_enquiries').insert({
-    type: 'club',
-    data: {
-      clubName,
-      school,
-      category,
-      members:      form.get('members')      ?? null,
-      description,
-      meetSchedule: form.get('meetSchedule') ?? null,
-      website:      form.get('website')      ?? null,
-      contactName,
-      contactEmail,
-    },
-  })
+  try {
+    const supabase = await createClient()
 
-  if (error) {
-    console.error('club register insert error', error.message)
-    return NextResponse.redirect(new URL('/clubs/register?error=server', request.url))
+    const { error } = await supabase.from('partner_enquiries').insert({
+      type: 'club',
+      data: body,
+      status: 'pending',
+    })
+
+    if (error) {
+      console.error('[clubs/register] DB error:', error)
+      return NextResponse.json({ error: 'Database error.' }, { status: 500 })
+    }
+
+    return NextResponse.json(
+      { success: true, message: 'Club registration submitted.' },
+      { status: 200 }
+    )
+  } catch (err) {
+    console.error('[clubs/register] Unexpected error:', err)
+    return NextResponse.json({ error: 'Internal server error.' }, { status: 500 })
   }
-
-  return NextResponse.redirect(new URL('/clubs/register/success', request.url))
 }

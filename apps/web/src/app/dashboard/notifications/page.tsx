@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { currentUser } from '@clerk/nextjs/server'
 import { SiteNav } from '@/components/layout/SiteNav'
 import styles from '../dashboard.module.css'
 import notifStyles from './notifications.module.css'
@@ -18,14 +19,14 @@ const NOTIFICATIONS = [
     body: 'The Loran Award closes in 14 days. You matched this award.',
     time: '2 hours ago',
     read: false,
-    href: '/scholarships',
+    href: '/dashboard/scholarships',
   },
   {
     id: 2,
     type: 'contact',
     icon: '👤',
-    title: 'Contact request from Jordan L.',
-    body: 'Jordan sent you a contact request. Accept to start messaging.',
+    title: 'New contact request',
+    body: 'A student sent you a contact request. Accept to start messaging.',
     time: '5 hours ago',
     read: false,
     href: '/dashboard/chat',
@@ -38,7 +39,7 @@ const NOTIFICATIONS = [
     body: 'New build session this Friday at 6 PM in ICCS 246. All members welcome.',
     time: 'Yesterday',
     read: true,
-    href: '/clubs',
+    href: '/dashboard/clubs',
   },
   {
     id: 4,
@@ -48,7 +49,7 @@ const NOTIFICATIONS = [
     body: 'You match the TD Scholarship for Community Leadership ($70,000). Deadline: Mar 1.',
     time: '2 days ago',
     read: true,
-    href: '/scholarships',
+    href: '/dashboard/scholarships',
   },
   {
     id: 5,
@@ -64,8 +65,8 @@ const NOTIFICATIONS = [
     id: 6,
     type: 'contact',
     icon: '👤',
-    title: 'Sam K. accepted your contact request',
-    body: 'You can now message Sam directly.',
+    title: 'Contact request accepted',
+    body: 'A student accepted your contact request. You can now message them directly.',
     time: '4 days ago',
     read: true,
     href: '/dashboard/chat',
@@ -83,29 +84,41 @@ const NOTIFICATIONS = [
 ]
 
 const NAV_LINKS = [
-  { href: '/dashboard', label: 'Overview', icon: '◉' },
-  { href: '/dashboard/grades', label: 'Grades', icon: '📊' },
-  { href: '/dashboard/clubs', label: 'Clubs', icon: '🤝' },
-  { href: '/scholarships', label: 'Scholarships', icon: '🎓' },
-  { href: '/housing', label: 'Housing', icon: '🏠' },
-  { href: '/dashboard/chat', label: 'Messages', icon: '💬' },
-  { href: '/dashboard/notifications', label: 'Notifications', icon: '🔔' },
-  { href: '/profile', label: 'Profile', icon: '👤' },
+  { href: '/dashboard',               label: 'Overview',     icon: '◉' },
+  { href: '/dashboard/grades',        label: 'Grades',       icon: '📊' },
+  { href: '/dashboard/clubs',         label: 'Clubs',        icon: '🤝' },
+  { href: '/dashboard/scholarships',  label: 'Scholarships', icon: '🎓' },
+  { href: '/dashboard/housing',       label: 'Housing',      icon: '🏠' },
+  { href: '/dashboard/chat',          label: 'Messages',     icon: '💬' },
+  { href: '/dashboard/notifications', label: 'Notifications',icon: '🔔' },
+  { href: '/profile',                 label: 'Profile',      icon: '👤' },
 ]
 
 const unread = NOTIFICATIONS.filter((n) => !n.read).length
 
-export default function NotificationsPage() {
+export default async function NotificationsPage() {
+  const user = await currentUser()
+  const firstName = user?.firstName ?? 'Student'
+  const initials = ((user?.firstName?.[0] ?? '') + (user?.lastName?.[0] ?? '')).toUpperCase() || 'DK'
+  const avatarUrl = user?.imageUrl
+
   return (
     <>
       <SiteNav />
       <div className={styles.layout}>
         <nav className={styles.sidebar} aria-label="Dashboard navigation">
           <div className={styles.sideUser}>
-            <div className={styles.avatar}>A</div>
+            <div className={styles.avatarWrap}>
+              {avatarUrl
+                ? <img src={avatarUrl} alt={firstName} className={styles.avatarImg} />
+                : <div className={styles.avatar}>{initials}</div>
+              }
+            </div>
             <div>
-              <p className={styles.userName}>Alex Martin</p>
-              <p className={styles.userSchool}>UBC · 3rd year</p>
+              <p className={styles.userName}>
+                {user ? `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim() : 'Student'}
+              </p>
+              <p className={styles.userSchool}>Digital Kampus</p>
             </div>
           </div>
           <ul className={styles.sideLinks}>
@@ -146,17 +159,17 @@ export default function NotificationsPage() {
               <Link
                 key={n.id}
                 href={n.href}
-                className={`${notifStyles.item} ${!n.read ? notifStyles.unread : ''}`}
+                className={`${notifStyles.item} ${!n.read ? notifStyles.itemUnread : ''}`}
               >
-                <div className={`${notifStyles.iconWrap} ${notifStyles[n.type]}`}>
-                  {n.icon}
+                <div className={`${notifStyles.iconWrap} ${notifStyles[n.type as keyof typeof notifStyles] ?? ''}`}>
+                  <span className={notifStyles.icon}>{n.icon}</span>
                 </div>
                 <div className={notifStyles.content}>
                   <p className={notifStyles.title}>{n.title}</p>
                   <p className={notifStyles.body}>{n.body}</p>
                   <p className={notifStyles.time}>{n.time}</p>
                 </div>
-                {!n.read && <span className={notifStyles.unreadDot} aria-label="Unread" />}
+                {!n.read && <span className={notifStyles.dot} aria-label="Unread" />}
               </Link>
             ))}
           </div>

@@ -7,6 +7,15 @@ const SCHOOL_SLUGS = [
   'queens', 'ualberta', 'uvic', 'dal', 'bcit', 'seneca', 'humber',
 ]
 
+const CLUB_SLUGS = [
+  'ubc-computer-science-club',
+  'mcgill-debating-union',
+  'uoft-muslim-students-association',
+  'sfu-hiking-club',
+  'carleton-film-collective',
+  'ualberta-sustainability-network',
+]
+
 const COMPARE_SLUGS = ['ubc-vs-sfu', 'uoft-vs-ubc', 'uoft-vs-mcgill', 'sfu-vs-uvic']
 
 const HOUSING_SLUGS = [
@@ -44,6 +53,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }))
 
+  const clubPages: MetadataRoute.Sitemap = CLUB_SLUGS.map((slug) => ({
+    url: `${BASE}/clubs/${slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.75,
+  }))
+
   const comparePages: MetadataRoute.Sitemap = COMPARE_SLUGS.map((slug) => ({
     url: `${BASE}/compare/${slug}`,
     lastModified: now,
@@ -67,5 +83,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }))
 
-  return [...staticPages, ...schoolPages, ...comparePages, ...housingPages, ...scholarshipPages]
+  return [...staticPages, ...schoolPages, ...clubPages, ...comparePages, ...housingPages, ...scholarshipPages]
 }

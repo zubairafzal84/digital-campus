@@ -55,6 +55,10 @@
 .unread { background: color-mix(in srgb, var(--lav) 30%, transparent); }
 .unread:hover { background: color-mix(in srgb, var(--lav) 45%, transparent); }
 
+/* itemUnread — canonical class used by page.tsx */
+.itemUnread { background: color-mix(in srgb, var(--lav) 30%, transparent); }
+.itemUnread:hover { background: color-mix(in srgb, var(--lav) 45%, transparent); }
+
 .iconWrap {
   width: 42px;
   height: 42px;
@@ -72,6 +76,8 @@
 .iconWrap.club        { background: #ede9fe; }
 .iconWrap.grades      { background: #dbeafe; }
 .iconWrap.system      { background: #f0fdf4; }
+
+.icon { display: contents; }
 
 .content { flex: 1; min-width: 0; }
 
@@ -97,6 +103,17 @@
 }
 
 .unreadDot {
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  border-radius: 50%;
+  background: var(--purple);
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+/* dot — canonical class used by page.tsx */
+.dot {
   width: 8px;
   height: 8px;
   min-width: 8px;
