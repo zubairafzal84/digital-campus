@@ -111,19 +111,20 @@ export default async function ScholarshipsPage() {
   const supabase = await createClient()
   const { data: dbAwards } = await supabase
     .from('scholarships')
-    .select('id, name, provider, amount, currency, type, deadline, description')
-    .order('amount', { ascending: false })
+    .select('id, name_en, funder_name, amount_max, type, deadline, description_en')
+    .eq('is_published', true)
+    .order('amount_max', { ascending: false })
     .limit(12)
 
   const awards = dbAwards?.map(a => ({
     id: a.id,
-    name: a.name,
-    school: a.provider,
-    schoolSlug: null,
-    amount: a.amount,
+    name: a.name_en,
+    school: a.funder_name,
+    schoolSlug: null as string | null,
+    amount: a.amount_max ?? 0,
     type: a.type as string,
     deadline: a.deadline ?? 'Rolling',
-    description: a.description ?? '',
+    description: a.description_en ?? '',
     tags: [a.type],
   })) ?? LISTINGS
 

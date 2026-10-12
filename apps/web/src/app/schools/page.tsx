@@ -63,19 +63,19 @@ const breadcrumbs = {
 export default async function SchoolsPage() {
   const supabase = await createClient()
   const { data: dbSchools } = await supabase
-    .from('schools')
-    .select('slug, name, city, province_code, type, verified')
-    .eq('status', 'active')
-    .order('name')
+    .from('institutions')
+    .select('slug, name_en, city, province, type, is_verified')
+    .eq('is_published', true)
+    .order('name_en')
     .limit(24)
 
   const schools = dbSchools?.map(s => ({
     slug: s.slug,
-    name: s.name,
+    name: s.name_en,
     city: s.city,
-    province: s.province_code,
+    province: s.province,
     type: s.type,
-    verified: s.verified,
+    verified: s.is_verified,
   })) ?? FEATURED_SCHOOLS
 
   return (

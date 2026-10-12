@@ -1,74 +1,65 @@
 -- RLS policies for Digital Kampus
--- Requires the schema migration (000001) to have run first.
+-- Matches table names in 20261012000001_initial_schema.sql
 
 -- ============================================================
--- student_profiles
+-- student_profiles  (private — own + accepted contacts only)
 -- ============================================================
 ALTER TABLE public.student_profiles ENABLE ROW LEVEL SECURITY;
 
--- Students can read their own profile
-CREATE POLICY "student_profiles_select_own"
+CREATE POLICY "sp_select_own"
   ON public.student_profiles FOR SELECT
-  USING (auth.uid() = user_id);
+  USING (auth.uid() = account_id);
 
--- Students can read profiles of users they are connected with
-CREATE POLICY "student_profiles_select_connected"
+CREATE POLICY "sp_select_connected"
   ON public.student_profiles FOR SELECT
   USING (
     EXISTS (
       SELECT 1 FROM public.contact_requests cr
       WHERE cr.status = 'accepted'
         AND (
-          (cr.sender_id = auth.uid() AND cr.recipient_id = student_profiles.user_id)
+          (cr.sender_id = auth.uid() AND cr.recipient_id = student_profiles.account_id)
           OR
-          (cr.recipient_id = auth.uid() AND cr.sender_id = student_profiles.user_id)
+          (cr.recipient_id = auth.uid() AND cr.sender_id = student_profiles.account_id)
         )
     )
   );
 
--- Students can update only their own profile
-CREATE POLICY "student_profiles_update_own"
+CREATE POLICY "sp_update_own"
   ON public.student_profiles FOR UPDATE
-  USING (auth.uid() = user_id)
-  WITH CHECK (auth.uid() = user_id);
+  USING (auth.uid() = account_id)
+  WITH CHECK (auth.uid() = account_id);
 
--- Students can insert their own profile (one per user)
-CREATE POLICY "student_profiles_insert_own"
+CREATE POLICY "sp_insert_own"
   ON public.student_profiles FOR INSERT
-  WITH CHECK (auth.uid() = user_id);
+  WITH CHECK (auth.uid() = account_id);
 
 -- ============================================================
 -- contact_requests
 -- ============================================================
 ALTER TABLE public.contact_requests ENABLE ROW LEVEL SECURITY;
 
--- Users see requests they sent or received
-CREATE POLICY "contact_requests_select"
+CREATE POLICY "cr_select"
   ON public.contact_requests FOR SELECT
   USING (auth.uid() = sender_id OR auth.uid() = recipient_id);
 
--- Users can create requests where they are the sender
-CREATE POLICY "contact_requests_insert"
+CREATE POLICY "cr_insert"
   ON public.contact_requests FOR INSERT
   WITH CHECK (auth.uid() = sender_id AND sender_id <> recipient_id);
 
--- Recipients can accept or decline; senders can cancel (update status)
-CREATE POLICY "contact_requests_update"
+CREATE POLICY "cr_update"
   ON public.contact_requests FOR UPDATE
   USING (auth.uid() = recipient_id OR auth.uid() = sender_id);
 
 -- ============================================================
--- conversations
+-- conversations  (private to participants)
 -- ============================================================
 ALTER TABLE public.conversations ENABLE ROW LEVEL SECURITY;
 
--- Only participants can see a conversation
-CREATE POLICY "conversations_select"
+CREATE POLICY "conv_select"
   ON public.conversations FOR SELECT
   USING (auth.uid() = participant_a OR auth.uid() = participant_b);
 
--- Only participants can update (e.g. mark read)
-CREATE POLICY "conversations_update"
+CREATE POLICY "conv_update"
   ON public.conversations FOR UPDATE
   USING (auth.uid() = participant_a OR auth.uid() = participant_b);
 
@@ -77,8 +68,7 @@ CREATE POLICY "conversations_update"
 -- ============================================================
 ALTER TABLE public.messages ENABLE ROW LEVEL SECURITY;
 
--- Only participants of the parent conversation can read messages
-CREATE POLICY "messages_select"
+CREATE POLICY "msg_select"
   ON public.messages FOR SELECT
   USING (
     EXISTS (
@@ -88,8 +78,7 @@ CREATE POLICY "messages_select"
     )
   );
 
--- Only the sender can insert a message
-CREATE POLICY "messages_insert"
+CREATE POLICY "msg_insert"
   ON public.messages FOR INSERT
   WITH CHECK (
     auth.uid() = sender_id
@@ -105,39 +94,36 @@ CREATE POLICY "messages_insert"
 -- ============================================================
 ALTER TABLE public.notifications ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "notifications_select_own"
+CREATE POLICY "notif_select_own"
   ON public.notifications FOR SELECT
-  USING (auth.uid() = user_id);
+  USING (auth.uid() = account_id);
 
-CREATE POLICY "notifications_update_own"
+CREATE POLICY "notif_update_own"
   ON public.notifications FOR UPDATE
-  USING (auth.uid() = user_id);
+  USING (auth.uid() = account_id);
 
 -- ============================================================
 -- enrolments
 -- ============================================================
 ALTER TABLE public.enrolments ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "enrolments_select_own"
+CREATE POLICY "enrol_select_own"
   ON public.enrolments FOR SELECT
-  USING (auth.uid() = student_id);
-
-CREATE POLICY "enrolments_insert_own"
-  ON public.enrolments FOR INSERT
-  WITH CHECK (auth.uid() = student_id);
+  USING (auth.uid() = (SELECT account_id FROM student_profiles WHERE id = student_id));
 
 -- ============================================================
 -- assessments
 -- ============================================================
 ALTER TABLE public.assessments ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "assessments_select_own"
+CREATE POLICY "assess_select_own"
   ON public.assessments FOR SELECT
   USING (
     EXISTS (
       SELECT 1 FROM public.enrolments e
+      JOIN public.student_profiles sp ON sp.id = e.student_id
       WHERE e.id = assessments.enrolment_id
-        AND e.student_id = auth.uid()
+        AND sp.account_id = auth.uid()
     )
   );
 
@@ -146,44 +132,63 @@ CREATE POLICY "assessments_select_own"
 -- ============================================================
 ALTER TABLE public.scholarship_matches ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "scholarship_matches_select_own"
+CREATE POLICY "sm_select_own"
   ON public.scholarship_matches FOR SELECT
-  USING (auth.uid() = student_id);
-
--- Service role / edge functions write matches; students can only read
--- ============================================================
--- verifications (student email verification records)
--- ============================================================
-ALTER TABLE public.verifications ENABLE ROW LEVEL SECURITY;
-
-CREATE POLICY "verifications_select_own"
-  ON public.verifications FOR SELECT
-  USING (auth.uid() = user_id);
+  USING (
+    student_id IN (
+      SELECT id FROM student_profiles WHERE account_id = auth.uid()
+    )
+  );
 
 -- ============================================================
--- Schools and scholarships are public read-only
+-- student_verifications
 -- ============================================================
-ALTER TABLE public.schools ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.student_verifications ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "schools_select_public"
-  ON public.schools FOR SELECT
-  USING (status = 'active');
+CREATE POLICY "sv_select_own"
+  ON public.student_verifications FOR SELECT
+  USING (
+    student_id IN (
+      SELECT id FROM student_profiles WHERE account_id = auth.uid()
+    )
+  );
 
+-- ============================================================
+-- Institutions: public read of published institutions
+-- ============================================================
+ALTER TABLE public.institutions ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "inst_select_public"
+  ON public.institutions FOR SELECT
+  USING (is_published = true);
+
+-- ============================================================
+-- Scholarships: public read of published scholarships
+-- ============================================================
 ALTER TABLE public.scholarships ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "scholarships_select_public"
+CREATE POLICY "sch_select_public"
   ON public.scholarships FOR SELECT
-  USING (true);
+  USING (is_published = true);
 
 -- ============================================================
--- Clubs are public read, insert requires auth
+-- Clubs: public read of published clubs
 -- ============================================================
 ALTER TABLE public.clubs ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "clubs_select_public"
   ON public.clubs FOR SELECT
-  USING (status = 'active');
+  USING (is_published = true);
 
 CREATE POLICY "clubs_insert_auth"
   ON public.clubs FOR INSERT
   WITH CHECK (auth.uid() IS NOT NULL);
+
+-- ============================================================
+-- Programmes: public read of published programmes
+-- ============================================================
+ALTER TABLE public.programmes ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "prog_select_public"
+  ON public.programmes FOR SELECT
+  USING (is_published = true);

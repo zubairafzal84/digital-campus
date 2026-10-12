@@ -1,0 +1,294 @@
+.hero {
+  background: linear-gradient(160deg, var(--navy) 0%, #1e2e7a 60%, #2d1a6b 100%);
+  padding: 100px 24px 80px;
+  text-align: center;
+}
+
+.heroInner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  background: rgba(255,255,255,0.12);
+  color: var(--lav);
+  border-radius: 24px;
+  padding: 6px 16px;
+  margin-bottom: 24px;
+  letter-spacing: 0.02em;
+}
+
+.h1 {
+  font-size: clamp(32px, 6vw, 60px);
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  margin-bottom: 24px;
+}
+
+.hi {
+  color: var(--lav);
+}
+
+.lead {
+  font-size: 18px;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.65;
+  margin-bottom: 36px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaBtns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ctaPrimary {
+  display: inline-block;
+  padding: 14px 32px;
+  background: var(--purple);
+  color: #ffffff;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.ctaPrimary:hover {
+  background: var(--purple-hi);
+}
+
+.ctaSecondary {
+  display: inline-block;
+  padding: 14px 28px;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.85);
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+
+.ctaSecondary:hover {
+  border-color: rgba(255,255,255,0.5);
+}
+
+/* Features */
+.features {
+  padding: 80px 24px;
+  background: var(--bg);
+}
+
+.inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.h2 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.cardIcon {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.cardTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.cardBody {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Schools */
+.schools {
+  padding: 72px 24px;
+  background: var(--lav);
+}
+
+.schoolsSub {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 24px;
+  margin-top: -20px;
+}
+
+.schoolChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.schoolChip {
+  padding: 8px 18px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+
+.schoolChip:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+}
+
+.allSchools {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--purple);
+  text-decoration: none;
+}
+
+.allSchools:hover {
+  text-decoration: underline;
+}
+
+/* Scholarships belt */
+.scholarships {
+  background: var(--navy);
+  padding: 80px 24px;
+}
+
+.scholarships .inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.h2White {
+  font-size: 26px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+
+.schBody {
+  font-size: 15px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+
+.schCta {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--lav);
+  text-decoration: none;
+}
+
+.schCta:hover {
+  text-decoration: underline;
+}
+
+.schRight {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.schStat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.schNum {
+  font-size: 32px;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.schLabel {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+}
+
+/* CTA bottom */
+.cta {
+  padding: 80px 24px;
+  background: var(--bg);
+  text-align: center;
+}
+
+.ctaInner {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.ctaH {
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--navy);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.ctaBody {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.ctaBtn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: var(--purple);
+  color: #ffffff;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.ctaBtn:hover {
+  background: var(--purple-hi);
+}
+
+@media (max-width: 768px) {
+  .scholarships .inner {
+    grid-template-columns: 1fr;
+  }
+}
