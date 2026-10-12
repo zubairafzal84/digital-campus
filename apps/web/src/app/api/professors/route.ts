@@ -18,20 +18,18 @@ export async function GET(request: NextRequest) {
       department,
       course_codes,
       ratings_count,
-      avg_overall,
-      avg_clarity,
-      avg_helpfulness,
-      avg_difficulty,
+      avg_overall_rating,
       would_take_again_pct
     `)
-    .order('avg_overall', { ascending: false, nullsFirst: false })
+    .eq('is_published', true)
+    .order('avg_overall_rating', { ascending: false, nullsFirst: false })
 
   if (school) {
     query = query.eq('school', school)
   }
 
   if (q) {
-    query = query.or(`name.ilike.%${q}%,course_codes.cs.{${q.toUpperCase()}}`)
+    query = query.ilike('name', `%${q}%`)
   }
 
   const { data, error } = await query.limit(100)
@@ -54,7 +52,10 @@ export async function POST(request: NextRequest) {
   const body = await request.json().catch(() => null)
 
   if (!body || !body.name || !body.school || !body.department) {
-    return NextResponse.json({ error: 'name, school, and department are required.' }, { status: 400 })
+    return NextResponse.json(
+      { error: 'name, school, and department are required.' },
+      { status: 400 },
+    )
   }
 
   const { name, school, department, course_codes } = body
@@ -74,6 +75,7 @@ export async function POST(request: NextRequest) {
       department: department.trim(),
       course_codes: courseCodes,
       submitted_by: userId,
+      is_published: false, // Requires admin review before going live
     })
     .select('id, name, school, department')
     .single()

@@ -1,37 +1,54 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
 export async function GET(
-  _request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params
-
   const supabase = await createClient()
 
-  const { data: professor, error: professorError } = await supabase
+  const { data: professor, error: profErr } = await supabase
     .from('professors')
-    .select('*')
+    .select(`
+      id,
+      name,
+      school,
+      department,
+      course_codes,
+      ratings_count,
+      avg_overall_rating,
+      avg_clarity_rating,
+      avg_helpfulness_rating,
+      avg_difficulty_rating,
+      would_take_again_pct,
+      is_published
+    `)
     .eq('id', id)
     .eq('is_published', true)
     .single()
 
-  if (professorError) {
-    if (professorError.code === 'PGRST116') {
-      return NextResponse.json({ error: 'Professor not found' }, { status: 404 })
-    }
-    return NextResponse.json({ error: professorError.message }, { status: 500 })
+  if (profErr || !professor) {
+    return NextResponse.json({ error: 'Professor not found.' }, { status: 404 })
   }
 
-  const { data: ratings, error: ratingsError } = await supabase
+  const { data: reviews } = await supabase
     .from('professor_ratings')
-    .select('*')
+    .select(`
+      id,
+      course_code,
+      grade_received,
+      overall_rating,
+      clarity_rating,
+      helpfulness_rating,
+      difficulty_rating,
+      would_take_again,
+      review_text,
+      created_at
+    `)
     .eq('professor_id', id)
     .order('created_at', { ascending: false })
+    .limit(50)
 
-  if (ratingsError) {
-    return NextResponse.json({ error: ratingsError.message }, { status: 500 })
-  }
-
-  return NextResponse.json({ professor, ratings: ratings ?? [] })
+  return NextResponse.json({ professor, reviews: reviews ?? [] })
 }
