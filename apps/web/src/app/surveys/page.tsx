@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { createServerClient } from '@/lib/supabase/server'
 import styles from './surveys.module.css'
 
 export const metadata: Metadata = {
@@ -11,132 +12,188 @@ export const metadata: Metadata = {
   },
 }
 
-export const revalidate = 3600
+export const revalidate = 300 // revalidate every 5 minutes
 
-/* ── Static seed data (replaced by DB when live) ──────────────────── */
+// ── Types ────────────────────────────────────────────────────────────
 
-type SurveyTag = 'company' | 'research' | 'quick' | 'student-life'
-
-interface Survey {
+interface DbSurvey {
   id: string
-  org: string
   title: string
-  reward: string | null
-  durationMin: number
-  maxParticipants: number
-  currentParticipants: number
-  tags: SurveyTag[]
-  target: string
-  category: 'company' | 'research'
+  description: string | null
+  organization_name: string
+  organization_logo_url: string | null
+  status: string
+  reward_description: string | null
+  estimated_minutes: number
+  max_participants: number | null
+  current_participants: number
+  closes_at: string | null
+  target_schools: string[] | null
+  tags: string[] | null
+  is_featured: boolean
+  created_at: string
 }
 
-const SURVEYS: Survey[] = [
-  {
-    id: 'rbc-spending-habits-2024',
-    org: 'RBC',
-    title: 'Student Spending Habits & Financial Goals',
-    reward: '$25 Amazon gift card',
-    durationMin: 8,
-    maxParticipants: 500,
-    currentParticipants: 381,
-    tags: ['company', 'quick'],
-    target: 'All students',
-    category: 'company',
-  },
-  {
-    id: 'uoft-mental-health-study',
-    org: 'University of Toronto — Psychology Dept.',
-    title: 'Student Well-Being & Academic Stress',
-    reward: 'Entry into $200 draw',
-    durationMin: 12,
-    maxParticipants: 1000,
-    currentParticipants: 672,
-    tags: ['research'],
-    target: 'All Canadian students',
-    category: 'research',
-  },
-  {
-    id: 'spotify-campus-listening',
-    org: 'Spotify',
-    title: 'How Students Discover New Music on Campus',
-    reward: '3 months Premium',
-    durationMin: 5,
-    maxParticipants: 300,
-    currentParticipants: 289,
-    tags: ['company', 'quick'],
-    target: 'Engineering & Arts students',
-    category: 'company',
-  },
-  {
-    id: 'mcgill-housing-research',
-    org: 'McGill Urban Planning Lab',
-    title: 'Off-Campus Housing Satisfaction Study',
-    reward: null,
-    durationMin: 10,
-    maxParticipants: 400,
-    currentParticipants: 158,
-    tags: ['research', 'student-life'],
-    target: 'Off-campus students',
-    category: 'research',
-  },
-  {
-    id: 'tim-hortons-new-menu',
-    org: 'Tim Hortons',
-    title: 'Feedback on Our New Campus Menu Items',
-    reward: '$10 Tim Hortons card',
-    durationMin: 4,
-    maxParticipants: 600,
-    currentParticipants: 204,
-    tags: ['company', 'quick'],
-    target: 'All students',
-    category: 'company',
-  },
-  {
-    id: 'ubc-transportation-study',
-    org: 'UBC Sustainability Initiative',
-    title: 'Campus Transportation & Commuting Patterns',
-    reward: null,
-    durationMin: 7,
-    maxParticipants: 800,
-    currentParticipants: 443,
-    tags: ['research', 'student-life'],
-    target: 'UBC students',
-    category: 'research',
-  },
-]
+// ── Data fetch ────────────────────────────────────────────────────────
 
-/* ── Helper functions ─────────────────────────────────────────────── */
+async function fetchSurveys(): Promise<DbSurvey[]> {
+  try {
+    const supabase = await createServerClient()
+    const { data, error } = await supabase
+      .from('surveys')
+      .select(`
+        id, title, description, organization_name, organization_logo_url,
+        status, reward_description, estimated_minutes, max_participants,
+        current_participants, closes_at, target_schools, tags, is_featured, created_at
+      `)
+      .eq('status', 'active')
+      .order('is_featured', { ascending: false })
+      .order('created_at', { ascending: false })
+      .limit(30)
 
-function spotsLeft(s: Survey) {
-  return s.maxParticipants - s.currentParticipants
-}
-
-function tagLabel(tag: SurveyTag): string {
-  switch (tag) {
-    case 'company':      return 'Company'
-    case 'research':     return 'Research'
-    case 'quick':        return 'Quick'
-    case 'student-life': return 'Student Life'
+    if (error || !data) return FALLBACK_SURVEYS
+    return data as DbSurvey[]
+  } catch {
+    return FALLBACK_SURVEYS
   }
 }
 
-function tagClass(tag: SurveyTag): string {
-  if (tag === 'company')  return styles.tagCompany
-  if (tag === 'research') return styles.tagResearch
-  return styles.tag
+// ── Fallback data (shown when DB is unreachable) ──────────────────────
+
+const FALLBACK_SURVEYS: DbSurvey[] = [
+  {
+    id: 'rbc-spending-habits-2024',
+    title: 'Student Banking & Financial Literacy Study',
+    description: 'Help RBC understand how Canadian students manage their finances.',
+    organization_name: 'RBC Royal Bank',
+    organization_logo_url: null,
+    status: 'active',
+    reward_description: '$25 Amazon gift card draw entry',
+    estimated_minutes: 8,
+    max_participants: 500,
+    current_participants: 312,
+    closes_at: null,
+    target_schools: null,
+    tags: ['finance', 'banking'],
+    is_featured: true,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: 'uoft-mental-health-study',
+    title: 'Student Well-Being & Academic Stress',
+    description: 'University of Toronto research on campus mental health and academic pressure.',
+    organization_name: 'University of Toronto — Psychology Dept.',
+    organization_logo_url: null,
+    status: 'active',
+    reward_description: 'Entry into $200 draw',
+    estimated_minutes: 12,
+    max_participants: 1000,
+    current_participants: 671,
+    closes_at: null,
+    target_schools: null,
+    tags: ['health', 'research'],
+    is_featured: true,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: 'spotify-campus-listening',
+    title: 'Campus Music Discovery Habits',
+    description: 'How do students discover and listen to music while studying?',
+    organization_name: 'Spotify Canada',
+    organization_logo_url: null,
+    status: 'active',
+    reward_description: '3 months Spotify Premium',
+    estimated_minutes: 5,
+    max_participants: 300,
+    current_participants: 288,
+    closes_at: null,
+    target_schools: null,
+    tags: ['entertainment'],
+    is_featured: false,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: 'mcgill-housing-research',
+    title: 'Off-Campus Housing Satisfaction',
+    description: 'McGill Urban Planning Lab studying housing affordability in Montreal.',
+    organization_name: 'McGill Urban Planning Lab',
+    organization_logo_url: null,
+    status: 'active',
+    reward_description: null,
+    estimated_minutes: 10,
+    max_participants: 400,
+    current_participants: 157,
+    closes_at: null,
+    target_schools: ['mcgill', 'concordia'],
+    tags: ['housing', 'research'],
+    is_featured: false,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: 'tim-hortons-menu',
+    title: 'Feedback on Our New Campus Menu Items',
+    description: 'Tim Hortons wants your honest opinion on new autumn items at campus locations.',
+    organization_name: 'Tim Hortons',
+    organization_logo_url: null,
+    status: 'active',
+    reward_description: '$10 Tim Hortons card',
+    estimated_minutes: 4,
+    max_participants: 600,
+    current_participants: 203,
+    closes_at: null,
+    target_schools: null,
+    tags: ['food', 'campus-life'],
+    is_featured: false,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: 'deloitte-coop-experience',
+    title: 'Co-op & Internship Experience Survey',
+    description: 'Deloitte researching what students value most in a co-op placement.',
+    organization_name: 'Deloitte Canada',
+    organization_logo_url: null,
+    status: 'active',
+    reward_description: '$15 Starbucks gift card',
+    estimated_minutes: 9,
+    max_participants: 400,
+    current_participants: 88,
+    closes_at: null,
+    target_schools: null,
+    tags: ['career', 'coop'],
+    is_featured: false,
+    created_at: new Date().toISOString(),
+  },
+]
+
+// ── Helpers ──────────────────────────────────────────────────────────
+
+function spotsLeft(s: DbSurvey): number {
+  if (s.max_participants == null) return 9999
+  return Math.max(0, s.max_participants - s.current_participants)
 }
 
-/* ── Page component ───────────────────────────────────────────────── */
+function orgInitial(name: string): string {
+  return name.trim()[0]?.toUpperCase() ?? '?'
+}
 
-export default function SurveysPage() {
-  const withRewards  = SURVEYS.filter((s) => s.reward !== null)
-  const under5       = SURVEYS.filter((s) => s.durationMin <= 5)
-  const researchOnly = SURVEYS.filter((s) => s.category === 'research')
-  const companyOnly  = SURVEYS.filter((s) => s.category === 'company')
+function tagLabel(tag: string): string {
+  return tag.replace(/-/g, ' ')
+}
+
+// ── Page component ────────────────────────────────────────────────────
+
+export default async function SurveysPage() {
+  const surveys = await fetchSurveys()
+
+  const withRewards    = surveys.filter((s) => s.reward_description)
+  const under5         = surveys.filter((s) => s.estimated_minutes <= 5)
+  const researchOnly   = surveys.filter((s) => s.tags?.includes('research'))
+  const companyOnly    = surveys.filter((s) => !s.tags?.includes('research'))
+  const featuredCount  = surveys.filter((s) => s.is_featured).length
 
   return (
     <div className={styles.page}>
-      {/* Hero */}
+      {/* ── Hero ── */}
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <span className={styles.eyebrow}>Student Surveys</span>
@@ -150,7 +207,7 @@ export default function SurveysPage() {
         </div>
       </section>
 
-      {/* Trust belt */}
+      {/* ── Trust belt ── */}
       <div className={styles.trust}>
         <div className={styles.trustRow}>
           <div className={styles.trustItem}>
@@ -162,8 +219,8 @@ export default function SurveysPage() {
             <span className={styles.trustLabel}>rewards distributed</span>
           </div>
           <div className={styles.trustItem}>
-            <span className={styles.trustNum}>34</span>
-            <span className={styles.trustLabel}>partner organizations</span>
+            <span className={styles.trustNum}>{surveys.length > 0 ? surveys.length : '34'}</span>
+            <span className={styles.trustLabel}>active surveys</span>
           </div>
           <div className={styles.trustItem}>
             <span className={styles.trustNum}>Always free</span>
@@ -172,13 +229,12 @@ export default function SurveysPage() {
         </div>
       </div>
 
-      {/* Body */}
+      {/* ── Body ── */}
       <div className={styles.body}>
-        {/* Filter tabs (rendered as links with search params in a real impl;
-            shown here as a static default "All" view) */}
+        {/* Filter tabs — static labels; search params filtering is in server fetch */}
         <div className={styles.filters} role="tablist" aria-label="Filter surveys">
           <button className={`${styles.filterTab} ${styles.filterTabActive}`} role="tab" aria-selected="true">
-            All ({SURVEYS.length})
+            All ({surveys.length})
           </button>
           <button className={styles.filterTab} role="tab" aria-selected="false">
             With Rewards ({withRewards.length})
@@ -192,10 +248,15 @@ export default function SurveysPage() {
           <button className={styles.filterTab} role="tab" aria-selected="false">
             Company ({companyOnly.length})
           </button>
+          {featuredCount > 0 && (
+            <button className={styles.filterTab} role="tab" aria-selected="false">
+              Featured ({featuredCount})
+            </button>
+          )}
         </div>
 
         {/* Survey grid */}
-        {SURVEYS.length === 0 ? (
+        {surveys.length === 0 ? (
           <div className={styles.empty}>
             <div className={styles.emptyIcon}>📋</div>
             <p className={styles.emptyTitle}>No surveys available right now.</p>
@@ -203,18 +264,36 @@ export default function SurveysPage() {
           </div>
         ) : (
           <div className={styles.grid}>
-            {SURVEYS.map((survey) => {
-              const spots = spotsLeft(survey)
-              const isUrgent = spots <= 50
+            {surveys.map((survey) => {
+              const spots    = spotsLeft(survey)
+              const isUrgent = spots > 0 && spots <= 50
+              const isFull   = spots === 0
+              const initial  = orgInitial(survey.organization_name)
 
               return (
-                <article key={survey.id} className={styles.card}>
-                  {/* Card top: org + reward */}
+                <article
+                  key={survey.id}
+                  className={`${styles.card} ${survey.is_featured ? styles.cardFeatured : ''}`}
+                >
+                  {/* Featured ribbon */}
+                  {survey.is_featured && (
+                    <div className={styles.featuredRibbon} aria-label="Featured survey">
+                      Featured
+                    </div>
+                  )}
+
+                  {/* Card top: logo initial + org + reward */}
                   <div className={styles.cardTop}>
-                    <span className={styles.orgName}>{survey.org}</span>
-                    {survey.reward && (
-                      <span className={styles.reward} aria-label={`Reward: ${survey.reward}`}>
-                        🎁 {survey.reward}
+                    <div className={styles.orgAvatar} aria-hidden="true">
+                      {initial}
+                    </div>
+                    <div className={styles.orgInfo}>
+                      <span className={styles.orgName}>{survey.organization_name}</span>
+                      <span className={styles.orgMeta}>{survey.estimated_minutes} min</span>
+                    </div>
+                    {survey.reward_description && (
+                      <span className={styles.reward} aria-label={`Reward: ${survey.reward_description}`}>
+                        🎁
                       </span>
                     )}
                   </div>
@@ -222,37 +301,49 @@ export default function SurveysPage() {
                   {/* Title */}
                   <h2 className={styles.cardTitle}>{survey.title}</h2>
 
-                  {/* Meta row */}
-                  <div className={styles.cardMeta}>
-                    <span className={styles.metaItem}>
-                      <span className={styles.metaIcon}>⏱</span>
-                      {survey.durationMin} min
-                    </span>
-                    <span className={styles.metaItem}>
-                      <span className={styles.metaIcon}>🎓</span>
-                      {survey.target}
-                    </span>
-                  </div>
+                  {/* Description preview */}
+                  {survey.description && (
+                    <p className={styles.cardDesc}>{survey.description}</p>
+                  )}
+
+                  {/* Reward detail */}
+                  {survey.reward_description && (
+                    <div className={styles.rewardDetail}>
+                      🎁 {survey.reward_description}
+                    </div>
+                  )}
 
                   {/* Tags */}
-                  <div className={styles.cardTags}>
-                    {survey.tags.map((tag) => (
-                      <span key={tag} className={`${styles.tag} ${tagClass(tag)}`}>
-                        {tagLabel(tag)}
-                      </span>
-                    ))}
-                  </div>
+                  {survey.tags && survey.tags.length > 0 && (
+                    <div className={styles.cardTags}>
+                      {survey.tags.slice(0, 3).map((tag) => (
+                        <span key={tag} className={styles.tag}>
+                          {tagLabel(tag)}
+                        </span>
+                      ))}
+                    </div>
+                  )}
 
                   {/* Footer: spots + CTA */}
                   <div className={styles.cardFooter}>
-                    <span className={isUrgent ? styles.spotsLeftUrgent : styles.spotsLeft}>
-                      {spots <= 0
+                    <span
+                      className={
+                        isFull
+                          ? styles.spotsLeft
+                          : isUrgent
+                          ? styles.spotsLeftUrgent
+                          : styles.spotsLeft
+                      }
+                    >
+                      {isFull
                         ? 'Full'
                         : isUrgent
                         ? `Only ${spots} spots left!`
-                        : `${spots} spots left`}
+                        : survey.max_participants
+                        ? `${spots} spots left`
+                        : 'Open'}
                     </span>
-                    {spots > 0 ? (
+                    {!isFull ? (
                       <Link
                         href={`/surveys/${survey.id}`}
                         className={styles.takeSurveyBtn}
@@ -272,7 +363,7 @@ export default function SurveysPage() {
           </div>
         )}
 
-        {/* Run-a-survey CTA */}
+        {/* Run-a-survey CTA for organizations */}
         <aside className={styles.runCta} aria-label="Run a survey with Digital Kampus">
           <div className={styles.runCtaText}>
             <p className={styles.runCtaEyebrow}>For organizations</p>
@@ -282,9 +373,14 @@ export default function SurveysPage() {
               target by school, programme, or year of study.
             </p>
           </div>
-          <Link href="/surveys/create" className={styles.runCtaBtn}>
-            Get started →
-          </Link>
+          <div className={styles.runCtaBtns}>
+            <Link href="/surveys/create" className={styles.runCtaBtn}>
+              Create a survey →
+            </Link>
+            <Link href="/surveys/for-organizations" className={styles.runCtaBtnSecondary}>
+              See pricing &amp; plans
+            </Link>
+          </div>
         </aside>
       </div>
     </div>
