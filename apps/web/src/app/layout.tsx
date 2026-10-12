@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { ClerkProvider } from '@clerk/nextjs'
 import '@/styles/globals.css'
 
 export const viewport: Viewport = {
@@ -86,8 +87,22 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body>{children}</body>
-    </html>
+    <ClerkProvider
+      signInUrl="/login"
+      signUpUrl="/signup"
+      signInFallbackRedirectUrl="/dashboard"
+      signUpFallbackRedirectUrl="/dashboard"
+      appearance={{
+        variables: {
+          colorPrimary: '#6B3EF2',
+          borderRadius: '12px',
+          fontFamily: 'inherit',
+        },
+      }}
+    >
+      <html lang="en" suppressHydrationWarning>
+        <body>{children}</body>
+      </html>
+    </ClerkProvider>
   )
 }

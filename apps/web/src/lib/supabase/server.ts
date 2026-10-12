@@ -1,31 +1,31 @@
-import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
+import { auth } from '@clerk/nextjs/server'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 import type { Database } from '@dk/database'
 
-export { createClient as createServerClient }
-
+/**
+ * Creates a Supabase client authenticated with the current Clerk session.
+ *
+ * Clerk's JWT template named "supabase" must be configured in the Clerk
+ * Dashboard (Configure → JWT Templates → Add → Supabase). The template
+ * generates a JWT that Supabase verifies using Clerk's JWKS endpoint.
+ * auth.uid() in RLS policies returns the Clerk user ID (sub claim).
+ *
+ * For unauthenticated requests (public API routes) the client falls back
+ * to the anon key without an Authorization header.
+ */
 export async function createClient() {
-  const cookieStore = await cookies()
+  const { getToken } = await auth()
+  const token = await getToken({ template: 'supabase' }).catch(() => null)
 
-  return createServerClient<Database>(
+  return createSupabaseClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
-      cookies: {
-        getAll() {
-          return cookieStore.getAll()
-        },
-        setAll(cookiesToSet) {
-          try {
-            cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options),
-            )
-          } catch {
-            // setAll called from a Server Component — cookies can only be
-            // set in a Server Action or Route Handler.
-          }
-        },
+      global: {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
       },
     },
   )
 }
+
+export { createClient as createServerClient }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { currentUser } from '@clerk/nextjs/server'
 import { SiteNav } from '@/components/layout/SiteNav'
 import styles from './profile.module.css'
 
@@ -8,7 +9,15 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const user = await currentUser()
+
+  const firstName   = user?.firstName ?? ''
+  const lastName    = user?.lastName  ?? ''
+  const email       = user?.emailAddresses?.[0]?.emailAddress ?? ''
+  const avatarInitials = ((firstName[0] ?? '') + (lastName[0] ?? '')).toUpperCase() || 'DK'
+  const avatarUrl   = user?.imageUrl
+
   return (
     <>
       <SiteNav />
@@ -20,18 +29,28 @@ export default function ProfilePage() {
           <div className={styles.grid}>
             <aside className={styles.sidebar}>
               <div className={styles.avatarWrap}>
-                <div className={styles.avatar}>AM</div>
-                <button className={styles.changeAvatar}>Change photo</button>
+                {avatarUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={avatarUrl} alt={`${firstName} ${lastName}`} className={styles.avatarImg} />
+                ) : (
+                  <div className={styles.avatar}>{avatarInitials}</div>
+                )}
               </div>
               <nav className={styles.profileNav}>
                 {[
                   { label: 'Personal info', href: '#personal', active: true },
-                  { label: 'Education', href: '#education' },
-                  { label: 'Privacy', href: '#privacy' },
+                  { label: 'Education',     href: '#education' },
+                  { label: 'Privacy',       href: '#privacy' },
                   { label: 'Notifications', href: '#notifications' },
                   { label: 'Account & security', href: '#security' },
                 ].map(({ label, href, active }) => (
-                  <Link key={href} href={href} className={`${styles.navLink} ${active ? styles.navActive : ''}`}>{label}</Link>
+                  <Link
+                    key={href}
+                    href={href}
+                    className={`${styles.navLink} ${active ? styles.navActive : ''}`}
+                  >
+                    {label}
+                  </Link>
                 ))}
               </nav>
             </aside>
@@ -43,23 +62,26 @@ export default function ProfilePage() {
                   <div className={styles.row2}>
                     <div className={styles.field}>
                       <label className={styles.label}>First name</label>
-                      <input type="text" defaultValue="Alex" className={styles.input} />
+                      <input type="text" name="firstName" defaultValue={firstName} className={styles.input} />
                     </div>
                     <div className={styles.field}>
                       <label className={styles.label}>Last name</label>
-                      <input type="text" defaultValue="Martin" className={styles.input} />
+                      <input type="text" name="lastName" defaultValue={lastName} className={styles.input} />
                     </div>
                   </div>
                   <div className={styles.field}>
                     <label className={styles.label}>Email</label>
-                    <input type="email" defaultValue="alex.martin@student.ubc.ca" className={styles.input} readOnly />
-                    <p className={styles.hint}>Your school email is used for verification only.</p>
+                    <input type="email" defaultValue={email} className={styles.input} readOnly />
+                    <p className={styles.hint}>
+                      Email is managed by your account provider.{' '}
+                      <Link href="/dashboard" className={styles.inlineLink}>Manage account →</Link>
+                    </p>
                   </div>
                   <div className={styles.field}>
                     <label className={styles.label}>Preferred language</label>
                     <select className={styles.input}>
                       <option value="en">English</option>
-                      <option value="fr">Français</option>
+                      <option value="fr">Français (coming soon)</option>
                     </select>
                   </div>
                   <button type="submit" className={styles.saveBtn}>Save changes</button>
@@ -71,17 +93,17 @@ export default function ProfilePage() {
                 <form className={styles.form}>
                   <div className={styles.field}>
                     <label className={styles.label}>School</label>
-                    <input type="text" defaultValue="University of British Columbia" className={styles.input} readOnly />
-                    <p className={styles.hint}>Contact support to change your institution.</p>
+                    <input type="text" placeholder="e.g. University of British Columbia" className={styles.input} />
+                    <p className={styles.hint}>Contact support to change your institution after verification.</p>
                   </div>
                   <div className={styles.row2}>
                     <div className={styles.field}>
                       <label className={styles.label}>Programme</label>
-                      <input type="text" defaultValue="BSc Computer Science" className={styles.input} />
+                      <input type="text" placeholder="e.g. BSc Computer Science" className={styles.input} />
                     </div>
                     <div className={styles.field}>
                       <label className={styles.label}>Year</label>
-                      <select className={styles.input} defaultValue="3">
+                      <select className={styles.input} defaultValue="1">
                         <option value="1">1st year</option>
                         <option value="2">2nd year</option>
                         <option value="3">3rd year</option>
@@ -98,7 +120,7 @@ export default function ProfilePage() {
                 <h2 className={styles.sectionH}>Privacy</h2>
                 <div className={styles.toggleList}>
                   {[
-                    { label: 'Show my profile to other students', sub: 'Only students you\'ve connected with can message you.', on: true },
+                    { label: 'Show my profile to other students', sub: "Only students you've connected with can message you.", on: true },
                     { label: 'Appear in campus search', sub: 'Students at your school can find your public profile.', on: false },
                     { label: 'Share grades with clubs', sub: 'Some clubs use GPA for eligibility checks.', on: false },
                   ].map(({ label, sub, on }) => (
@@ -120,6 +142,14 @@ export default function ProfilePage() {
                 <p className={styles.privacyNote}>
                   Your grades and private messages are never publicly indexed.
                   <Link href="/privacy" className={styles.inlineLink}> Privacy policy →</Link>
+                </p>
+              </section>
+
+              <section className={styles.section} id="security">
+                <h2 className={styles.sectionH}>Account &amp; security</h2>
+                <p className={styles.hint}>
+                  Password changes, connected social accounts, and two-factor authentication are managed
+                  through your account provider.
                 </p>
               </section>
             </main>

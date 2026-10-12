@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { NavAuth } from './NavAuth'
 import styles from './SiteNav.module.css'
 
 const NAV_LINKS = [
@@ -40,12 +41,7 @@ export function SiteNav() {
           <button className={styles.lang} aria-label="Switch to French">
             FR
           </button>
-          <Link href="/login" className={styles.ghost}>
-            Sign in
-          </Link>
-          <Link href="/signup" className={styles.solid}>
-            Get started
-          </Link>
+          <NavAuth />
         </div>
       </nav>
     </header>

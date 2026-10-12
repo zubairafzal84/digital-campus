@@ -1,0 +1,263 @@
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.breadcrumb a { color: var(--purple, #6B3EF2); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 40px;
+  align-items: start;
+}
+
+@media (max-width: 840px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { order: -1; }
+}
+
+/* ── Article ── */
+
+.articleHeader { margin-bottom: 36px; }
+
+.providerRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.provider {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--purple, #6B3EF2);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.renewableBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--lav, #E9E2FF);
+  color: var(--purple, #6B3EF2);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.h1 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 800;
+  color: var(--navy, #0A1F5D);
+  line-height: 1.2;
+  margin: 0 0 14px;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  font-size: 0.9375rem;
+}
+
+.amount {
+  font-weight: 800;
+  font-size: 1.125rem;
+  color: var(--navy, #0A1F5D);
+  font-variant-numeric: tabular-nums;
+}
+
+.dot { color: #9ca3af; }
+
+.deadline { color: #374151; }
+
+.gpa {
+  font-weight: 600;
+  color: #374151;
+}
+
+.programs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.programChip {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #f3f4f6;
+  color: #374151;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* ── Sections ── */
+
+.section {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 28px;
+  margin-bottom: 28px;
+}
+
+.h2 {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--navy, #0A1F5D);
+  margin: 0 0 14px;
+}
+
+.body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #374151;
+  margin: 0;
+}
+
+.eligList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.eligItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9375rem;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.check {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--lav, #E9E2FF);
+  color: var(--purple, #6B3EF2);
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  margin-top: 2px;
+}
+
+/* ── Sidebar ── */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 96px;
+}
+
+.sideCard {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.sideH3 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--navy, #0A1F5D);
+  margin: 0 0 16px;
+}
+
+.dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 16px;
+  font-size: 0.875rem;
+  margin: 0 0 20px;
+}
+
+.dl dt {
+  font-weight: 600;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.dl dd {
+  color: #111827;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.applyBtn {
+  display: block;
+  width: 100%;
+  background: var(--purple, #6B3EF2);
+  color: #fff;
+  text-align: center;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity 0.15s;
+  margin-bottom: 10px;
+}
+.applyBtn:hover { opacity: 0.87; }
+
+.freeNote {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  text-align: center;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.sideBody {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #374151;
+  margin: 0 0 16px;
+}
+
+.signupBtn {
+  display: block;
+  width: 100%;
+  background: var(--navy, #0A1F5D);
+  color: #fff;
+  text-align: center;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.signupBtn:hover { opacity: 0.87; }
+
+/* ── Dark mode ── */
+
+@media (prefers-color-scheme: dark) {
+  .sideCard { background: #111827; border-color: #374151; }
+  .programChip { background: #1f2937; color: #d1d5db; }
+  .body, .eligItem, .sideBody, .dl dd { color: #d1d5db; }
+  .h1, .h2, .sideH3 { color: #f9fafb; }
+  .section { border-color: #374151; }
+  .deadline, .gpa { color: #9ca3af; }
+  .freeNote { color: #6b7280; }
+}

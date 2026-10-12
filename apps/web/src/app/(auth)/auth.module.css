@@ -203,3 +203,14 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Clerk component wrappers */
+.clerkRoot {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.clerkCard {
+  box-shadow: 0 4px 32px rgba(107, 62, 242, 0.1) !important;
+  border: 1.5px solid var(--border, #e5e7eb) !important;
+}

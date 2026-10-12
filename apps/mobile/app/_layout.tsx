@@ -3,8 +3,33 @@ import { StatusBar } from 'expo-status-bar'
 import { useFonts } from 'expo-font'
 import { useEffect } from 'react'
 import * as SplashScreen from 'expo-splash-screen'
+import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo'
+import * as SecureStore from 'expo-secure-store'
 
 SplashScreen.preventAutoHideAsync()
+
+const tokenCache = {
+  async getToken(key: string) {
+    try {
+      return await SecureStore.getItemAsync(key)
+    } catch {
+      return null
+    }
+  },
+  async saveToken(key: string, value: string) {
+    try {
+      await SecureStore.setItemAsync(key, value)
+    } catch {
+      // Ignore write errors
+    }
+  },
+}
+
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
+
+if (!publishableKey) {
+  throw new Error('Missing EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY — add it to .env.local')
+}
 
 export default function RootLayout() {
   const [loaded] = useFonts({
@@ -26,12 +51,15 @@ export default function RootLayout() {
   if (!loaded) return null
 
   return (
-    <>
-      <StatusBar style="auto" />
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </>
+    <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
+      <ClerkLoaded>
+        <StatusBar style="auto" />
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(auth)" />
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+      </ClerkLoaded>
+    </ClerkProvider>
   )
 }
