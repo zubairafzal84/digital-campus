@@ -1,0 +1,189 @@
+.hero {
+  background: var(--navy);
+  padding: 100px 24px 80px;
+}
+
+.heroInner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.h1 {
+  font-size: clamp(30px, 5vw, 52px);
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  margin-bottom: 24px;
+}
+
+.lead {
+  font-size: 18px;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.65;
+  max-width: 580px;
+}
+
+/* Mission */
+.missionSection {
+  padding: 80px 24px;
+  background: var(--bg);
+}
+
+.missionInner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.h2 {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.missionText p {
+  font-size: 16px;
+  color: var(--fg);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.missionStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.stat {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statNum {
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Values */
+.valuesSection {
+  padding: 80px 24px;
+  background: var(--lav);
+}
+
+.valuesInner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.valueCard {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.valueTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+
+.valueBody {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* CTA */
+.ctaSection {
+  background: var(--navy);
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.ctaInner {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.ctaH {
+  font-size: 30px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.ctaBody {
+  font-size: 16px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 28px;
+}
+
+.ctaBtns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.primary {
+  padding: 13px 28px;
+  background: var(--purple);
+  color: #ffffff;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.primary:hover {
+  background: var(--purple-hi);
+}
+
+.secondary {
+  padding: 13px 28px;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.85);
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+
+.secondary:hover {
+  border-color: rgba(255,255,255,0.5);
+}
+
+@media (max-width: 768px) {
+  .missionInner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}

@@ -9,6 +9,7 @@ import { BrowseByProvince } from '@/components/home/BrowseByProvince'
 import { HowItWorks } from '@/components/home/HowItWorks'
 import { HomeFaq } from '@/components/home/HomeFaq'
 import { StatsBelt } from '@/components/home/StatsBelt'
+import { FeatureShowcase } from '@/components/home/FeatureShowcase'
 import { JsonLd } from '@/components/seo/JsonLd'
 
 export const metadata: Metadata = {
@@ -62,6 +63,7 @@ export default function HomePage() {
         <Hero />
         <TrustedBy />
         <Features />
+        <FeatureShowcase />
         <CompareTeaser />
         <BrowseByProvince />
         <HowItWorks />
