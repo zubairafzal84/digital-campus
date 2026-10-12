@@ -3,7 +3,10 @@ import Link from 'next/link'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { SiteNav } from '@/components/layout/SiteNav'
 import { SiteFooter } from '@/components/layout/SiteFooter'
+import { createClient } from '@/lib/supabase/server'
 import styles from './scholarships.module.css'
+
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Scholarships & Bursaries for Canadian Students | Digital Kampus',
@@ -104,7 +107,26 @@ const faqLd = {
   ],
 }
 
-export default function ScholarshipsPage() {
+export default async function ScholarshipsPage() {
+  const supabase = await createClient()
+  const { data: dbAwards } = await supabase
+    .from('scholarships')
+    .select('id, name, provider, amount, currency, type, deadline, description')
+    .order('amount', { ascending: false })
+    .limit(12)
+
+  const awards = dbAwards?.map(a => ({
+    id: a.id,
+    name: a.name,
+    school: a.provider,
+    schoolSlug: null,
+    amount: a.amount,
+    type: a.type as string,
+    deadline: a.deadline ?? 'Rolling',
+    description: a.description ?? '',
+    tags: [a.type],
+  })) ?? LISTINGS
+
   return (
     <>
       <JsonLd data={faqLd} />
@@ -161,7 +183,7 @@ export default function ScholarshipsPage() {
               <Link href="/signup" className={styles.inlineLink}>Create free account →</Link>
             </p>
             <div className={styles.grid}>
-              {LISTINGS.map((s) => (
+              {awards.map((s) => (
                 <div key={s.id} className={styles.card}>
                   <div className={styles.cardTop}>
                     <span className={styles.amount}>${s.amount.toLocaleString()}</span>

@@ -3,7 +3,10 @@ import Link from 'next/link'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { SiteNav } from '@/components/layout/SiteNav'
 import { SiteFooter } from '@/components/layout/SiteFooter'
+import { createClient } from '@/lib/supabase/server'
 import styles from './schools.module.css'
+
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'Browse Canadian Colleges & Universities | Digital Kampus',
@@ -57,7 +60,24 @@ const breadcrumbs = {
   ],
 }
 
-export default function SchoolsPage() {
+export default async function SchoolsPage() {
+  const supabase = await createClient()
+  const { data: dbSchools } = await supabase
+    .from('schools')
+    .select('slug, name, city, province_code, type, verified')
+    .eq('status', 'active')
+    .order('name')
+    .limit(24)
+
+  const schools = dbSchools?.map(s => ({
+    slug: s.slug,
+    name: s.name,
+    city: s.city,
+    province: s.province_code,
+    type: s.type,
+    verified: s.verified,
+  })) ?? FEATURED_SCHOOLS
+
   return (
     <>
       <JsonLd data={breadcrumbs} />
@@ -115,9 +135,9 @@ export default function SchoolsPage() {
 
         <section className={styles.results}>
           <div className={styles.inner}>
-            <p className={styles.resultCount}>Showing {FEATURED_SCHOOLS.length} of 200+ schools</p>
+            <p className={styles.resultCount}>Showing {schools.length} of 200+ schools</p>
             <div className={styles.grid}>
-              {FEATURED_SCHOOLS.map((s) => (
+              {schools.map((s) => (
                 <Link key={s.slug} href={`/schools/${s.slug}`} className={styles.card}>
                   <div className={styles.cardTop}>
                     <div className={styles.cardIcon}>{s.name.charAt(0)}</div>
