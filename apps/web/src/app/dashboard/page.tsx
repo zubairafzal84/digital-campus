@@ -25,10 +25,11 @@ export default function DashboardPage() {
             {[
               { href: '/dashboard', label: 'Overview', icon: '◉' },
               { href: '/dashboard/grades', label: 'Grades', icon: '📊' },
-              { href: '/clubs', label: 'Clubs', icon: '🤝' },
+              { href: '/dashboard/clubs', label: 'Clubs', icon: '🤝' },
               { href: '/scholarships', label: 'Scholarships', icon: '🎓' },
               { href: '/housing', label: 'Housing', icon: '🏠' },
               { href: '/dashboard/chat', label: 'Messages', icon: '💬' },
+              { href: '/dashboard/notifications', label: 'Notifications', icon: '🔔' },
               { href: '/profile', label: 'Profile', icon: '👤' },
             ].map(({ href, label, icon }) => (
               <li key={href}>

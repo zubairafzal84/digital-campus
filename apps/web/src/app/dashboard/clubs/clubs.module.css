@@ -1,0 +1,296 @@
+.browseBtn {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--purple);
+  background: var(--lav);
+  border-radius: 10px;
+  padding: 10px 18px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.browseBtn:hover { background: var(--lav-dim); }
+
+.section { margin-bottom: 40px; }
+
+.sectionH {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.count {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--purple);
+  background: var(--lav);
+  border-radius: 20px;
+  padding: 2px 8px;
+}
+
+/* My clubs list */
+.myList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.myCard {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.myCardTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.clubIconWrap {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 12px;
+  background: var(--lav);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.clubInfo { flex: 1; min-width: 0; }
+
+.clubName {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: 4px;
+}
+
+.clubMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+
+.category { color: var(--purple); font-weight: 600; }
+
+.roleBadge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--navy);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1px 8px;
+}
+
+.nextEvent {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.eventLabel {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--purple);
+}
+
+.eventName {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.eventLoc {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.myCardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.viewLink {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--purple);
+  text-decoration: none;
+}
+
+.viewLink:hover { text-decoration: underline; }
+
+.leaveBtn {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.leaveBtn:hover { color: #dc2626; border-color: #dc2626; }
+
+/* Suggested grid */
+.suggestedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.sugCard {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.sugCard:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.07);
+  transform: translateY(-2px);
+}
+
+.sugTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sugIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--lav);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.sugCategory {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--purple);
+  background: var(--lav);
+  border-radius: 20px;
+  padding: 2px 10px;
+}
+
+.sugName {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.sugDesc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.sugFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.sugMembers {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.joinBtn {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  background: var(--purple);
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.joinBtn:hover { background: var(--purple-hov); }
+
+/* Register CTA */
+.registerCta {
+  margin-top: 8px;
+}
+
+.registerBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 28px;
+  flex-wrap: wrap;
+}
+
+.registerH {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.registerP { font-size: 14px; color: var(--muted); max-width: 400px; }
+
+.registerBtn {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--purple);
+  background: var(--lav);
+  border-radius: 10px;
+  padding: 10px 20px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.registerBtn:hover { background: var(--lav-dim); }
+
+@media (max-width: 640px) {
+  .suggestedGrid { grid-template-columns: 1fr; }
+  .registerBox { flex-direction: column; align-items: flex-start; }
+}

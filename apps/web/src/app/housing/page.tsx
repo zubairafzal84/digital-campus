@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 const LISTINGS = [
   {
     id: 1,
+    slug: 'kitsilano-1br-near-ubc',
     title: '1BR near UBC — Kitsilano',
     rent: 1850,
     bedrooms: 1,
@@ -33,6 +34,7 @@ const LISTINGS = [
   },
   {
     id: 2,
+    slug: 'shared-room-sfu-burnaby',
     title: 'Shared room — close to SFU Burnaby',
     rent: 850,
     bedrooms: 1,
@@ -46,6 +48,7 @@ const LISTINGS = [
   },
   {
     id: 3,
+    slug: '2br-ottawa-carleton-uottawa',
     title: '2BR apartment — downtown Ottawa (Carleton/uOttawa)',
     rent: 2100,
     bedrooms: 2,
@@ -59,6 +62,7 @@ const LISTINGS = [
   },
   {
     id: 4,
+    slug: 'basement-suite-u-of-t',
     title: 'Basement suite near U of T St. George',
     rent: 1650,
     bedrooms: 1,
@@ -72,6 +76,7 @@ const LISTINGS = [
   },
   {
     id: 5,
+    slug: '3br-student-house-montreal-mcgill',
     title: '3BR student house — Plateau, Montréal (McGill)',
     rent: 2400,
     bedrooms: 3,
@@ -85,6 +90,7 @@ const LISTINGS = [
   },
   {
     id: 6,
+    slug: 'studio-university-of-alberta',
     title: 'Studio — near University of Alberta',
     rent: 1100,
     bedrooms: 0,
@@ -143,7 +149,7 @@ export default function HousingPage() {
             </div>
             <div className={styles.grid}>
               {LISTINGS.map((l) => (
-                <div key={l.id} className={styles.card}>
+                <Link key={l.id} href={`/housing/${l.slug}`} className={styles.card} style={{ textDecoration: 'none', color: 'inherit' }}>
                   <div className={styles.cardImg}>
                     <div className={styles.imgPlaceholder}>{l.type === 'shared' ? '🏠' : l.type === 'apartment' ? '🏢' : l.type === 'basement' ? '🏡' : '🏘️'}</div>
                     <span className={styles.typePill}>{l.type}</span>
@@ -165,10 +171,10 @@ export default function HousingPage() {
                     </div>
                     <div className={styles.cardFooter}>
                       <span className={styles.available}>Available {l.available}</span>
-                      <Link href="/signup" className={styles.contactBtn}>Contact landlord →</Link>
+                      <span className={styles.contactBtn}>View details →</span>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
