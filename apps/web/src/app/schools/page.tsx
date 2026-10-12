@@ -37,18 +37,30 @@ const PROVINCES = [
 const TYPES = ['University', 'College', 'Polytechnic', 'Institut']
 
 const FEATURED_SCHOOLS = [
-  { name: 'University of British Columbia', slug: 'ubc', city: 'Vancouver', province: 'BC', type: 'University', programmes: 300, verified: true },
-  { name: 'University of Toronto', slug: 'uoft', city: 'Toronto', province: 'ON', type: 'University', programmes: 700, verified: true },
-  { name: 'McGill University', slug: 'mcgill', city: 'Montréal', province: 'QC', type: 'University', programmes: 400, verified: true },
-  { name: 'Simon Fraser University', slug: 'sfu', city: 'Burnaby', province: 'BC', type: 'University', programmes: 200, verified: true },
-  { name: 'University of Alberta', slug: 'ualberta', city: 'Edmonton', province: 'AB', type: 'University', programmes: 350, verified: true },
-  { name: 'Carleton University', slug: 'carleton', city: 'Ottawa', province: 'ON', type: 'University', programmes: 250, verified: true },
-  { name: 'University of Ottawa', slug: 'uottawa', city: 'Ottawa', province: 'ON', type: 'University', programmes: 450, verified: true },
-  { name: 'BCIT', slug: 'bcit', city: 'Burnaby', province: 'BC', type: 'Polytechnic', programmes: 180, verified: true },
-  { name: 'Humber College', slug: 'humber', city: 'Toronto', province: 'ON', type: 'College', programmes: 220, verified: true },
-  { name: 'Université de Montréal', slug: 'udem', city: 'Montréal', province: 'QC', type: 'University', programmes: 380, verified: true },
-  { name: 'Dalhousie University', slug: 'dal', city: 'Halifax', province: 'NS', type: 'University', programmes: 190, verified: false },
-  { name: 'University of Manitoba', slug: 'umanitoba', city: 'Winnipeg', province: 'MB', type: 'University', programmes: 180, verified: false },
+  { name: 'University of British Columbia', slug: 'ubc', city: 'Vancouver', province: 'BC', type: 'University', programmes: 300, verified: true, logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/8/83/University_of_British_Columbia_coat_of_arms.svg/120px-University_of_British_Columbia_coat_of_arms.svg.png' },
+  { name: 'University of Toronto', slug: 'uoft', city: 'Toronto', province: 'ON', type: 'University', programmes: 700, verified: true, logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/University_of_Toronto_coat_of_arms.svg/120px-University_of_Toronto_coat_of_arms.svg.png' },
+  { name: 'McGill University', slug: 'mcgill', city: 'Montréal', province: 'QC', type: 'University', programmes: 400, verified: true, logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/McGill_University_CoA.svg/120px-McGill_University_CoA.svg.png' },
+  { name: 'University of Western Ontario', slug: 'western', city: 'London', province: 'ON', type: 'University', programmes: 400, verified: true, logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/4c/Western_University_London_Ontario_coat_of_arms.svg/120px-Western_University_London_Ontario_coat_of_arms.svg.png' },
+  { name: 'McMaster University', slug: 'mcmaster', city: 'Hamilton', province: 'ON', type: 'University', programmes: 300, verified: true, logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/0a/McMaster_University_logo.svg/120px-McMaster_University_logo.svg.png' },
+  { name: 'University of Waterloo', slug: 'uwaterloo', city: 'Waterloo', province: 'ON', type: 'University', programmes: 250, verified: true, logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/f3/University_of_Waterloo_seal.svg/120px-University_of_Waterloo_seal.svg.png' },
+  { name: "Queen's University", slug: 'queens', city: 'Kingston', province: 'ON', type: 'University', programmes: 200, verified: true, logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/Queens_University_CoA.svg/120px-Queens_University_CoA.svg.png' },
+  { name: 'University of Alberta', slug: 'ualberta', city: 'Edmonton', province: 'AB', type: 'University', programmes: 400, verified: true, logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/University_of_Alberta_coat_of_arms.svg/120px-University_of_Alberta_coat_of_arms.svg.png' },
+  { name: 'University of Calgary', slug: 'ucalgary', city: 'Calgary', province: 'AB', type: 'University', programmes: 250, verified: true, logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/16/University_of_Calgary_arms.svg/120px-University_of_Calgary_arms.svg.png' },
+  { name: 'University of Ottawa', slug: 'uottawa', city: 'Ottawa', province: 'ON', type: 'University', programmes: 450, verified: true, logoUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/6f/University_of_Ottawa_coat_of_arms.svg/120px-University_of_Ottawa_coat_of_arms.svg.png' },
+  { name: 'Simon Fraser University', slug: 'sfu', city: 'Burnaby', province: 'BC', type: 'University', programmes: 200, verified: true, logoUrl: null },
+  { name: 'Université de Montréal', slug: 'udem', city: 'Montréal', province: 'QC', type: 'University', programmes: 650, verified: true, logoUrl: null },
+  { name: 'Université Laval', slug: 'laval', city: 'Québec City', province: 'QC', type: 'University', programmes: 500, verified: true, logoUrl: null },
+  { name: 'York University', slug: 'yorku', city: 'Toronto', province: 'ON', type: 'University', programmes: 300, verified: true, logoUrl: null },
+  { name: 'Toronto Metropolitan University', slug: 'ryerson', city: 'Toronto', province: 'ON', type: 'University', programmes: 150, verified: true, logoUrl: null },
+  { name: 'Carleton University', slug: 'carleton', city: 'Ottawa', province: 'ON', type: 'University', programmes: 250, verified: true, logoUrl: null },
+  { name: 'Concordia University', slug: 'concordia', city: 'Montréal', province: 'QC', type: 'University', programmes: 300, verified: true, logoUrl: null },
+  { name: 'Dalhousie University', slug: 'dal', city: 'Halifax', province: 'NS', type: 'University', programmes: 190, verified: true, logoUrl: null },
+  { name: 'BCIT', slug: 'bcit', city: 'Burnaby', province: 'BC', type: 'Polytechnic', programmes: 180, verified: true, logoUrl: null },
+  { name: 'Seneca Polytechnic', slug: 'seneca', city: 'Toronto', province: 'ON', type: 'College', programmes: 300, verified: true, logoUrl: null },
+  { name: 'Humber College', slug: 'humber', city: 'Etobicoke', province: 'ON', type: 'College', programmes: 250, verified: true, logoUrl: null },
+  { name: 'Sheridan College', slug: 'sheridan', city: 'Oakville', province: 'ON', type: 'College', programmes: 150, verified: true, logoUrl: null },
+  { name: 'NAIT', slug: 'nait', city: 'Edmonton', province: 'AB', type: 'Polytechnic', programmes: 200, verified: true, logoUrl: null },
+  { name: 'University of Manitoba', slug: 'umanitoba', city: 'Winnipeg', province: 'MB', type: 'University', programmes: 180, verified: true, logoUrl: null },
 ]
 
 const breadcrumbs = {
@@ -137,20 +149,30 @@ export default async function SchoolsPage() {
           <div className={styles.inner}>
             <p className={styles.resultCount}>Showing {schools.length} of 200+ schools</p>
             <div className={styles.grid}>
-              {schools.map((s) => (
-                <Link key={s.slug} href={`/schools/${s.slug}`} className={styles.card}>
-                  <div className={styles.cardTop}>
-                    <div className={styles.cardIcon}>{s.name.charAt(0)}</div>
-                    {s.verified && (
-                      <span className={styles.verified} title="Verified institution">✓ Verified</span>
-                    )}
-                  </div>
-                  <h2 className={styles.cardName}>{s.name}</h2>
-                  <p className={styles.cardMeta}>{s.city}, {s.province} · {s.type}</p>
-                  <p className={styles.cardProg}>{s.programmes}+ programmes</p>
-                  <span className={styles.cardCta}>View profile →</span>
-                </Link>
-              ))}
+              {schools.map((s) => {
+                const logoUrl = (s as { logoUrl?: string | null }).logoUrl ?? null
+                return (
+                  <Link key={s.slug} href={`/schools/${s.slug}`} className={styles.card}>
+                    <div className={styles.cardTop}>
+                      {logoUrl ? (
+                        <div className={styles.cardLogoWrap}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={logoUrl} alt={s.name + ' logo'} width={40} height={40} className={styles.cardLogo} />
+                        </div>
+                      ) : (
+                        <div className={styles.cardIcon}>{s.name.charAt(0)}</div>
+                      )}
+                      {s.verified && (
+                        <span className={styles.verified} title="Verified institution">✓ Verified</span>
+                      )}
+                    </div>
+                    <h2 className={styles.cardName}>{s.name}</h2>
+                    <p className={styles.cardMeta}>{s.city}, {s.province} · {s.type}</p>
+                    <p className={styles.cardProg}>{s.programmes}+ programmes</p>
+                    <span className={styles.cardCta}>View profile →</span>
+                  </Link>
+                )
+              })}
             </div>
           </div>
         </section>
