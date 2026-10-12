@@ -1,0 +1,193 @@
+/* ============================================================
+   New Student Guide — expandable accordion
+   Navy theme · dark mode support
+   ============================================================ */
+
+:root {
+  --ng-navy:      #0A1F5D;
+  --ng-navy-mid:  #1A3575;
+  --ng-purple:    #6B3EF2;
+  --ng-purple-hi: #8B5CFF;
+  --ng-lav:       #E9E2FF;
+  --ng-bg:        #FFFFFF;
+  --ng-surface:   #F0F4FF;
+  --ng-border:    #C8D4F8;
+  --ng-text:      #1A1D2E;
+  --ng-muted:     #5A6280;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ng-navy:      #A8BEFF;
+    --ng-navy-mid:  #7090E0;
+    --ng-purple:    #9B70FF;
+    --ng-purple-hi: #B99DFF;
+    --ng-lav:       #1E1630;
+    --ng-bg:        #0F1117;
+    --ng-surface:   #141824;
+    --ng-border:    #2A3560;
+    --ng-text:      #E8ECF8;
+    --ng-muted:     #8A90B0;
+  }
+}
+
+:root[data-theme="dark"] {
+  --ng-navy:      #A8BEFF;
+  --ng-navy-mid:  #7090E0;
+  --ng-purple:    #9B70FF;
+  --ng-purple-hi: #B99DFF;
+  --ng-lav:       #1E1630;
+  --ng-bg:        #0F1117;
+  --ng-surface:   #141824;
+  --ng-border:    #2A3560;
+  --ng-text:      #E8ECF8;
+  --ng-muted:     #8A90B0;
+}
+
+/* ---- Outer wrapper ---- */
+.guideWrap {
+  background: var(--ng-surface);
+  border: 1px solid var(--ng-border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+/* ---- Top-level toggle ---- */
+.guideToggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 18px 20px;
+  text-align: left;
+  font-family: inherit;
+}
+
+.guideToggle:hover {
+  background: color-mix(in srgb, var(--ng-navy) 6%, transparent);
+}
+
+.guideIcon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.guideTitle {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ng-navy);
+}
+
+.chevron {
+  font-size: 0.75rem;
+  color: var(--ng-muted);
+  flex-shrink: 0;
+}
+
+/* ---- Expanded body ---- */
+.guideBody {
+  padding: 0 20px 20px;
+  border-top: 1px solid var(--ng-border);
+}
+
+.guideIntro {
+  font-size: 0.92rem;
+  color: var(--ng-muted);
+  margin: 14px 0 16px;
+}
+
+/* ---- Cards grid ---- */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ---- Individual card ---- */
+.card {
+  background: var(--ng-bg);
+  border: 1px solid var(--ng-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ---- Card header (accordion trigger) ---- */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  text-align: left;
+  font-family: inherit;
+}
+
+.cardHeader:hover {
+  background: color-mix(in srgb, var(--ng-navy) 5%, transparent);
+}
+
+.cardIcon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.cardTitle {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ng-navy);
+}
+
+.cardChevron {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ng-purple);
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+}
+
+/* ---- Card body ---- */
+.cardBody {
+  padding: 0 16px 16px 44px;
+  font-size: 0.92rem;
+  color: var(--ng-text);
+  line-height: 1.6;
+  border-top: 1px solid var(--ng-border);
+  padding-top: 12px;
+}
+
+/* ---- Inline links ---- */
+.cardLink {
+  color: var(--ng-purple);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+.cardLink:hover {
+  color: var(--ng-purple-hi);
+}
+
+/* ---- Responsive: slightly wider cards on tablet ---- */
+@media (min-width: 600px) {
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

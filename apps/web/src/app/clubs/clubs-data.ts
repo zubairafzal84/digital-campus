@@ -32,16 +32,32 @@ export interface Club {
 
 export const UNIVERSITIES: { slug: string; name: string }[] = [
   { slug: 'ubc', name: 'University of British Columbia' },
+  { slug: 'sfu', name: 'Simon Fraser University' },
+  { slug: 'uvic', name: 'University of Victoria' },
   { slug: 'uoft', name: 'University of Toronto' },
+  { slug: 'yorku', name: 'York University' },
+  { slug: 'ryerson', name: 'Toronto Metropolitan University' },
   { slug: 'mcgill', name: 'McGill University' },
+  { slug: 'concordia', name: 'Concordia University' },
+  { slug: 'uottawa', name: 'University of Ottawa' },
+  { slug: 'carleton', name: 'Carleton University' },
   { slug: 'waterloo', name: 'University of Waterloo' },
   { slug: 'western', name: 'Western University' },
   { slug: 'mcmaster', name: 'McMaster University' },
   { slug: 'queens', name: "Queen's University" },
+  { slug: 'guelphu', name: 'University of Guelph' },
+  { slug: 'laurier', name: 'Wilfrid Laurier University' },
   { slug: 'ucalgary', name: 'University of Calgary' },
   { slug: 'ualberta', name: 'University of Alberta' },
-  { slug: 'carleton', name: 'Carleton University' },
-  { slug: 'concordia', name: 'Concordia University' },
+  { slug: 'dal', name: 'Dalhousie University' },
+  { slug: 'mun', name: 'Memorial University of Newfoundland' },
+  { slug: 'unb', name: 'University of New Brunswick' },
+  { slug: 'ocadu', name: 'OCAD University' },
+  { slug: 'bcit', name: 'British Columbia Institute of Technology' },
+  { slug: 'seneca', name: 'Seneca Polytechnic' },
+  { slug: 'humber', name: 'Humber Polytechnic' },
+  { slug: 'georgebrown', name: 'George Brown College' },
+  { slug: 'algonquin', name: 'Algonquin College' },
 ]
 
 export const ALL_CATEGORIES: ClubCategory[] = [
@@ -1336,6 +1352,480 @@ export const CLUBS: Club[] = [
     ],
   },
 
+  // ── Simon Fraser University ──────────────────────────────────────────────
+  {
+    id: 'sfu-sfss',
+    name: 'Simon Fraser Student Society (SFSS)',
+    universitySlug: 'sfu',
+    university: 'Simon Fraser University',
+    category: 'Student Government',
+    members: 35000,
+    description:
+      'The SFSS is the undergraduate student society at SFU, delivering clubs support, health & dental coverage, student advocacy, and campus programming across all three campuses.',
+    founded: 1965,
+    website: 'https://sfss.ca',
+    nextEvent: 'SFSS General Meeting — Nov 5',
+    events: [
+      { title: 'SFSS General Meeting', date: 'Nov 5, 2026', location: 'MBC 2270, Burnaby' },
+      { title: 'Clubs Day', date: 'Nov 19, 2026', location: 'Maggie Benson Centre' },
+    ],
+  },
+  {
+    id: 'sfu-esss',
+    name: 'SFU Engineering Science Student Society (ESSS)',
+    universitySlug: 'sfu',
+    university: 'Simon Fraser University',
+    category: 'Student Government',
+    members: 4500,
+    description:
+      'The ESSS represents undergraduate engineering science students at SFU, organising orientation, the Iron Ring ceremony, design showcases, and the annual Engineering Banquet.',
+    founded: 1970,
+    website: 'https://sfuess.ca',
+    nextEvent: 'Engineering Banquet — Nov 22',
+    events: [
+      { title: 'Engineering Banquet', date: 'Nov 22, 2026', location: 'Harbour Centre, Vancouver' },
+      { title: 'Design Showcase', date: 'Nov 8, 2026', location: 'TASC1 Atrium' },
+    ],
+  },
+  {
+    id: 'sfu-debate-society',
+    name: 'SFU Debate Society',
+    universitySlug: 'sfu',
+    university: 'Simon Fraser University',
+    category: 'Academic',
+    members: 180,
+    description:
+      'The SFU Debate Society competes in British Columbia Universities Debating (BCUD) and national tournaments, running weekly practices and public debates on campus.',
+    nextEvent: 'Weekly Practice — Nov 4',
+    events: [
+      { title: 'Weekly Practice', date: 'Nov 4, 2026 7 PM', location: 'AQ 3149' },
+      { title: 'SFU Open Tournament', date: 'Nov 21–22, 2026', location: 'Academic Quadrangle' },
+    ],
+  },
+  {
+    id: 'sfu-film-society',
+    name: 'SFU Film Society',
+    universitySlug: 'sfu',
+    university: 'Simon Fraser University',
+    category: 'Arts',
+    members: 220,
+    description:
+      'The SFU Film Society screens international, indie, and classic films on campus and supports student filmmakers through production workshops and an annual short-film showcase.',
+    nextEvent: 'Werner Herzog Night — Nov 7',
+    events: [
+      { title: 'Werner Herzog Night', date: 'Nov 7, 2026 7 PM', location: 'AQ Screening Room' },
+      { title: 'Student Film Showcase', date: 'Dec 5, 2026', location: 'Goldcorp Centre for the Arts' },
+    ],
+  },
+  {
+    id: 'sfu-science-student-society',
+    name: 'SFU Science Student Society',
+    universitySlug: 'sfu',
+    university: 'Simon Fraser University',
+    category: 'Academic',
+    members: 6500,
+    description:
+      'The SSS represents all science undergraduates at SFU, providing academic support, networking events, research symposiums, and the annual Science Formal.',
+    founded: 1971,
+    website: 'https://sfusss.ca',
+    nextEvent: 'Science Formal — Nov 28',
+    events: [
+      { title: 'Science Formal', date: 'Nov 28, 2026', location: 'Lonsdale Quay Market, North Van' },
+      { title: 'Research Showcase', date: 'Nov 13, 2026', location: 'TASC2 Concourse' },
+    ],
+  },
+  {
+    id: 'sfu-msa',
+    name: 'SFU Muslim Students Association',
+    universitySlug: 'sfu',
+    university: 'Simon Fraser University',
+    category: 'Cultural',
+    members: 650,
+    description:
+      "The SFU MSA provides a welcoming community for Muslim students through weekly Jumu'ah prayers, Ramadan iftars, interfaith events, and social gatherings on all campuses.",
+    website: 'https://sfumsa.ca',
+    nextEvent: 'Halal Food Fair — Nov 6',
+    events: [
+      { title: 'Halal Food Fair', date: 'Nov 6, 2026 11 AM–3 PM', location: 'MBC Concourse' },
+      { title: 'Interfaith Dialogue Night', date: 'Nov 20, 2026', location: 'Cornerstone Building' },
+    ],
+  },
+  {
+    id: 'sfu-hiking-outdoor-club',
+    name: 'SFU Hiking and Outdoor Club',
+    universitySlug: 'sfu',
+    university: 'Simon Fraser University',
+    category: 'Sports',
+    members: 480,
+    description:
+      'The SFU Hiking and Outdoor Club organises weekly hikes, trail runs, and camping trips across the North Shore Mountains, Garibaldi, and beyond for all experience levels.',
+    nextEvent: 'Garibaldi Lake Hike — Nov 1',
+    events: [
+      { title: 'Garibaldi Lake Day Hike', date: 'Nov 1, 2026', location: 'Departure: SFU Bus Loop 7 AM' },
+      { title: 'Winter Snowshoeing Intro', date: 'Nov 22, 2026', location: 'Cypress Mountain' },
+    ],
+  },
+  {
+    id: 'sfu-ski-snowboard-club',
+    name: 'SFU Ski and Snowboard Club',
+    universitySlug: 'sfu',
+    university: 'Simon Fraser University',
+    category: 'Sports',
+    members: 340,
+    description:
+      'The SFU Ski and Snowboard Club runs discounted season pass programs, weekly trips to Whistler and Cypress Mountain, and an annual club race day for all ability levels.',
+    nextEvent: 'Season Pass Info Night — Nov 10',
+    events: [
+      { title: 'Season Pass Info Night', date: 'Nov 10, 2026 6 PM', location: 'West Mall Centre 3515' },
+      { title: 'Opening Day Trip — Cypress', date: 'Nov 28, 2026', location: 'Cypress Mountain' },
+    ],
+  },
+
+  // ── University of Victoria ────────────────────────────────────────────────
+  {
+    id: 'uvic-uvss',
+    name: 'University of Victoria Students Society (UVSS)',
+    universitySlug: 'uvic',
+    university: 'University of Victoria',
+    category: 'Student Government',
+    members: 21000,
+    description:
+      'The UVSS is the undergraduate student society at UVic, operating the Student Union Building, clubs funding, student advocacy, health plan, and the popular on-campus events program.',
+    founded: 1964,
+    website: 'https://uvss.ca',
+    nextEvent: 'UVSS Board Meeting — Nov 4',
+    events: [
+      { title: 'UVSS Board Meeting', date: 'Nov 4, 2026', location: 'Student Union Building B 116' },
+      { title: 'Clubs Fair', date: 'Nov 18, 2026', location: 'Student Union Building Atrium' },
+    ],
+  },
+  {
+    id: 'uvic-ess',
+    name: 'UVic Engineering Students Society',
+    universitySlug: 'uvic',
+    university: 'University of Victoria',
+    category: 'Student Government',
+    members: 3200,
+    description:
+      'The UVic ESS represents undergraduate engineering students, running Engineering Week, the Iron Ring ceremony, design competitions, and the annual Engineering Banquet.',
+    founded: 1962,
+    website: 'https://uvicengineers.ca',
+    nextEvent: 'Engineering Week Kickoff — Nov 9',
+    events: [
+      { title: 'Engineering Week Kickoff', date: 'Nov 9, 2026', location: 'Engineering & Computer Science Building' },
+      { title: 'Engineering Banquet', date: 'Nov 27, 2026', location: 'Victoria Convention Centre' },
+    ],
+  },
+  {
+    id: 'uvic-debate-club',
+    name: 'UVic Debate Club',
+    universitySlug: 'uvic',
+    university: 'University of Victoria',
+    category: 'Academic',
+    members: 140,
+    description:
+      'The UVic Debate Club trains students in parliamentary debate, competes across Western Canada, and runs an open debate series on campus welcoming participants of all skill levels.',
+    nextEvent: 'Weekly Practice — Nov 3',
+    events: [
+      { title: 'Weekly Practice', date: 'Nov 3, 2026 7 PM', location: 'Cornett A225' },
+      { title: 'Pacific Rim Invitational', date: 'Nov 14–15, 2026', location: 'Cornett Building' },
+    ],
+  },
+  {
+    id: 'uvic-film-society',
+    name: 'UVic Film Society',
+    universitySlug: 'uvic',
+    university: 'University of Victoria',
+    category: 'Arts',
+    members: 195,
+    description:
+      'The UVic Film Society screens art-house and independent films, hosts filmmaker talks, and runs student production workshops culminating in the annual Reel Victoria film festival.',
+    nextEvent: 'Ozu Retrospective Night — Nov 6',
+    events: [
+      { title: 'Ozu Retrospective Night', date: 'Nov 6, 2026 7:30 PM', location: 'Clearihue Screening Room' },
+      { title: 'Reel Victoria Film Festival', date: 'Dec 5, 2026', location: 'Cinecenta, SUB' },
+    ],
+  },
+  {
+    id: 'uvic-outdoor-club',
+    name: 'UVic Outdoor Club',
+    universitySlug: 'uvic',
+    university: 'University of Victoria',
+    category: 'Sports',
+    members: 520,
+    description:
+      "The UVic Outdoor Club organises hiking, kayaking, rock climbing, cycling, and backcountry skiing trips across Vancouver Island and BC's coast for all experience levels.",
+    website: 'https://uvicoutdoorclub.ca',
+    nextEvent: 'Mt. Finlayson Hike — Nov 2',
+    events: [
+      { title: 'Mt. Finlayson Hike', date: 'Nov 2, 2026 8 AM', location: 'Meeting at UVic Ring Road' },
+      { title: 'Kayaking Day — Elk/Beaver Lake', date: 'Nov 16, 2026', location: 'Elk Lake Regional Park' },
+    ],
+  },
+  {
+    id: 'uvic-students-for-climate-action',
+    name: 'UVic Students for Climate Action',
+    universitySlug: 'uvic',
+    university: 'University of Victoria',
+    category: 'Environment',
+    members: 310,
+    description:
+      'UVic Students for Climate Action campaigns for campus sustainability, fossil-fuel divestment, and climate justice through rallies, workshops, and collaboration with local environmental groups.',
+    nextEvent: 'Climate Justice Town Hall — Nov 7',
+    events: [
+      { title: 'Climate Justice Town Hall', date: 'Nov 7, 2026 5 PM', location: 'David Turpin Building A144' },
+      { title: 'Repair Café and Zero-Waste Workshop', date: 'Nov 21, 2026', location: 'Student Union Building' },
+    ],
+  },
+  {
+    id: 'uvic-pre-law-society',
+    name: 'UVic Pre-Law Society',
+    universitySlug: 'uvic',
+    university: 'University of Victoria',
+    category: 'Academic',
+    members: 380,
+    description:
+      'The UVic Pre-Law Society prepares undergraduate students for law school through LSAT workshops, law school panels, moot court practice, and networking with UVic Law alumni.',
+    nextEvent: 'LSAT Strategy Workshop — Nov 10',
+    events: [
+      { title: 'LSAT Strategy Workshop', date: 'Nov 10, 2026 5:30 PM', location: 'Cornett B129' },
+      { title: 'Law School Panel Night', date: 'Nov 24, 2026', location: 'Fraser Building 159' },
+    ],
+  },
+
+  // ── University of Ottawa ─────────────────────────────────────────────────
+  {
+    id: 'uottawa-sfuo',
+    name: 'Student Federation of the University of Ottawa (SFUO)',
+    universitySlug: 'uottawa',
+    university: 'University of Ottawa',
+    category: 'Student Government',
+    members: 42000,
+    description:
+      'The SFUO is the bilingual undergraduate student federation at uOttawa, providing clubs support, student advocacy, health and dental coverage, and cultural programming in English and French.',
+    founded: 1968,
+    website: 'https://sfuo.ca',
+    nextEvent: 'SFUO General Assembly — Nov 5',
+    events: [
+      { title: 'SFUO General Assembly', date: 'Nov 5, 2026', location: 'UCU Building Soleil Room' },
+      { title: 'Clubs and Services Fair', date: 'Nov 19, 2026', location: 'UCU Atrium' },
+    ],
+  },
+  {
+    id: 'uottawa-esa',
+    name: 'uOttawa Engineering Students Association',
+    universitySlug: 'uottawa',
+    university: 'University of Ottawa',
+    category: 'Student Government',
+    members: 5800,
+    description:
+      'The uOttawa ESA represents engineering undergraduates, running Engineering Week, the Iron Ring ceremony, the annual Engineering Gala, and co-op networking events.',
+    founded: 1954,
+    website: 'https://esa.uottawa.ca',
+    nextEvent: 'Engineering Gala — Nov 21',
+    events: [
+      { title: 'Engineering Gala', date: 'Nov 21, 2026', location: 'Shaw Centre Ottawa' },
+      { title: 'Design Team Showcase', date: 'Nov 7, 2026', location: 'SITE Building Atrium' },
+    ],
+  },
+  {
+    id: 'uottawa-debate-society',
+    name: 'uOttawa Debate Society',
+    universitySlug: 'uottawa',
+    university: 'University of Ottawa',
+    category: 'Academic',
+    members: 165,
+    description:
+      'The uOttawa Debate Society competes in bilingual parliamentary debate at national and international tournaments and runs open debate events in both English and French.',
+    nextEvent: 'Weekly Practice — Nov 3',
+    events: [
+      { title: 'Weekly Practice', date: 'Nov 3, 2026 7 PM', location: 'Desmarais Hall 1170' },
+      { title: 'Ottawa Invitational — Nov 20', date: 'Nov 20–21, 2026', location: 'Tabaret Hall' },
+    ],
+  },
+  {
+    id: 'uottawa-fulcrum',
+    name: 'The Fulcrum',
+    universitySlug: 'uottawa',
+    university: 'University of Ottawa',
+    category: 'Media',
+    members: 130,
+    description:
+      "The Fulcrum is the University of Ottawa's independent English-language student newspaper, covering campus news, culture, sports, and opinion in print and online since 1942.",
+    founded: 1942,
+    website: 'https://thefulcrum.ca',
+    nextEvent: 'Editorial Meeting — Nov 3',
+    events: [
+      { title: 'Editorial Meeting', date: 'Nov 3, 2026 5 PM', location: 'UCU Building Room 106' },
+      { title: 'Investigative Journalism Workshop', date: 'Nov 17, 2026', location: 'Fulcrum Office' },
+    ],
+  },
+  {
+    id: 'uottawa-isa',
+    name: 'uOttawa International Students Association',
+    universitySlug: 'uottawa',
+    university: 'University of Ottawa',
+    category: 'Cultural',
+    members: 2100,
+    description:
+      'The ISA at uOttawa supports international students through orientation, cultural festivals, immigration help sessions, language exchanges, and social events in the national capital.',
+    website: 'https://uottawaisa.ca',
+    nextEvent: 'International Night — Nov 12',
+    events: [
+      { title: 'International Night', date: 'Nov 12, 2026 6 PM', location: 'UCU Soleil Room' },
+      { title: 'Language Exchange Mixer', date: 'Nov 26, 2026', location: 'UCU Atrium' },
+    ],
+  },
+  {
+    id: 'uottawa-premed-society',
+    name: 'uOttawa Pre-Med Society',
+    universitySlug: 'uottawa',
+    university: 'University of Ottawa',
+    category: 'Academic',
+    members: 720,
+    description:
+      'The uOttawa Pre-Med Society supports aspiring physicians with MCAT prep workshops, clinical volunteering placements, medical school interview prep, and physician speaker panels.',
+    nextEvent: 'Med School Application Night — Nov 9',
+    events: [
+      { title: 'Med School Application Night', date: 'Nov 9, 2026 5:30 PM', location: 'Lamoureux Hall 220' },
+      { title: 'MCAT Prep Session', date: 'Nov 23, 2026', location: 'FTX 147' },
+    ],
+  },
+  {
+    id: 'uottawa-law-students-association',
+    name: 'uOttawa Law Students Association',
+    universitySlug: 'uottawa',
+    university: 'University of Ottawa',
+    category: 'Academic',
+    members: 850,
+    description:
+      'The uOttawa LSA represents common and civil law students, organising moot courts, legal clinics, bar nights, and the Annual Law Formal at one of Canada\'s top bilingual law schools.',
+    founded: 1960,
+    website: 'https://uottawalsa.ca',
+    nextEvent: 'Law Formal — Nov 28',
+    events: [
+      { title: 'Law Formal', date: 'Nov 28, 2026', location: 'Château Laurier, Ottawa' },
+      { title: 'Moot Court Practice', date: 'Nov 5, 2026 6 PM', location: 'Fauteux Hall Moot Courtroom' },
+    ],
+  },
+
+  // ── Dalhousie University ─────────────────────────────────────────────────
+  {
+    id: 'dal-dsu',
+    name: 'Dalhousie Student Union (DSU)',
+    universitySlug: 'dal',
+    university: 'Dalhousie University',
+    category: 'Student Government',
+    members: 19000,
+    description:
+      'The DSU is the undergraduate student government at Dalhousie, operating student services, clubs support, health and dental coverage, and student advocacy in Halifax.',
+    founded: 1910,
+    website: 'https://dsu.ca',
+    nextEvent: 'DSU Council Meeting — Nov 4',
+    events: [
+      { title: 'DSU Council Meeting', date: 'Nov 4, 2026', location: 'Student Union Building Room 308' },
+      { title: 'Fall Clubs Fair', date: 'Nov 18, 2026', location: 'SUB Mezzanine' },
+    ],
+  },
+  {
+    id: 'dal-engineering-society',
+    name: 'Dal Engineering Society',
+    universitySlug: 'dal',
+    university: 'Dalhousie University',
+    category: 'Student Government',
+    members: 2800,
+    description:
+      'The Dal Engineering Society represents all undergraduate engineering students, organising E-Week, the Iron Ring ceremony, design team support, and the annual Engineers Formal.',
+    founded: 1952,
+    website: 'https://engsoc.dal.ca',
+    nextEvent: 'Engineers Formal — Nov 22',
+    events: [
+      { title: 'Engineers Formal', date: 'Nov 22, 2026', location: 'Halifax Marriott Harbourfront' },
+      { title: 'E-Week Kickoff', date: 'Nov 9, 2026', location: 'Sexton Campus Gym' },
+    ],
+  },
+  {
+    id: 'dal-debate-club',
+    name: 'Dal Debate Club',
+    universitySlug: 'dal',
+    university: 'Dalhousie University',
+    category: 'Academic',
+    members: 120,
+    description:
+      "Dal's Debate Club competes in parliamentary debate at regional and national tournaments and runs weekly practice sessions open to students at all experience levels.",
+    nextEvent: 'Practice Session — Nov 3',
+    events: [
+      { title: 'Practice Session', date: 'Nov 3, 2026 7 PM', location: 'McCain Building 2021' },
+      { title: 'Dal Invitational', date: 'Nov 20–21, 2026', location: 'Henry Hicks Building' },
+    ],
+  },
+  {
+    id: 'dal-gazette',
+    name: 'The Gazette',
+    universitySlug: 'dal',
+    university: 'Dalhousie University',
+    category: 'Media',
+    members: 110,
+    description:
+      "The Dalhousie Gazette is one of Canada's oldest student newspapers, published since 1869, covering Dal campus news, Halifax events, sports, arts, and student opinion.",
+    founded: 1869,
+    website: 'https://dalgazette.com',
+    nextEvent: 'Pitch Meeting — Nov 3',
+    events: [
+      { title: 'Pitch Meeting', date: 'Nov 3, 2026 5 PM', location: 'Gazette Office, SUB Room 312' },
+      { title: 'Photography Skills Workshop', date: 'Nov 17, 2026', location: 'SUB Room 312' },
+    ],
+  },
+  {
+    id: 'dal-isa',
+    name: 'Dal International Students Association',
+    universitySlug: 'dal',
+    university: 'Dalhousie University',
+    category: 'Cultural',
+    members: 1600,
+    description:
+      'Dal ISA connects international students in Halifax through cultural festivals, orientation programs, immigration information sessions, and social outings across Nova Scotia.',
+    website: 'https://dalisa.ca',
+    nextEvent: 'International Cultural Showcase — Nov 14',
+    events: [
+      { title: 'International Cultural Showcase', date: 'Nov 14, 2026 5 PM', location: 'Dalhousie Arts Centre' },
+      { title: 'Halifax City Tour', date: 'Nov 1, 2026', location: 'Departing from SUB' },
+    ],
+  },
+  {
+    id: 'dal-medical-students-society',
+    name: 'Dal Medical Students Society',
+    universitySlug: 'dal',
+    university: 'Dalhousie University',
+    category: 'Academic',
+    members: 480,
+    description:
+      'The Dal MSS represents medical students across Atlantic Canada, organising clinical skills workshops, wellness initiatives, research symposiums, and advocacy with Dalhousie Medicine.',
+    founded: 1969,
+    website: 'https://dalmss.ca',
+    nextEvent: 'Clinical Skills Night — Nov 6',
+    events: [
+      { title: 'Clinical Skills Night', date: 'Nov 6, 2026 6 PM', location: 'Tupper Medical Building' },
+      { title: 'Student Research Day', date: 'Nov 27, 2026', location: 'CHEB Building' },
+    ],
+  },
+  {
+    id: 'dal-law-students-society',
+    name: 'Dal Law Students Society',
+    universitySlug: 'dal',
+    university: 'Dalhousie University',
+    category: 'Academic',
+    members: 560,
+    description:
+      'The Dalhousie Law Students Society represents JD and LLM students at the Schulich School of Law, running moot competitions, bar nights, pro bono clinics, and the annual Law Formal.',
+    website: 'https://dallss.ca',
+    nextEvent: 'Law Formal — Nov 29',
+    events: [
+      { title: 'Law Formal', date: 'Nov 29, 2026', location: 'Halifax Marriott Harbourfront' },
+      { title: 'Moot Training Session', date: 'Nov 7, 2026 5 PM', location: 'Weldon Law Building Moot Court' },
+    ],
+  },
+
   // ── Concordia University ─────────────────────────────────────────────────
   {
     id: 'concordia-csu',
@@ -1418,6 +1908,950 @@ export const CLUBS: Club[] = [
     events: [
       { title: 'Docurama Showcase', date: 'Nov 18, 2026 6 PM', location: "Concordia Cinema, J.A. DeSève" },
       { title: 'Documentary Filmmaking Masterclass', date: 'Nov 7, 2026', location: 'Visual Arts Building VA-114' },
+    ],
+  },
+
+  // ── York University ──────────────────────────────────────────────────────
+  {
+    id: 'yorku-yfs',
+    name: 'York Federation of Students (YFS)',
+    universitySlug: 'yorku',
+    university: 'York University',
+    category: 'Student Government',
+    members: 55000,
+    description:
+      'The YFS is the undergraduate student government at York University, providing student advocacy, clubs support, health and dental coverage, and campus programming across all faculties.',
+    founded: 1973,
+    website: 'https://yfs.ca',
+    nextEvent: 'YFS Council Meeting — Nov 5',
+    events: [
+      { title: 'YFS Council Meeting', date: 'Nov 5, 2026', location: 'Student Centre Room 313' },
+      { title: 'Fall Clubs Fair', date: 'Nov 19, 2026', location: 'Vari Hall' },
+    ],
+  },
+  {
+    id: 'yorku-engineering-society',
+    name: 'York Engineering Society',
+    universitySlug: 'yorku',
+    university: 'York University',
+    category: 'Student Government',
+    members: 4200,
+    description:
+      'The York Engineering Society represents Lassonde School of Engineering undergraduates, running Engineering Week, design showcases, the Iron Ring ceremony, and the annual Engineering Banquet.',
+    founded: 1992,
+    website: 'https://yorkengsoc.ca',
+    nextEvent: 'Engineering Banquet — Nov 20',
+    events: [
+      { title: 'Engineering Banquet', date: 'Nov 20, 2026', location: 'International Banquet Hall, Vaughan' },
+      { title: 'Design Team Showcase', date: 'Nov 6, 2026', location: 'Lassonde Building Atrium' },
+    ],
+  },
+  {
+    id: 'yorku-debate-society',
+    name: 'York Debate Society',
+    universitySlug: 'yorku',
+    university: 'York University',
+    category: 'Academic',
+    members: 155,
+    description:
+      'The York Debate Society competes in parliamentary debate at regional and national tournaments and hosts open debate nights and public-speaking workshops for all York students.',
+    nextEvent: 'Weekly Practice — Nov 4',
+    events: [
+      { title: 'Weekly Practice', date: 'Nov 4, 2026 7 PM', location: 'Ross Building S612' },
+      { title: 'York Open Tournament', date: 'Nov 21–22, 2026', location: 'Schulich School of Business' },
+    ],
+  },
+  {
+    id: 'yorku-excalibur',
+    name: 'Excalibur Publications',
+    universitySlug: 'yorku',
+    university: 'York University',
+    category: 'Media',
+    members: 135,
+    description:
+      "Excalibur is York University's independent student newspaper, published since 1966, covering campus news, arts, culture, sports, and opinion in print and online.",
+    founded: 1966,
+    website: 'https://excal.on.ca',
+    nextEvent: 'Editorial Meeting — Nov 3',
+    events: [
+      { title: 'Editorial Meeting', date: 'Nov 3, 2026 5 PM', location: 'Student Centre Room 009' },
+      { title: 'Design and Layout Workshop', date: 'Nov 17, 2026', location: 'Excalibur Office' },
+    ],
+  },
+  {
+    id: 'yorku-isa',
+    name: 'York International Students Association',
+    universitySlug: 'yorku',
+    university: 'York University',
+    category: 'Cultural',
+    members: 3200,
+    description:
+      'The York ISA supports the large international student community through cultural events, orientation programs, immigration info sessions, and social gatherings in the Greater Toronto Area.',
+    nextEvent: 'International Cultural Night — Nov 12',
+    events: [
+      { title: 'International Cultural Night', date: 'Nov 12, 2026 6 PM', location: 'Vari Hall' },
+      { title: 'Toronto Exploration Day', date: 'Nov 22, 2026', location: 'Departing from York Lanes' },
+    ],
+  },
+  {
+    id: 'yorku-film-studies-club',
+    name: 'York Film Studies Club',
+    universitySlug: 'yorku',
+    university: 'York University',
+    category: 'Arts',
+    members: 265,
+    description:
+      'The York Film Studies Club screens and discusses international cinema, hosts filmmaker Q&As, and supports student productions through its annual Short Film Competition.',
+    nextEvent: 'Fellini Double Bill — Nov 7',
+    events: [
+      { title: 'Fellini Double Bill', date: 'Nov 7, 2026 7 PM', location: 'Nat Taylor Cinema' },
+      { title: 'Short Film Competition Submissions Due', date: 'Nov 30, 2026', location: 'Online Submission' },
+    ],
+  },
+  {
+    id: 'yorku-business-students-association',
+    name: 'York Business Students Association',
+    universitySlug: 'yorku',
+    university: 'York University',
+    category: 'Academic',
+    members: 1800,
+    description:
+      'The York BSA connects Schulich and LA&PS business students with industry through case competitions, networking events, mentorship programs, and the Schulich Speaker Series.',
+    nextEvent: 'Case Competition — Nov 14',
+    events: [
+      { title: 'Case Competition', date: 'Nov 14, 2026', location: 'Schulich School of Business' },
+      { title: 'Industry Networking Mixer', date: 'Nov 27, 2026 5 PM', location: 'Seymour Schulich Building Atrium' },
+    ],
+  },
+
+  // ── Toronto Metropolitan University (TMU / Ryerson) ──────────────────────
+  {
+    id: 'ryerson-tmsu',
+    name: 'Toronto Metropolitan Students Union (TMSU)',
+    universitySlug: 'ryerson',
+    university: 'Toronto Metropolitan University',
+    category: 'Student Government',
+    members: 45000,
+    description:
+      'The TMSU is the undergraduate student government at TMU, providing clubs support, student advocacy, health and dental coverage, and campus programming in downtown Toronto.',
+    founded: 1942,
+    website: 'https://tmsu.ca',
+    nextEvent: 'TMSU Council Meeting — Nov 5',
+    events: [
+      { title: 'TMSU Council Meeting', date: 'Nov 5, 2026', location: 'Student Campus Centre 211' },
+      { title: 'Fall Clubs & Activities Fair', date: 'Nov 19, 2026', location: 'Quad (Gould Street)' },
+    ],
+  },
+  {
+    id: 'ryerson-ess',
+    name: 'TMU Engineering Students Society',
+    universitySlug: 'ryerson',
+    university: 'Toronto Metropolitan University',
+    category: 'Student Government',
+    members: 5100,
+    description:
+      'The TMU ESS represents all engineering undergraduates, organising Engineering Week, the Iron Ring ceremony, design showcases, and the annual Engineering Formal in downtown Toronto.',
+    founded: 1965,
+    website: 'https://tmuess.ca',
+    nextEvent: 'Engineering Formal — Nov 22',
+    events: [
+      { title: 'Engineering Formal', date: 'Nov 22, 2026', location: 'Toronto Convention Centre' },
+      { title: 'E-Week Opening — Nov 9', date: 'Nov 9, 2026', location: 'Kerr Hall Atrium' },
+    ],
+  },
+  {
+    id: 'ryerson-chang-school-association',
+    name: 'Chang School Students Association',
+    universitySlug: 'ryerson',
+    university: 'Toronto Metropolitan University',
+    category: 'Academic',
+    members: 2800,
+    description:
+      'The Chang School Students Association represents continuing education students at TMU, providing academic support, networking events, and community for mature and part-time learners.',
+    nextEvent: 'Continuing Ed Networking Night — Nov 10',
+    events: [
+      { title: 'Continuing Ed Networking Night', date: 'Nov 10, 2026 6 PM', location: 'Chang School, Heaslip House' },
+      { title: 'Academic Success Workshop', date: 'Nov 24, 2026', location: 'Heaslip House 104' },
+    ],
+  },
+  {
+    id: 'ryerson-debate-club',
+    name: 'TMU Debate Club',
+    universitySlug: 'ryerson',
+    university: 'Toronto Metropolitan University',
+    category: 'Academic',
+    members: 145,
+    description:
+      'The TMU Debate Club trains students in competitive parliamentary debate, participates in Ontario and national circuits, and runs open debate events at the heart of downtown Toronto.',
+    nextEvent: 'Weekly Practice — Nov 3',
+    events: [
+      { title: 'Weekly Practice', date: 'Nov 3, 2026 7 PM', location: 'Jorgenson Hall JOR-1410' },
+      { title: 'TMU Open Invitational', date: 'Nov 20–21, 2026', location: 'Jorgenson Hall' },
+    ],
+  },
+  {
+    id: 'ryerson-eyeopener',
+    name: 'The Eyeopener',
+    universitySlug: 'ryerson',
+    university: 'Toronto Metropolitan University',
+    category: 'Media',
+    members: 125,
+    description:
+      "The Eyeopener is TMU's independent student newspaper, published since 1967, covering campus news, Toronto culture, sports, and opinion in print and online.",
+    founded: 1967,
+    website: 'https://theeyeopener.com',
+    nextEvent: 'Editorial Meeting — Nov 3',
+    events: [
+      { title: 'Editorial Meeting', date: 'Nov 3, 2026 5 PM', location: 'SCC 203' },
+      { title: 'Investigative Writing Workshop', date: 'Nov 17, 2026', location: 'Eyeopener Office' },
+    ],
+  },
+  {
+    id: 'ryerson-international-students',
+    name: 'TMU International Students',
+    universitySlug: 'ryerson',
+    university: 'Toronto Metropolitan University',
+    category: 'Cultural',
+    members: 4500,
+    description:
+      'TMU International Students supports one of the most diverse campuses in Canada through orientation programs, cultural festivals, immigration workshops, and social events in Toronto.',
+    nextEvent: 'International Orientation — Nov 1',
+    events: [
+      { title: 'International Orientation', date: 'Nov 1, 2026 2 PM', location: 'Student Campus Centre Auditorium' },
+      { title: 'Global Cultures Night', date: 'Nov 14, 2026', location: 'Ryerson Image Centre' },
+    ],
+  },
+  {
+    id: 'ryerson-commerce-society',
+    name: 'TMU Commerce Society',
+    universitySlug: 'ryerson',
+    university: 'Toronto Metropolitan University',
+    category: 'Academic',
+    members: 2100,
+    description:
+      'The TMU Commerce Society connects Ted Rogers School of Management students with industry through case competitions, networking events, and the annual Business Week speaker series.',
+    nextEvent: 'Business Week Kickoff — Nov 9',
+    events: [
+      { title: 'Business Week Kickoff', date: 'Nov 9, 2026 12 PM', location: 'Ted Rogers School of Management' },
+      { title: 'Bay Street Networking Night', date: 'Nov 25, 2026 6 PM', location: 'TRSM 1-076' },
+    ],
+  },
+  {
+    id: 'ryerson-film-society',
+    name: 'TMU Film Society',
+    universitySlug: 'ryerson',
+    university: 'Toronto Metropolitan University',
+    category: 'Arts',
+    members: 280,
+    description:
+      'The TMU Film Society supports student filmmakers at one of Canada\'s top film schools through screenings, production workshops, industry guest talks, and the annual TMU Short Film Showcase.',
+    nextEvent: 'New Wave Cinema Night — Nov 7',
+    events: [
+      { title: 'New Wave Cinema Night', date: 'Nov 7, 2026 7 PM', location: 'Ryerson Image Centre Screening Room' },
+      { title: 'Short Film Showcase', date: 'Dec 4, 2026', location: 'Rogers Communications Centre' },
+    ],
+  },
+
+  // ── Memorial University of Newfoundland ──────────────────────────────────
+  {
+    id: 'mun-munsu',
+    name: 'Memorial University Students Union (MUNSU)',
+    universitySlug: 'mun',
+    university: 'Memorial University of Newfoundland',
+    category: 'Student Government',
+    members: 19000,
+    description:
+      'MUNSU is the undergraduate student government at Memorial University, delivering student advocacy, clubs support, health and dental coverage, and campus events in St. John\'s.',
+    founded: 1959,
+    website: 'https://munsu.ca',
+    nextEvent: 'MUNSU Council Meeting — Nov 4',
+    events: [
+      { title: 'MUNSU Council Meeting', date: 'Nov 4, 2026', location: 'Thomson Student Centre Room 3000' },
+      { title: 'Fall Clubs Night', date: 'Nov 18, 2026', location: 'Thomson Student Centre Atrium' },
+    ],
+  },
+  {
+    id: 'mun-engineering-society',
+    name: 'MUN Engineering Society',
+    universitySlug: 'mun',
+    university: 'Memorial University of Newfoundland',
+    category: 'Student Government',
+    members: 2400,
+    description:
+      "The MUN Engineering Society represents undergraduate engineering students, running Engineering Week, the Iron Ring ceremony, design team support, and the annual Engineers' Ball.",
+    founded: 1965,
+    website: 'https://munengineering.ca',
+    nextEvent: "Engineers' Ball — Nov 21",
+    events: [
+      { title: "Engineers' Ball", date: 'Nov 21, 2026', location: 'Delta Hotels St. John\'s' },
+      { title: 'E-Week Opening', date: 'Nov 9, 2026', location: 'Engineering Building EN-2000' },
+    ],
+  },
+  {
+    id: 'mun-debate-club',
+    name: 'MUN Debate Club',
+    universitySlug: 'mun',
+    university: 'Memorial University of Newfoundland',
+    category: 'Academic',
+    members: 110,
+    description:
+      'The MUN Debate Club competes in national parliamentary debate circuits, runs weekly practices, and hosts the annual Atlantic Invitational Tournament on campus in St. John\'s.',
+    nextEvent: 'Weekly Practice — Nov 3',
+    events: [
+      { title: 'Weekly Practice', date: 'Nov 3, 2026 7 PM', location: 'Arts & Administration Building A-1049' },
+      { title: 'Atlantic Invitational', date: 'Nov 20–21, 2026', location: 'Arts & Admin Building' },
+    ],
+  },
+  {
+    id: 'mun-the-muse',
+    name: 'The Muse',
+    universitySlug: 'mun',
+    university: 'Memorial University of Newfoundland',
+    category: 'Media',
+    members: 95,
+    description:
+      "The Muse is Memorial University's independent student newspaper, published since 1969, covering campus life, St. John's culture, sports, arts, and student opinion.",
+    founded: 1969,
+    website: 'https://themusenl.com',
+    nextEvent: 'Editorial Meeting — Nov 3',
+    events: [
+      { title: 'Editorial Meeting', date: 'Nov 3, 2026 5 PM', location: 'Muse Office, Thomson Student Centre 2000' },
+      { title: 'Pitching Workshop for New Writers', date: 'Nov 17, 2026', location: 'Muse Office' },
+    ],
+  },
+  {
+    id: 'mun-isa',
+    name: 'MUN International Students Association',
+    universitySlug: 'mun',
+    university: 'Memorial University of Newfoundland',
+    category: 'Cultural',
+    members: 1400,
+    description:
+      'The MUN ISA welcomes international students to Newfoundland through orientation programs, cultural showcases, immigration workshops, and social events across St. John\'s.',
+    nextEvent: 'Welcome to St. Johns Night — Nov 1',
+    events: [
+      { title: "Welcome to St. John's Night", date: 'Nov 1, 2026 5 PM', location: 'Thomson Student Centre Atrium' },
+      { title: 'Cultural Diversity Showcase', date: 'Nov 15, 2026', location: 'Arts & Culture Centre' },
+    ],
+  },
+  {
+    id: 'mun-premed-club',
+    name: 'MUN Pre-Med Club',
+    universitySlug: 'mun',
+    university: 'Memorial University of Newfoundland',
+    category: 'Academic',
+    members: 340,
+    description:
+      'The MUN Pre-Med Club supports aspiring physicians with MCAT resources, clinical volunteering placements, medical school panels, and connections to Memorial\'s Faculty of Medicine.',
+    nextEvent: 'Med School Info Night — Nov 9',
+    events: [
+      { title: 'Med School Info Night', date: 'Nov 9, 2026 5:30 PM', location: 'Health Sciences Centre' },
+      { title: 'MCAT Strategy Workshop', date: 'Nov 23, 2026', location: 'Science Building SN-2109' },
+    ],
+  },
+
+  // ── University of New Brunswick ──────────────────────────────────────────
+  {
+    id: 'unb-unbsu',
+    name: 'University of New Brunswick Students Union (UNBSU)',
+    universitySlug: 'unb',
+    university: 'University of New Brunswick',
+    category: 'Student Government',
+    members: 9500,
+    description:
+      'The UNBSU is the undergraduate student government at UNB Fredericton, providing student advocacy, clubs support, health and dental coverage, and campus services for the UNB community.',
+    founded: 1948,
+    website: 'https://unbsu.ca',
+    nextEvent: 'UNBSU Council Meeting — Nov 4',
+    events: [
+      { title: 'UNBSU Council Meeting', date: 'Nov 4, 2026', location: 'Student Union Building Room 105' },
+      { title: 'Fall Clubs Night', date: 'Nov 18, 2026', location: 'Student Union Building' },
+    ],
+  },
+  {
+    id: 'unb-engineering-society',
+    name: 'UNB Engineering Society',
+    universitySlug: 'unb',
+    university: 'University of New Brunswick',
+    category: 'Student Government',
+    members: 2100,
+    description:
+      "The UNB Engineering Society represents Fredericton engineering undergraduates, organising Engineering Week, the Iron Ring ceremony, design competitions, and the Engineers' Ball.",
+    founded: 1920,
+    nextEvent: "Engineers' Ball — Nov 21",
+    events: [
+      { title: "Engineers' Ball", date: 'Nov 21, 2026', location: 'Fredericton Convention Centre' },
+      { title: 'E-Week Design Challenge', date: 'Nov 9, 2026', location: 'Head Hall Atrium' },
+    ],
+  },
+  {
+    id: 'unb-debate-club',
+    name: 'UNB Debate Club',
+    universitySlug: 'unb',
+    university: 'University of New Brunswick',
+    category: 'Academic',
+    members: 95,
+    description:
+      'The UNB Debate Club participates in Atlantic and national parliamentary debate circuits, runs weekly practice sessions, and hosts debate events open to the wider UNB community.',
+    nextEvent: 'Practice Session — Nov 3',
+    events: [
+      { title: 'Practice Session', date: 'Nov 3, 2026 7 PM', location: 'Tilley Hall 301' },
+      { title: 'Atlantic Open', date: 'Nov 21–22, 2026', location: 'Tilley Hall' },
+    ],
+  },
+  {
+    id: 'unb-brunswickan',
+    name: 'The Brunswickan',
+    universitySlug: 'unb',
+    university: 'University of New Brunswick',
+    category: 'Media',
+    members: 105,
+    description:
+      "The Brunswickan is the oldest student newspaper in Canada, founded in 1867, covering UNB campus news, Fredericton events, sports, arts, and student life in print and online.",
+    founded: 1867,
+    website: 'https://www.thebrunswickan.com',
+    nextEvent: 'Editorial Meeting — Nov 3',
+    events: [
+      { title: 'Editorial Meeting', date: 'Nov 3, 2026 5 PM', location: 'Brunswickan Office, SUB Room 35' },
+      { title: '157th Anniversary Celebration', date: 'Nov 14, 2026', location: 'SUB Ballroom' },
+    ],
+  },
+  {
+    id: 'unb-isa',
+    name: 'UNB International Students Association',
+    universitySlug: 'unb',
+    university: 'University of New Brunswick',
+    category: 'Cultural',
+    members: 1100,
+    description:
+      'The UNB ISA supports international students in Fredericton through orientation programs, cultural events, immigration information sessions, and social activities across New Brunswick.',
+    nextEvent: 'International Cultural Night — Nov 12',
+    events: [
+      { title: 'International Cultural Night', date: 'Nov 12, 2026 6 PM', location: 'Wu Conference Centre' },
+      { title: 'Fredericton City Tour', date: 'Nov 1, 2026', location: 'Departing from SUB' },
+    ],
+  },
+
+  // ── University of Guelph ─────────────────────────────────────────────────
+  {
+    id: 'guelphu-csa',
+    name: 'Central Student Association (CSA)',
+    universitySlug: 'guelphu',
+    university: 'University of Guelph',
+    category: 'Student Government',
+    members: 26000,
+    description:
+      'The CSA is the undergraduate student government at the University of Guelph, operating student services, clubs funding, health and dental, and advocacy for all undergraduates.',
+    founded: 1966,
+    website: 'https://csaonline.ca',
+    nextEvent: 'CSA Board Meeting — Nov 4',
+    events: [
+      { title: 'CSA Board Meeting', date: 'Nov 4, 2026', location: 'University Centre UC-264' },
+      { title: 'Fall Clubs Night', date: 'Nov 18, 2026', location: 'University Centre Atrium' },
+    ],
+  },
+  {
+    id: 'guelphu-engineering-society',
+    name: 'Guelph Engineering Society',
+    universitySlug: 'guelphu',
+    university: 'University of Guelph',
+    category: 'Student Government',
+    members: 2900,
+    description:
+      'The Guelph Engineering Society represents College of Engineering and Physical Sciences undergraduates, running Engineering Week, the Iron Ring ceremony, and the annual Engineers Formal.',
+    founded: 1965,
+    website: 'https://guelphengsoc.ca',
+    nextEvent: 'Engineers Formal — Nov 22',
+    events: [
+      { title: 'Engineers Formal', date: 'Nov 22, 2026', location: 'Guelph Marriott Hotel' },
+      { title: 'E-Week Kickoff', date: 'Nov 9, 2026', location: 'Reynolds Building Atrium' },
+    ],
+  },
+  {
+    id: 'guelphu-debate-club',
+    name: 'Guelph Debate Club',
+    universitySlug: 'guelphu',
+    university: 'University of Guelph',
+    category: 'Academic',
+    members: 130,
+    description:
+      'The Guelph Debate Club competes in parliamentary debate circuits across Ontario and hosts weekly practice sessions and an annual invitational open to all Ontario universities.',
+    nextEvent: 'Practice Session — Nov 3',
+    events: [
+      { title: 'Practice Session', date: 'Nov 3, 2026 7 PM', location: 'MacKinnon Building 113' },
+      { title: 'Guelph Invitational', date: 'Nov 20–21, 2026', location: 'University Centre' },
+    ],
+  },
+  {
+    id: 'guelphu-ontarion',
+    name: 'The Ontarion',
+    universitySlug: 'guelphu',
+    university: 'University of Guelph',
+    category: 'Media',
+    members: 115,
+    description:
+      "The Ontarion is the University of Guelph's independent student newspaper, published since 1962, covering campus news, Guelph events, arts, sports, and student opinion.",
+    founded: 1962,
+    website: 'https://theontarion.com',
+    nextEvent: 'Editorial Meeting — Nov 3',
+    events: [
+      { title: 'Editorial Meeting', date: 'Nov 3, 2026 5 PM', location: 'Ontarion Office, UC-264' },
+      { title: 'Photography Workshop', date: 'Nov 17, 2026', location: 'Ontarion Office' },
+    ],
+  },
+  {
+    id: 'guelphu-agriculture-students-association',
+    name: 'Guelph Agricultural Students Association',
+    universitySlug: 'guelphu',
+    university: 'University of Guelph',
+    category: 'Academic',
+    members: 1200,
+    description:
+      "Guelph's Agricultural Students Association supports Ontario Agricultural College students through agri-food industry tours, networking events, and the annual OAC Formal.",
+    founded: 1949,
+    website: 'https://oac.uoguelph.ca/asa',
+    nextEvent: 'OAC Formal — Nov 28',
+    events: [
+      { title: 'OAC Formal', date: 'Nov 28, 2026', location: 'Guelph Gryphons Athletics Centre' },
+      { title: 'Agri-Food Industry Tour', date: 'Nov 6, 2026', location: 'Ontario Agri-Food Facility, Guelph' },
+    ],
+  },
+  {
+    id: 'guelphu-vet-students-association',
+    name: 'Guelph Veterinary Students Association',
+    universitySlug: 'guelphu',
+    university: 'University of Guelph',
+    category: 'Academic',
+    members: 650,
+    description:
+      "The Ontario Veterinary College Student Council represents students at one of North America's top vet schools, organising clinical skills workshops, mentorship, and the annual Vet Formal.",
+    founded: 1966,
+    website: 'https://ovcsga.uoguelph.ca',
+    nextEvent: 'Vet Formal — Nov 29',
+    events: [
+      { title: 'Vet Formal', date: 'Nov 29, 2026', location: 'Cutten Club, Guelph' },
+      { title: 'Clinical Skills Workshop', date: 'Nov 8, 2026', location: 'OVC Anatomy Suite' },
+    ],
+  },
+
+  // ── Wilfrid Laurier University ────────────────────────────────────────────
+  {
+    id: 'laurier-wlusu',
+    name: 'Wilfrid Laurier University Students Union (WLUSU)',
+    universitySlug: 'laurier',
+    university: 'Wilfrid Laurier University',
+    category: 'Student Government',
+    members: 18000,
+    description:
+      'WLUSU is the undergraduate student government at Laurier, operating the Fred Nichols Campus Centre, student clubs, health and dental coverage, and advocacy across Waterloo and Brantford campuses.',
+    founded: 1973,
+    website: 'https://wlusu.com',
+    nextEvent: 'WLUSU Board Meeting — Nov 4',
+    events: [
+      { title: 'WLUSU Board Meeting', date: 'Nov 4, 2026', location: 'FNCC Room 1-105' },
+      { title: 'Fall Clubs Fair', date: 'Nov 18, 2026', location: 'Concourse Atrium' },
+    ],
+  },
+  {
+    id: 'laurier-business-students-association',
+    name: 'Laurier Business Students Association',
+    universitySlug: 'laurier',
+    university: 'Wilfrid Laurier University',
+    category: 'Academic',
+    members: 2400,
+    description:
+      'The Laurier BSA connects Lazaridis School of Business students with industry through case competitions, networking nights, a mentorship program, and the annual Business Week.',
+    website: 'https://laurierbsa.ca',
+    nextEvent: 'Business Week Kickoff — Nov 9',
+    events: [
+      { title: 'Business Week Kickoff', date: 'Nov 9, 2026 12 PM', location: 'Lazaridis School Atrium' },
+      { title: 'Case Competition', date: 'Nov 21, 2026', location: 'Lazaridis School' },
+    ],
+  },
+  {
+    id: 'laurier-debate-club',
+    name: 'Laurier Debate Club',
+    universitySlug: 'laurier',
+    university: 'Wilfrid Laurier University',
+    category: 'Academic',
+    members: 145,
+    description:
+      'The Laurier Debate Club competes in Ontario and national parliamentary debate circuits and hosts public debate events and public-speaking workshops on the Waterloo campus.',
+    nextEvent: 'Weekly Practice — Nov 3',
+    events: [
+      { title: 'Weekly Practice', date: 'Nov 3, 2026 7 PM', location: 'Arts Building 1E1' },
+      { title: 'Laurier Invitational', date: 'Nov 20–21, 2026', location: 'Science Building' },
+    ],
+  },
+  {
+    id: 'laurier-the-cord',
+    name: 'The Cord',
+    universitySlug: 'laurier',
+    university: 'Wilfrid Laurier University',
+    category: 'Media',
+    members: 125,
+    description:
+      "The Cord is Wilfrid Laurier University's independent student newspaper, published since 1926, covering campus news, Waterloo events, arts, sports, and student opinion.",
+    founded: 1926,
+    website: 'https://thecord.ca',
+    nextEvent: 'Editorial Meeting — Nov 3',
+    events: [
+      { title: 'Editorial Meeting', date: 'Nov 3, 2026 5 PM', location: 'Fred Nichols Campus Centre 2-108' },
+      { title: 'Multimedia Journalism Workshop', date: 'Nov 17, 2026', location: 'Cord Office' },
+    ],
+  },
+  {
+    id: 'laurier-international-students',
+    name: 'Laurier International Students',
+    universitySlug: 'laurier',
+    university: 'Wilfrid Laurier University',
+    category: 'Cultural',
+    members: 1300,
+    description:
+      'Laurier International Students supports newcomers through orientation, cultural nights, immigration workshops, a buddy program, and social events across the Waterloo campus.',
+    nextEvent: 'International Night — Nov 12',
+    events: [
+      { title: 'International Night', date: 'Nov 12, 2026 6 PM', location: 'Turret Nightclub, FNCC' },
+      { title: 'Winter Survival Guide', date: 'Nov 4, 2026', location: 'Concourse Atrium' },
+    ],
+  },
+  {
+    id: 'laurier-accounting-students',
+    name: 'Laurier Accounting Students',
+    universitySlug: 'laurier',
+    university: 'Wilfrid Laurier University',
+    category: 'Academic',
+    members: 890,
+    description:
+      'The Laurier Accounting Students Association prepares students for CPA designations through exam prep workshops, Big Four networking nights, and the annual Accounting Case Competition.',
+    nextEvent: 'CPA Exam Prep Session — Nov 5',
+    events: [
+      { title: 'CPA Exam Prep Session', date: 'Nov 5, 2026 5:30 PM', location: 'Lazaridis School BA 201' },
+      { title: 'Big Four Accounting Night', date: 'Nov 19, 2026', location: 'Lazaridis Atrium' },
+    ],
+  },
+
+  // ── OCAD University ───────────────────────────────────────────────────────
+  {
+    id: 'ocadu-ocad-su',
+    name: 'OCAD University Students Union (OCAD SU)',
+    universitySlug: 'ocadu',
+    university: 'OCAD University',
+    category: 'Student Government',
+    members: 4500,
+    description:
+      'The OCAD SU is the student government at OCAD University, supporting student clubs, advocacy, health and dental coverage, and campus programming at Canada\'s largest art and design university.',
+    founded: 1968,
+    website: 'https://ocadsu.org',
+    nextEvent: 'OCAD SU Annual General Meeting — Nov 5',
+    events: [
+      { title: 'OCAD SU Annual General Meeting', date: 'Nov 5, 2026', location: '100 McCaul Street, Great Hall' },
+      { title: 'Clubs and Collectives Fair', date: 'Nov 19, 2026', location: 'OCADU 100 McCaul Atrium' },
+    ],
+  },
+  {
+    id: 'ocadu-photography-society',
+    name: 'OCAD Photography Society',
+    universitySlug: 'ocadu',
+    university: 'OCAD University',
+    category: 'Arts',
+    members: 280,
+    description:
+      'The OCAD Photography Society connects photography students through darkroom workshops, studio critiques, gallery visits, and the annual OCAD Photography Exhibition at 100 McCaul.',
+    nextEvent: 'Darkroom Workshop — Nov 6',
+    events: [
+      { title: 'Darkroom Workshop', date: 'Nov 6, 2026 4 PM', location: 'OCAD Photography Studio, Room 236' },
+      { title: 'Annual Photography Exhibition', date: 'Dec 3, 2026', location: 'OCADU Student Gallery' },
+    ],
+  },
+  {
+    id: 'ocadu-illustration-club',
+    name: 'OCAD Illustration Club',
+    universitySlug: 'ocadu',
+    university: 'OCAD University',
+    category: 'Arts',
+    members: 220,
+    description:
+      'The OCAD Illustration Club brings together illustration students for life drawing sessions, portfolio reviews, publisher talks, and the annual Illustration Zine Exchange.',
+    nextEvent: 'Life Drawing Session — Nov 4',
+    events: [
+      { title: 'Life Drawing Session', date: 'Nov 4, 2026 5 PM', location: 'OCADU Drawing Studio, Room 510' },
+      { title: 'Portfolio Review Night', date: 'Nov 18, 2026', location: 'OCADU Illustration Department' },
+    ],
+  },
+  {
+    id: 'ocadu-graphic-design-students',
+    name: 'OCAD Graphic Design Students',
+    universitySlug: 'ocadu',
+    university: 'OCAD University',
+    category: 'Academic',
+    members: 310,
+    description:
+      'OCAD Graphic Design Students connects design undergraduates through portfolio crits, industry speaker series, type workshops, and the annual Grad Show design showcase.',
+    nextEvent: 'Type Workshop — Nov 7',
+    events: [
+      { title: 'Type Workshop', date: 'Nov 7, 2026 4 PM', location: 'OCADU Design Studio, Room 410' },
+      { title: 'Industry Talk: Pentagram', date: 'Nov 21, 2026', location: 'OCAD Great Hall' },
+    ],
+  },
+  {
+    id: 'ocadu-game-arts-club',
+    name: 'OCAD Game Arts Club',
+    universitySlug: 'ocadu',
+    university: 'OCAD University',
+    category: 'Tech',
+    members: 195,
+    description:
+      'The OCAD Game Arts Club unites game design and digital futures students through game jams, playtesting sessions, industry visits, and participation in the Global Game Jam.',
+    nextEvent: 'OCAD Game Jam — Nov 14',
+    events: [
+      { title: 'OCAD Game Jam', date: 'Nov 14–16, 2026', location: 'OCADU Digital Futures Studio' },
+      { title: 'Indie Dev Talk Series', date: 'Nov 7, 2026 4 PM', location: 'OCADU Room 230' },
+    ],
+  },
+
+  // ── BCIT ─────────────────────────────────────────────────────────────────
+  {
+    id: 'bcit-bcitsa',
+    name: 'BCIT Student Association (BCITSA)',
+    universitySlug: 'bcit',
+    university: 'British Columbia Institute of Technology',
+    category: 'Student Government',
+    members: 55000,
+    description:
+      'The BCITSA is the student association at BCIT, representing all full- and part-time students, operating the SE12 Building, student services, clubs, health plan, and campus events.',
+    founded: 1956,
+    website: 'https://bcitsa.ca',
+    nextEvent: 'BCITSA Council Meeting — Nov 4',
+    events: [
+      { title: 'BCITSA Council Meeting', date: 'Nov 4, 2026', location: 'SE12 Room 100' },
+      { title: 'Fall Clubs Day', date: 'Nov 18, 2026', location: 'SE12 Gymnasium' },
+    ],
+  },
+  {
+    id: 'bcit-engineering-club',
+    name: 'BCIT Engineering Club',
+    universitySlug: 'bcit',
+    university: 'British Columbia Institute of Technology',
+    category: 'Academic',
+    members: 620,
+    description:
+      'The BCIT Engineering Club connects civil, mechanical, and electrical technology students through design projects, industry site tours, technical workshops, and networking events.',
+    nextEvent: 'Structural Design Challenge — Nov 8',
+    events: [
+      { title: 'Structural Design Challenge', date: 'Nov 8, 2026', location: 'NE Building Workshop' },
+      { title: 'Industry Site Tour', date: 'Nov 22, 2026', location: 'Vancouver Metro Construction Site' },
+    ],
+  },
+  {
+    id: 'bcit-it-club',
+    name: 'BCIT IT Club',
+    universitySlug: 'bcit',
+    university: 'British Columbia Institute of Technology',
+    category: 'Tech',
+    members: 480,
+    description:
+      'The BCIT IT Club supports computing and network technology students through hackathons, cybersecurity workshops, coding challenges, and industry networking events across Metro Vancouver.',
+    nextEvent: 'Cybersecurity CTF Challenge — Nov 9',
+    events: [
+      { title: 'Cybersecurity CTF Challenge', date: 'Nov 9, 2026', location: 'SW1 Computer Lab' },
+      { title: 'Hackathon — BrainHack BCIT', date: 'Nov 22–23, 2026', location: 'NW4 Building' },
+    ],
+  },
+
+  // ── Seneca Polytechnic ────────────────────────────────────────────────────
+  {
+    id: 'seneca-student-federation',
+    name: 'Seneca Student Federation',
+    universitySlug: 'seneca',
+    university: 'Seneca Polytechnic',
+    category: 'Student Government',
+    members: 30000,
+    description:
+      'The Seneca Student Federation represents students across all Seneca campuses, providing student advocacy, clubs support, health and dental coverage, and campus services in the GTA.',
+    founded: 1970,
+    website: 'https://theseneca.ca',
+    nextEvent: 'SSF Council Meeting — Nov 4',
+    events: [
+      { title: 'SSF Council Meeting', date: 'Nov 4, 2026', location: 'Newnham Campus Student Centre' },
+      { title: 'Fall Clubs and Societies Fair', date: 'Nov 18, 2026', location: 'Newnham Campus Atrium' },
+    ],
+  },
+  {
+    id: 'seneca-tech-club',
+    name: 'Seneca Tech Club',
+    universitySlug: 'seneca',
+    university: 'Seneca Polytechnic',
+    category: 'Tech',
+    members: 380,
+    description:
+      'The Seneca Tech Club brings together software development, cybersecurity, and IT students through hackathons, coding workshops, industry guest talks, and collaborative project teams.',
+    nextEvent: 'Seneca Hackathon — Nov 15',
+    events: [
+      { title: 'Seneca Hackathon', date: 'Nov 15–16, 2026', location: 'Newnham Campus T Building' },
+      { title: 'Web Dev Workshop', date: 'Nov 4, 2026 5 PM', location: 'Seneca Labs T-2021' },
+    ],
+  },
+  {
+    id: 'seneca-business-society',
+    name: 'Seneca Business Society',
+    universitySlug: 'seneca',
+    university: 'Seneca Polytechnic',
+    category: 'Academic',
+    members: 560,
+    description:
+      'The Seneca Business Society connects business and accounting students with industry through case competitions, networking nights, mentorship with Seneca alumni, and the annual Business Week.',
+    nextEvent: 'Business Week Kickoff — Nov 9',
+    events: [
+      { title: 'Business Week Kickoff', date: 'Nov 9, 2026 12 PM', location: 'Seneca Business School Atrium' },
+      { title: 'Alumni Networking Night', date: 'Nov 25, 2026', location: 'King Campus Boardroom' },
+    ],
+  },
+
+  // ── Humber Polytechnic ────────────────────────────────────────────────────
+  {
+    id: 'humber-students-federation',
+    name: "Humber Students' Federation",
+    universitySlug: 'humber',
+    university: 'Humber Polytechnic',
+    category: 'Student Government',
+    members: 28000,
+    description:
+      "The Humber Students' Federation represents students at all Humber campuses, providing student advocacy, clubs support, health and dental coverage, and campus programming in the GTA.",
+    founded: 1969,
+    website: 'https://humberstudents.ca',
+    nextEvent: 'HSF Council Meeting — Nov 4',
+    events: [
+      { title: 'HSF Council Meeting', date: 'Nov 4, 2026', location: 'North Campus Student Centre' },
+      { title: 'Fall Clubs Fair', date: 'Nov 18, 2026', location: 'North Campus Main Street' },
+    ],
+  },
+  {
+    id: 'humber-media-arts-club',
+    name: 'Humber Media Arts Club',
+    universitySlug: 'humber',
+    university: 'Humber Polytechnic',
+    category: 'Arts',
+    members: 310,
+    description:
+      'The Humber Media Arts Club supports film, photography, journalism, and digital media students through screenings, portfolio workshops, industry visits, and an annual student media showcase.',
+    nextEvent: 'Student Media Showcase — Nov 14',
+    events: [
+      { title: 'Student Media Showcase', date: 'Nov 14, 2026 5 PM', location: 'Humber Lakeshore Campus Cinema' },
+      { title: 'Documentary Workshop', date: 'Nov 5, 2026', location: 'Media Arts Studio B' },
+    ],
+  },
+  {
+    id: 'humber-business-club',
+    name: 'Humber Business Club',
+    universitySlug: 'humber',
+    university: 'Humber Polytechnic',
+    category: 'Academic',
+    members: 490,
+    description:
+      'The Humber Business Club connects business administration and marketing students with GTA industry through case competitions, networking events, and the annual Humber Business Challenge.',
+    nextEvent: 'Humber Business Challenge — Nov 20',
+    events: [
+      { title: 'Humber Business Challenge', date: 'Nov 20, 2026', location: 'Business School A Building' },
+      { title: 'Industry Panel Night', date: 'Nov 6, 2026 5 PM', location: 'North Campus LRC Auditorium' },
+    ],
+  },
+
+  // ── George Brown College ──────────────────────────────────────────────────
+  {
+    id: 'georgebrown-gsa',
+    name: 'George Brown Student Association',
+    universitySlug: 'georgebrown',
+    university: 'George Brown College',
+    category: 'Student Government',
+    members: 33000,
+    description:
+      'The George Brown Student Association represents students across St. James, Casa Loma, and Waterfront campuses, providing advocacy, clubs support, and student services in downtown Toronto.',
+    founded: 1971,
+    website: 'https://gsa.georgebrown.ca',
+    nextEvent: 'GSA Council Meeting — Nov 4',
+    events: [
+      { title: 'GSA Council Meeting', date: 'Nov 4, 2026', location: 'St. James Campus Room 230' },
+      { title: 'Clubs and Activities Fair', date: 'Nov 18, 2026', location: 'Casa Loma Campus Main Hall' },
+    ],
+  },
+  {
+    id: 'georgebrown-culinary-club',
+    name: 'GBC Culinary Club',
+    universitySlug: 'georgebrown',
+    university: 'George Brown College',
+    category: 'Academic',
+    members: 420,
+    description:
+      "The George Brown Culinary Club celebrates food culture through chef demonstrations, pop-up dinners, visits to Toronto's best restaurants, and industry networking for hospitality students.",
+    nextEvent: 'Chef Demo Night — Nov 7',
+    events: [
+      { title: 'Chef Demo Night', date: 'Nov 7, 2026 5 PM', location: 'Waterfront Campus Chef School Kitchen' },
+      { title: 'Student Pop-Up Dinner', date: 'Nov 21, 2026', location: 'Waterfront Campus Dining Room' },
+    ],
+  },
+  {
+    id: 'georgebrown-ece-society',
+    name: 'GBC Early Childhood Education Society',
+    universitySlug: 'georgebrown',
+    university: 'George Brown College',
+    category: 'Academic',
+    members: 280,
+    description:
+      'The GBC ECE Society supports Early Childhood Education students through practicum prep workshops, resource sharing, peer mentorship, and advocacy for the ECE profession in Ontario.',
+    nextEvent: 'ECE Career Night — Nov 10',
+    events: [
+      { title: 'ECE Career Night', date: 'Nov 10, 2026 5 PM', location: 'St. James Campus Room 118-D' },
+      { title: 'Practicum Prep Workshop', date: 'Nov 24, 2026', location: 'Child Development Centre' },
+    ],
+  },
+
+  // ── Algonquin College ─────────────────────────────────────────────────────
+  {
+    id: 'algonquin-students-association',
+    name: 'Algonquin Students Association',
+    universitySlug: 'algonquin',
+    university: 'Algonquin College',
+    category: 'Student Government',
+    members: 18000,
+    description:
+      'The Algonquin Students Association represents students at all Algonquin College campuses, providing advocacy, clubs support, health and dental coverage, and campus services in Ottawa.',
+    founded: 1967,
+    website: 'https://algonquinsa.com',
+    nextEvent: 'ASA Board Meeting — Nov 4',
+    events: [
+      { title: 'ASA Board Meeting', date: 'Nov 4, 2026', location: 'Student Commons SA Building' },
+      { title: 'Fall Clubs Fair', date: 'Nov 18, 2026', location: 'Marketplace Food Court' },
+    ],
+  },
+  {
+    id: 'algonquin-media-design-club',
+    name: 'Algonquin Media and Design Club',
+    universitySlug: 'algonquin',
+    university: 'Algonquin College',
+    category: 'Arts',
+    members: 260,
+    description:
+      'The Algonquin Media and Design Club connects graphic design, advertising, and media communications students through portfolio workshops, design jams, and industry field trips in Ottawa.',
+    nextEvent: 'Design Jam — Nov 8',
+    events: [
+      { title: 'Design Jam', date: 'Nov 8, 2026 2 PM', location: 'Centre for Construction Excellence D Building' },
+      { title: 'Portfolio Review Night', date: 'Nov 22, 2026', location: 'Algonquin Design Studio' },
+    ],
+  },
+  {
+    id: 'algonquin-business-club',
+    name: 'Algonquin Business Club',
+    universitySlug: 'algonquin',
+    university: 'Algonquin College',
+    category: 'Academic',
+    members: 380,
+    description:
+      'The Algonquin Business Club supports business administration, marketing, and accounting students through case competitions, networking events, and speaker nights with Ottawa business leaders.',
+    nextEvent: 'Ottawa Business Speaker Night — Nov 10',
+    events: [
+      { title: 'Ottawa Business Speaker Night', date: 'Nov 10, 2026 5 PM', location: 'Algonquin Commons Theatre' },
+      { title: 'Business Case Competition', date: 'Nov 21, 2026', location: 'P Building Boardroom' },
     ],
   },
 ]

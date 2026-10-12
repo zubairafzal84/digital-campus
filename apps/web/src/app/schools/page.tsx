@@ -61,6 +61,16 @@ const FEATURED_SCHOOLS = [
   { name: 'Sheridan College', slug: 'sheridan', city: 'Oakville', province: 'ON', type: 'College', programmes: 150, verified: true, logoUrl: null },
   { name: 'NAIT', slug: 'nait', city: 'Edmonton', province: 'AB', type: 'Polytechnic', programmes: 200, verified: true, logoUrl: null },
   { name: 'University of Manitoba', slug: 'umanitoba', city: 'Winnipeg', province: 'MB', type: 'University', programmes: 180, verified: true, logoUrl: null },
+  { name: 'University of Guelph', slug: 'guelphu', city: 'Guelph', province: 'ON', type: 'University', programmes: 200, verified: true, logoUrl: null },
+  { name: 'Wilfrid Laurier University', slug: 'laurier', city: 'Waterloo', province: 'ON', type: 'University', programmes: 160, verified: true, logoUrl: null },
+  { name: 'Ontario Tech University', slug: 'ontariotech', city: 'Oshawa', province: 'ON', type: 'University', programmes: 80, verified: true, logoUrl: null },
+  { name: 'OCAD University', slug: 'ocadu', city: 'Toronto', province: 'ON', type: 'University', programmes: 60, verified: true, logoUrl: null },
+  { name: 'University of Regina', slug: 'ureginaCA', city: 'Regina', province: 'SK', type: 'University', programmes: 140, verified: true, logoUrl: null },
+  { name: 'MacEwan University', slug: 'macewan', city: 'Edmonton', province: 'AB', type: 'University', programmes: 65, verified: true, logoUrl: null },
+  { name: 'Mount Royal University', slug: 'mountroyal', city: 'Calgary', province: 'AB', type: 'University', programmes: 60, verified: true, logoUrl: null },
+  { name: 'Thompson Rivers University', slug: 'tru', city: 'Kamloops', province: 'BC', type: 'University', programmes: 140, verified: true, logoUrl: null },
+  { name: 'Vancouver Island University', slug: 'viu', city: 'Nanaimo', province: 'BC', type: 'University', programmes: 120, verified: true, logoUrl: null },
+  { name: 'Emily Carr University of Art and Design', slug: 'emilcarr', city: 'Vancouver', province: 'BC', type: 'University', programmes: 30, verified: true, logoUrl: null },
 ]
 
 const breadcrumbs = {
@@ -149,7 +159,7 @@ export default async function SchoolsPage() {
           <div className={styles.inner}>
             <p className={styles.resultCount}>Showing {schools.length} of 200+ schools</p>
             <div className={styles.grid}>
-              {schools.map((s) => {
+              {schools.slice(0, 24).map((s) => {
                 const logoUrl = (s as { logoUrl?: string | null }).logoUrl ?? null
                 return (
                   <Link key={s.slug} href={`/schools/${s.slug}`} className={styles.card}>
