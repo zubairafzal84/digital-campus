@@ -1,0 +1,91 @@
+.section {
+  padding: 0 0 80px;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 36px;
+  background: var(--navy);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.inner::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(107, 62, 242, 0.25);
+  pointer-events: none;
+}
+
+.tag {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--purple-hi);
+  margin-bottom: 10px;
+}
+
+.h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin-bottom: 10px;
+}
+
+.sub {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.7;
+  max-width: 440px;
+  margin-bottom: 24px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin-bottom: 24px;
+}
+
+.chip {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 7px 14px;
+  border-radius: 100px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.chip:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.cta {
+  display: inline-flex;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 11px 24px;
+  border-radius: 10px;
+  background: var(--purple-hi);
+  color: #fff;
+  transition: background 0.15s;
+}
+
+.cta:hover {
+  background: var(--purple);
+}

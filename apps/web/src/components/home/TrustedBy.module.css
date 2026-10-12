@@ -1,0 +1,38 @@
+.bar {
+  border-top: 1.5px solid var(--border);
+  border-bottom: 1.5px solid var(--border);
+  padding: 28px 0;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 14px;
+}
+
+.schools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+}
+
+.school {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  padding: 7px 15px;
+  border-radius: 8px;
+}

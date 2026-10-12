@@ -1,0 +1,465 @@
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  background: var(--navy);
+  padding: 80px 0 32px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sideUser {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 16px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  background: var(--purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.userName {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.userSchool {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+
+.sideLinks {
+  list-style: none;
+  padding: 0 8px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sideLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sideLink:hover {
+  background: rgba(255,255,255,0.08);
+  color: #ffffff;
+}
+
+.sideLinkActive {
+  background: var(--purple);
+  color: #ffffff;
+}
+
+.sideLinkActive:hover {
+  background: var(--purple-hov);
+}
+
+.sideIcon {
+  font-size: 16px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Main */
+.main {
+  background: var(--bg);
+  padding: 80px 32px 40px;
+  overflow-y: auto;
+}
+
+.topBar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.h1 {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.sub {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Card */
+.card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardH {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.cardLink {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--purple);
+  text-decoration: none;
+}
+
+/* Grades */
+.gradeList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gradeRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.gradeInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.courseCode {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.courseName {
+  font-size: 13px;
+  color: var(--fg);
+  font-weight: 500;
+}
+
+.gradeRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progressBar {
+  width: 80px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--purple), var(--purple-hi));
+  transition: width 0.3s;
+}
+
+.gradeNum {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fg);
+  width: 32px;
+  text-align: right;
+}
+
+.gradeLetter {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--purple);
+  width: 24px;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.gpa {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.gpaTrend {
+  font-size: 12px;
+  color: var(--green);
+  font-weight: 600;
+}
+
+/* Scholarships */
+.fundingList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fundingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.fundingInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fundingName {
+  font-size: 13px;
+  color: var(--fg);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.fundingDeadline {
+  font-size: 11px;
+  color: var(--faint);
+}
+
+.fundingRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.matchBadge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--green);
+  background: #dcfce7;
+  border-radius: 20px;
+  padding: 2px 8px;
+}
+
+.fundingAmt {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.ctaFull {
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--purple);
+  background: var(--lav);
+  border-radius: 10px;
+  padding: 10px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.ctaFull:hover { background: var(--lav-dim); }
+
+/* Clubs */
+.clubList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.clubRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.clubIcon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 10px;
+  background: var(--lav);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--purple);
+}
+
+.clubInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.clubName {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.clubMeta {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Messages */
+.msgList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.msgRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.msgRow:last-child { border-bottom: none; }
+
+.msgUnread { background: none; }
+
+.msgAvatar {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  background: var(--lav);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--purple);
+}
+
+.msgInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.msgFrom {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fg);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.unreadDot {
+  width: 7px;
+  height: 7px;
+  min-width: 7px;
+  border-radius: 50%;
+  background: var(--purple);
+  display: inline-block;
+}
+
+.msgPreview {
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.msgTime {
+  font-size: 11px;
+  color: var(--faint);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    height: auto;
+    padding: 72px 0 16px;
+  }
+
+  .sideLinks {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 12px;
+  }
+
+  .main {
+    padding: 24px 16px 40px;
+  }
+}

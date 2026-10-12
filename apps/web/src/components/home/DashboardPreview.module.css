@@ -1,0 +1,384 @@
+.card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.cardBar {
+  height: 3px;
+  background: linear-gradient(90deg, #6B3EF2, #9D6EFF);
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1.5px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 10px 14px;
+  border: none;
+  background: transparent;
+  color: var(--faint);
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1.5px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tab:hover {
+  color: var(--muted);
+}
+
+.tabActive {
+  color: var(--purple);
+  border-bottom-color: var(--purple);
+}
+
+.panel {
+  padding: 18px;
+  animation: fadeUp 0.3s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.panelHead {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 12px;
+}
+
+/* ── Grades ── */
+.gradeList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.courseRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.courseIco {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--lav);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--purple);
+  flex-shrink: 0;
+}
+
+.courseInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.courseName {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.courseCode {
+  font-size: 10px;
+  color: var(--faint);
+  margin-top: 1px;
+}
+
+.bar {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.6s ease;
+}
+
+.courseGrade {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.gradePct {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+}
+
+.gradeLtr {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--faint);
+}
+
+/* ── Social ── */
+.socialList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.clubRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.clubIco {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.clubInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.clubName {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.clubMeta {
+  font-size: 10px;
+  color: var(--faint);
+  margin-top: 2px;
+}
+
+.newBadge {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--purple);
+  background: var(--lav);
+  padding: 2px 7px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.joinBtn {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 7px;
+  border: 1.5px solid var(--purple);
+  color: var(--purple);
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+
+.joinBtn:hover {
+  background: var(--purple);
+  color: #fff;
+}
+
+/* ── Funding ── */
+.fundList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fundRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.fundMatch {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--green);
+  flex-shrink: 0;
+  min-width: 36px;
+  font-variant-numeric: tabular-nums;
+}
+
+.fundInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.fundName {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fundMeta {
+  font-size: 10px;
+  color: var(--faint);
+  margin-top: 2px;
+}
+
+.applyBtn {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 7px;
+  border: none;
+  background: var(--purple);
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.applyBtn:hover {
+  background: var(--purple-hov);
+}
+
+/* ── Chat ── */
+.chatList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.chatRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.chatRow:last-child {
+  border-bottom: none;
+}
+
+.chatRow:hover {
+  opacity: 0.8;
+}
+
+.chatUnread .chatFrom {
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.chatUnread::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--purple);
+}
+
+.chatAv {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6B3EF2, #9D6EFF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.chatBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.chatFrom {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.chatText {
+  font-size: 12px;
+  color: var(--faint);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.chatTime {
+  font-size: 10px;
+  color: var(--faint);
+  flex-shrink: 0;
+}
