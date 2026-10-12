@@ -3,17 +3,78 @@ import { createClient } from '@/lib/supabase/server'
 import { auth } from '@clerk/nextjs/server'
 
 // GET /api/events
-// List events. Params: school, type, from_date, to_date, limit.
+// List events. Params: school, type, from_date, to_date, limit, created_by, rsvp.
 // Returns upcoming published events by default (starts_at >= now).
+// created_by=me — auth required, returns all events created by the current user (including drafts).
+// rsvp=going    — auth required, returns events the current user RSVPd to as "going".
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl
-  const school    = searchParams.get('school')
-  const type      = searchParams.get('type')
-  const from_date = searchParams.get('from_date')
-  const to_date   = searchParams.get('to_date')
-  const limit     = Math.min(parseInt(searchParams.get('limit') ?? '50', 10), 200)
+  const school     = searchParams.get('school')
+  const type       = searchParams.get('type')
+  const from_date  = searchParams.get('from_date')
+  const to_date    = searchParams.get('to_date')
+  const created_by = searchParams.get('created_by')
+  const rsvp       = searchParams.get('rsvp')
+  const limit      = Math.min(parseInt(searchParams.get('limit') ?? '50', 10), 200)
 
   const supabase = await createClient()
+
+  // Resolve current user when personalised filters are requested
+  let userId: string | null = null
+  if (created_by === 'me' || rsvp === 'going') {
+    const session = await auth()
+    userId = session.userId
+    if (!userId) {
+      return NextResponse.json({ events: [] })
+    }
+  }
+
+  // For rsvp=going: fetch the event IDs the user has RSVPd to first
+  if (rsvp === 'going') {
+    const { data: rsvps } = await supabase
+      .from('event_rsvps')
+      .select('event_id')
+      .eq('user_id', userId!)
+      .eq('status', 'going')
+
+    const eventIds = (rsvps ?? []).map((r: { event_id: string }) => r.event_id)
+    if (eventIds.length === 0) {
+      return NextResponse.json({ events: [] })
+    }
+
+    const { data, error } = await supabase
+      .from('events')
+      .select(`
+        id,
+        title,
+        description,
+        event_type,
+        event_category,
+        visibility,
+        cover_emoji,
+        school_slug,
+        organizer_name,
+        location,
+        is_online,
+        online_url,
+        starts_at,
+        ends_at,
+        max_attendees,
+        current_attendees,
+        is_free,
+        price_cents,
+        image_url,
+        is_published,
+        created_by,
+        created_at
+      `)
+      .in('id', eventIds)
+      .order('starts_at', { ascending: true })
+      .limit(limit)
+
+    if (error) return NextResponse.json({ events: [] })
+    return NextResponse.json({ events: data ?? [] })
+  }
 
   let query = supabase
     .from('events')
@@ -22,6 +83,9 @@ export async function GET(request: NextRequest) {
       title,
       description,
       event_type,
+      event_category,
+      visibility,
+      cover_emoji,
       school_slug,
       organizer_name,
       location,
@@ -34,16 +98,23 @@ export async function GET(request: NextRequest) {
       is_free,
       price_cents,
       image_url,
+      is_published,
       created_by,
       created_at
     `)
-    .eq('is_published', true)
     .order('starts_at', { ascending: true })
     .limit(limit)
 
-  // Default: upcoming events only (starts_at >= now)
-  const now = new Date().toISOString()
-  query = query.gte('starts_at', from_date ?? now)
+  if (created_by === 'me') {
+    // Show all own events (including drafts), no date filter by default
+    query = query.eq('created_by', userId!)
+  } else {
+    // Public listing: published events only
+    query = query.eq('is_published', true)
+    // Default: upcoming events only (starts_at >= now)
+    const now = new Date().toISOString()
+    query = query.gte('starts_at', from_date ?? now)
+  }
 
   if (to_date) {
     query = query.lte('starts_at', to_date)

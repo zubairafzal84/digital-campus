@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './profile.module.css'
 
 /* ── Personal info form ─────────────────────────────────── */
@@ -261,6 +261,165 @@ function VerificationForm() {
       </form>
       <p className={styles.hint}>Your school email is used only to verify enrollment and is never shared.</p>
     </div>
+  )
+}
+
+/* ── Volunteer Experience ───────────────────────────────── */
+
+interface VolunteerEntry {
+  organization: string
+  role: string
+  year?: string
+  hours?: number
+}
+
+const EMPTY_ENTRY: VolunteerEntry = { organization: '', role: '', year: '', hours: undefined }
+
+export function VolunteerExperienceForm() {
+  const [entries,  setEntries]  = useState<VolunteerEntry[]>([])
+  const [loading,  setLoading]  = useState(true)
+  const [saving,   setSaving]   = useState(false)
+  const [success,  setSuccess]  = useState(false)
+  const [error,    setError]    = useState('')
+
+  useEffect(() => {
+    fetch('/api/profile')
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data?.volunteer_experience)) {
+          setEntries(data.volunteer_experience)
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  }, [])
+
+  function addEntry() {
+    setEntries(prev => [...prev, { ...EMPTY_ENTRY }])
+  }
+
+  function removeEntry(index: number) {
+    setEntries(prev => prev.filter((_, i) => i !== index))
+  }
+
+  function updateEntry(index: number, field: keyof VolunteerEntry, value: string) {
+    setEntries(prev => prev.map((e, i) => {
+      if (i !== index) return e
+      if (field === 'hours') {
+        const parsed = parseInt(value, 10)
+        return { ...e, hours: isNaN(parsed) ? undefined : parsed }
+      }
+      return { ...e, [field]: value }
+    }))
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setSaving(true)
+    setError('')
+    setSuccess(false)
+
+    // Strip empty entries
+    const cleaned = entries.filter(en => en.organization.trim() && en.role.trim())
+
+    try {
+      const res = await fetch('/api/profile', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ volunteer_experience: cleaned }),
+      })
+      if (!res.ok) throw new Error('Save failed.')
+      setEntries(cleaned)
+      setSuccess(true)
+      setTimeout(() => setSuccess(false), 3000)
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Save failed.')
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  if (loading) {
+    return <p className={styles.hint}>Loading…</p>
+  }
+
+  return (
+    <form className={styles.form} onSubmit={handleSubmit}>
+      {error   && <div className={styles.formError}>{error}</div>}
+      {success && <div className={styles.formSuccess}>Saved.</div>}
+
+      {entries.length === 0 && (
+        <p className={styles.hint}>No volunteer experience added yet.</p>
+      )}
+
+      {entries.map((entry, i) => (
+        <div key={i} className={styles.volunteerEntry}>
+          <div className={styles.row2}>
+            <div className={styles.field}>
+              <label className={styles.label}>Organization</label>
+              <input
+                type="text"
+                value={entry.organization}
+                onChange={e => updateEntry(i, 'organization', e.target.value)}
+                placeholder="e.g. Food Bank of Greater Vancouver"
+                className={styles.input}
+                required
+              />
+            </div>
+            <div className={styles.field}>
+              <label className={styles.label}>Role</label>
+              <input
+                type="text"
+                value={entry.role}
+                onChange={e => updateEntry(i, 'role', e.target.value)}
+                placeholder="e.g. Shift Coordinator"
+                className={styles.input}
+                required
+              />
+            </div>
+          </div>
+          <div className={styles.row2}>
+            <div className={styles.field}>
+              <label className={styles.label}>Year <span className={styles.optional}>(optional)</span></label>
+              <input
+                type="text"
+                value={entry.year ?? ''}
+                onChange={e => updateEntry(i, 'year', e.target.value)}
+                placeholder="e.g. 2024"
+                className={styles.input}
+              />
+            </div>
+            <div className={styles.field}>
+              <label className={styles.label}>Hours <span className={styles.optional}>(optional)</span></label>
+              <input
+                type="number"
+                min={1}
+                value={entry.hours ?? ''}
+                onChange={e => updateEntry(i, 'hours', e.target.value)}
+                placeholder="e.g. 40"
+                className={styles.input}
+              />
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => removeEntry(i)}
+            className={styles.removeBtn}
+            aria-label="Remove this entry"
+          >
+            Remove
+          </button>
+        </div>
+      ))}
+
+      <button type="button" onClick={addEntry} className={styles.addBtn}>
+        + Add volunteer experience
+      </button>
+
+      <button type="submit" className={styles.saveBtn} disabled={saving}>
+        {saving ? 'Saving…' : 'Save volunteer experience'}
+      </button>
+    </form>
   )
 }
 

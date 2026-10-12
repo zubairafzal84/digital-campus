@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { href: '/dashboard/grades',        label: 'Grades',        icon: '📊' },
   { href: '/dashboard/clubs',         label: 'Clubs',         icon: '🤝' },
   { href: '/dashboard/scholarships',  label: 'Scholarships',  icon: '🎓' },
+  { href: '/dashboard/events',        label: 'Events',        icon: '📅' },
   { href: '/dashboard/housing',       label: 'Housing',       icon: '🏠' },
   { href: '/dashboard/chat',          label: 'Messages',      icon: '💬' },
   { href: '/dashboard/notifications', label: 'Notifications', icon: '🔔' },

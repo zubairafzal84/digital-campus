@@ -15,6 +15,8 @@ const NAV_LINKS = [
   { href: '/professors', label: 'Professors', labelFr: 'Professeurs' },
   { href: '/surveys', label: 'Surveys', labelFr: 'Sondages' },
   { href: '/events', label: 'Events', labelFr: 'Événements' },
+  { href: '/volunteer', label: 'Volunteer', labelFr: 'Bénévolat' },
+  { href: '/resources', label: 'Resources', labelFr: 'Ressources' },
 ]
 
 export function SiteNav() {

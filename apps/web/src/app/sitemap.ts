@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next'
+import { ARTICLES } from './resources/articles-data'
 
 const BASE = 'https://digitalkampus.ca'
 
@@ -61,6 +62,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/surveys/create`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/surveys/for-organizations`, lastModified: now, changeFrequency: 'monthly', priority: 0.65 },
     { url: `${BASE}/events`, lastModified: now, changeFrequency: 'daily', priority: 0.85 },
+    { url: `${BASE}/events/create`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/volunteer`, lastModified: now, changeFrequency: 'daily', priority: 0.85 },
   ]
 
@@ -101,5 +103,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }))
 
-  return [...staticPages, ...schoolPages, ...clubPages, ...comparePages, ...housingPages, ...scholarshipPages]
+  const resourcePages: MetadataRoute.Sitemap = [
+    { url: `${BASE}/resources`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
+    ...ARTICLES.map((a) => ({
+      url: `${BASE}/resources/${a.slug}`,
+      lastModified: new Date(a.publishedAt),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
+  ]
+
+  return [...staticPages, ...schoolPages, ...clubPages, ...comparePages, ...housingPages, ...scholarshipPages, ...resourcePages]
 }

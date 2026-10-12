@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { currentUser } from '@clerk/nextjs/server'
 import { SiteNav } from '@/components/layout/SiteNav'
-import { PersonalInfoForm, EducationForm, PrivacyToggles } from './ProfileForms'
+import { PersonalInfoForm, EducationForm, PrivacyToggles, VolunteerExperienceForm } from './ProfileForms'
 import styles from './profile.module.css'
 
 export const metadata: Metadata = {
@@ -39,10 +39,11 @@ export default async function ProfilePage() {
               </div>
               <nav className={styles.profileNav}>
                 {[
-                  { label: 'Personal info',      href: '#personal' },
-                  { label: 'Education',          href: '#education' },
-                  { label: 'Privacy',            href: '#privacy' },
-                  { label: 'Account & security', href: '#security' },
+                  { label: 'Personal info',        href: '#personal' },
+                  { label: 'Education',            href: '#education' },
+                  { label: 'Volunteer experience', href: '#volunteer' },
+                  { label: 'Privacy',              href: '#privacy' },
+                  { label: 'Account & security',   href: '#security' },
                 ].map(({ label, href }) => (
                   <Link key={href} href={href} className={styles.navLink}>{label}</Link>
                 ))}
@@ -58,6 +59,11 @@ export default async function ProfilePage() {
               <section className={styles.section} id="education">
                 <h2 className={styles.sectionH}>Education</h2>
                 <EducationForm isVerified={false} />
+              </section>
+
+              <section className={styles.section} id="volunteer">
+                <h2 className={styles.sectionH}>Volunteer experience</h2>
+                <VolunteerExperienceForm />
               </section>
 
               <section className={styles.section} id="privacy">

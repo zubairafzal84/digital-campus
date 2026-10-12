@@ -204,6 +204,33 @@ export default async function DashboardPage() {
             <Link href="/professors" className={styles.emptyLink}>Rate a professor →</Link>
           </div>
         </section>
+
+        {/* Volunteer card */}
+        <section className={styles.card} aria-labelledby="volunteer-h">
+          <div className={styles.cardHeader}>
+            <h2 className={styles.cardH} id="volunteer-h">Volunteer</h2>
+            <Link href="/volunteer" className={styles.cardLink}>Browse →</Link>
+          </div>
+          <div className={styles.emptyState}>
+            <span className={styles.emptyIcon}>🤝</span>
+            <p>180+ volunteer opportunities near campus. Build your resume while giving back.</p>
+            <Link href="/volunteer" className={styles.emptyLink}>Find opportunities →</Link>
+          </div>
+        </section>
+
+        {/* Events card */}
+        <section className={styles.card} aria-labelledby="myevents-h">
+          <div className={styles.cardHeader}>
+            <h2 className={styles.cardH} id="myevents-h">Events</h2>
+            <Link href="/dashboard/events" className={styles.cardLink}>My events →</Link>
+          </div>
+          <div className={styles.emptyState}>
+            <span className={styles.emptyIcon}>📅</span>
+            <p>See what&rsquo;s happening on campus this week.</p>
+            <Link href="/events" className={styles.emptyLink}>Browse events →</Link>
+          </div>
+          <Link href="/events/create" className={styles.ctaFull}>Create an event +</Link>
+        </section>
       </div>
     </>
   )

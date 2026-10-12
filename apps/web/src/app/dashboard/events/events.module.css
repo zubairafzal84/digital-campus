@@ -1,0 +1,242 @@
+/* Dashboard — My Events page */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.h1 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+}
+
+.createBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--purple);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 9px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.createBtn:hover {
+  background: var(--purple-hi);
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid var(--border);
+}
+
+.tab {
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tab:hover {
+  color: var(--navy);
+}
+
+.tabActive {
+  color: var(--purple);
+  border-bottom-color: var(--purple);
+}
+
+/* Event list */
+.eventList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.eventCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.eventCard:hover {
+  border-color: var(--purple);
+  box-shadow: 0 2px 12px rgba(107, 62, 242, 0.08);
+}
+
+.eventEmoji {
+  font-size: 28px;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--lav);
+  border-radius: 10px;
+}
+
+.eventBody {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.eventTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+.eventMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.eventDate {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.eventAttendees {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.visibilityBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.visPublic {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.visUnlisted {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.visPrivate {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.visDraft {
+  background: #ede9fe;
+  color: #6b21a8;
+}
+
+/* Empty state */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 40px;
+}
+
+.emptyTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.emptySub {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 320px;
+  line-height: 1.5;
+}
+
+.emptyLink {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--purple);
+  text-decoration: none;
+}
+
+.emptyLink:hover {
+  text-decoration: underline;
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: var(--border);
+  border-radius: 8px;
+  animation: shimmer 1.2s infinite linear;
+}
+
+@keyframes shimmer {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.skeletonCard {
+  height: 80px;
+  border-radius: 12px;
+}
+
+@media (max-width: 640px) {
+  .eventCard {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .eventEmoji {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
 import styles from './events.module.css'
 
 // ---- Types ----
@@ -242,10 +243,17 @@ export default function EventsPage() {
       {/* ---- Header ---- */}
       <div className={styles.header}>
         <div className={styles.headerInner}>
-          <h1 className={styles.heading}>What&apos;s On Campus</h1>
-          <p className={styles.subheading}>
-            Discover events at your school — academic, social, sports, and more.
-          </p>
+          <div className={styles.headerTopRow}>
+            <div>
+              <h1 className={styles.heading}>What&apos;s On Campus</h1>
+              <p className={styles.subheading}>
+                Discover events at your school — academic, social, sports, and more.
+              </p>
+            </div>
+            <Link href="/events/create" className={styles.createEventBtn}>
+              + Create Event
+            </Link>
+          </div>
           <div className={styles.dateNav}>
             {(['this-week', 'next-week', 'this-month'] as const).map((r) => (
               <button
