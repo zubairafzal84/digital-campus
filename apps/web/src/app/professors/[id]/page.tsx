@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useUser } from '@clerk/nextjs'
@@ -17,21 +17,21 @@ interface Professor {
   department: string
   course_codes: string[]
   ratings_count: number
-  avg_overall: number | null
-  avg_clarity: number | null
-  avg_helpfulness: number | null
-  avg_difficulty: number | null
+  avg_overall_rating: number | null
+  avg_clarity_rating: number | null
+  avg_helpfulness_rating: number | null
+  avg_difficulty_rating: number | null
   would_take_again_pct: number | null
 }
 
 interface Review {
   id: string
   course_code: string | null
-  grade: string | null
-  overall: number
-  clarity: number | null
-  helpfulness: number | null
-  difficulty: number | null
+  grade_received: string | null
+  overall_rating: number
+  clarity_rating: number | null
+  helpfulness_rating: number | null
+  difficulty_rating: number | null
   would_take_again: boolean | null
   review_text: string | null
   created_at: string
@@ -135,7 +135,12 @@ function BreakdownRow({ label, score }: { label: string; score: number | null })
 
 // ── Rating form ───────────────────────────────────────────
 
-const GRADE_OPTIONS = ['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D', 'F', 'W', 'Pass', 'Fail', 'Audit', 'N/A']
+const GRADE_OPTIONS = [
+  'A+', 'A', 'A-',
+  'B+', 'B', 'B-',
+  'C+', 'C', 'C-',
+  'D', 'F', 'Drop', 'Audit',
+]
 
 interface RatingFormProps {
   professorId: string
@@ -145,39 +150,43 @@ interface RatingFormProps {
 
 function RatingForm({ professorId, professorName, onSubmitted }: RatingFormProps) {
   const [courseCode, setCourseCode] = useState('')
-  const [grade, setGrade] = useState('')
-  const [overall, setOverall] = useState(0)
-  const [clarity, setClarity] = useState(0)
-  const [helpfulness, setHelpfulness] = useState(0)
-  const [difficulty, setDifficulty] = useState(0)
+  const [gradeReceived, setGradeReceived] = useState('')
+  const [overallRating, setOverallRating] = useState(0)
+  const [clarityRating, setClarityRating] = useState(0)
+  const [helpfulnessRating, setHelpfulnessRating] = useState(0)
+  const [difficultyRating, setDifficultyRating] = useState(0)
   const [wouldTakeAgain, setWouldTakeAgain] = useState<boolean | null>(null)
   const [reviewText, setReviewText] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [msg, setMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
 
-  const charLeft = 500 - reviewText.length
+  const charLen = reviewText.length
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (overall === 0) {
-      setMsg({ type: 'error', text: 'Please set an Overall rating.' })
+    if (overallRating === 0 || clarityRating === 0 || helpfulnessRating === 0 || difficultyRating === 0) {
+      setMsg({ type: 'error', text: 'Please set ratings for Overall, Clarity, Helpfulness, and Difficulty.' })
+      return
+    }
+    if (wouldTakeAgain === null) {
+      setMsg({ type: 'error', text: 'Please answer "Would you take this professor again?"' })
       return
     }
     setSubmitting(true)
     setMsg(null)
     try {
-      const res = await fetch(`/api/professors/${professorId}`, {
+      const res = await fetch(`/api/professors/${professorId}/ratings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          course_code: courseCode,
-          grade,
-          overall,
-          clarity: clarity || undefined,
-          helpfulness: helpfulness || undefined,
-          difficulty: difficulty || undefined,
+          course_code: courseCode || undefined,
+          grade_received: gradeReceived || undefined,
+          overall_rating: overallRating,
+          clarity_rating: clarityRating,
+          helpfulness_rating: helpfulnessRating,
+          difficulty_rating: difficultyRating,
           would_take_again: wouldTakeAgain,
-          review_text: reviewText,
+          review_text: reviewText || undefined,
         }),
       })
       const json = await res.json()
@@ -185,9 +194,8 @@ function RatingForm({ professorId, professorName, onSubmitted }: RatingFormProps
         setMsg({ type: 'error', text: json.error ?? 'Something went wrong.' })
       } else {
         setMsg({ type: 'success', text: `Your rating for ${professorName} has been submitted!` })
-        // Reset
-        setCourseCode(''); setGrade(''); setOverall(0); setClarity(0)
-        setHelpfulness(0); setDifficulty(0); setWouldTakeAgain(null); setReviewText('')
+        setCourseCode(''); setGradeReceived(''); setOverallRating(0); setClarityRating(0)
+        setHelpfulnessRating(0); setDifficultyRating(0); setWouldTakeAgain(null); setReviewText('')
         onSubmitted()
       }
     } catch {
@@ -196,6 +204,8 @@ function RatingForm({ professorId, professorName, onSubmitted }: RatingFormProps
       setSubmitting(false)
     }
   }
+
+  const canSubmit = overallRating > 0 && clarityRating > 0 && helpfulnessRating > 0 && difficultyRating > 0 && wouldTakeAgain !== null
 
   return (
     <form className={styles.formCard} onSubmit={handleSubmit} noValidate>
@@ -224,8 +234,8 @@ function RatingForm({ professorId, professorName, onSubmitted }: RatingFormProps
         <select
           id="prof-grade"
           className={styles.formSelect}
-          value={grade}
-          onChange={(e) => setGrade(e.target.value)}
+          value={gradeReceived}
+          onChange={(e) => setGradeReceived(e.target.value)}
         >
           <option value="">Select grade…</option>
           {GRADE_OPTIONS.map((g) => <option key={g} value={g}>{g}</option>)}
@@ -233,23 +243,23 @@ function RatingForm({ professorId, professorName, onSubmitted }: RatingFormProps
       </div>
 
       <div className={styles.formField}>
-        <StarPicker label="Overall *" value={overall} onChange={setOverall} />
+        <StarPicker label="Overall *" value={overallRating} onChange={setOverallRating} />
       </div>
 
       <div className={styles.formField}>
-        <StarPicker label="Clarity" value={clarity} onChange={setClarity} />
+        <StarPicker label="Clarity *" value={clarityRating} onChange={setClarityRating} />
       </div>
 
       <div className={styles.formField}>
-        <StarPicker label="Helpfulness" value={helpfulness} onChange={setHelpfulness} />
+        <StarPicker label="Helpfulness *" value={helpfulnessRating} onChange={setHelpfulnessRating} />
       </div>
 
       <div className={styles.formField}>
-        <StarPicker label="Difficulty" value={difficulty} onChange={setDifficulty} />
+        <StarPicker label="Difficulty *" value={difficultyRating} onChange={setDifficultyRating} />
       </div>
 
       <div className={styles.formField}>
-        <div className={styles.formLabel}>Would you take this professor again?</div>
+        <div className={styles.formLabel}>Would you take this professor again? *</div>
         <div className={styles.yesnoToggle}>
           <button
             type="button"
@@ -278,15 +288,15 @@ function RatingForm({ professorId, professorName, onSubmitted }: RatingFormProps
           placeholder="Share your experience with this professor…"
           rows={4}
         />
-        <div className={`${styles.charCount} ${charLeft < 0 ? styles.charOver : ''}`}>
-          {reviewText.length}/500
+        <div className={`${styles.charCount} ${charLen > 490 ? styles.charOver : ''}`}>
+          {charLen}/500
         </div>
       </div>
 
       <button
         type="submit"
         className={styles.submitBtn}
-        disabled={submitting || overall === 0}
+        disabled={submitting || !canSubmit}
       >
         {submitting ? 'Submitting…' : 'Submit Rating'}
       </button>
@@ -305,7 +315,7 @@ export default function ProfessorProfilePage() {
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
 
-  async function loadData() {
+  const loadData = useCallback(async () => {
     try {
       const res = await fetch(`/api/professors/${id}`)
       if (res.status === 404) { setNotFound(true); return }
@@ -318,12 +328,11 @@ export default function ProfessorProfilePage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [id])
 
   useEffect(() => {
     if (id) loadData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
+  }, [id, loadData])
 
   // ── Loading ──────────────────────────────────────────
   if (loading) {
@@ -348,7 +357,7 @@ export default function ProfessorProfilePage() {
         <main className={styles.page}>
           <div className={styles.errorWrap}>
             <h1>Professor not found</h1>
-            <p>This professor may have been removed or the link is incorrect.</p>
+            <p>This professor may not exist or is pending admin review.</p>
             <Link href="/professors" className={styles.backLink}>← Back to professors</Link>
           </div>
         </main>
@@ -395,7 +404,7 @@ export default function ProfessorProfilePage() {
               {/* Big overall score */}
               <div className={styles.bigScoreWrap}>
                 <span className={styles.bigScore}>
-                  {professor.avg_overall?.toFixed(1) ?? '—'}
+                  {professor.avg_overall_rating?.toFixed(1) ?? '—'}
                 </span>
                 <span className={styles.bigScoreLabel}>/ 5.0</span>
               </div>
@@ -410,12 +419,12 @@ export default function ProfessorProfilePage() {
                     <span className={styles.statLabel}>Would take again</span>
                   </div>
                 )}
-                {professor.avg_difficulty != null && (
+                {professor.avg_difficulty_rating != null && (
                   <div className={styles.statPill}>
                     <span className={styles.statValue}>
-                      {professor.avg_difficulty.toFixed(1)}/5
+                      {professor.avg_difficulty_rating.toFixed(1)}/5
                     </span>
-                    <span className={styles.statLabel}>Difficulty</span>
+                    <span className={styles.statLabel}>Avg difficulty</span>
                   </div>
                 )}
               </div>
@@ -423,10 +432,10 @@ export default function ProfessorProfilePage() {
               {/* Category breakdown */}
               <div className={styles.breakdown}>
                 <p className={styles.breakdownTitle}>Category breakdown</p>
-                <BreakdownRow label="Overall" score={professor.avg_overall} />
-                <BreakdownRow label="Clarity" score={professor.avg_clarity} />
-                <BreakdownRow label="Helpfulness" score={professor.avg_helpfulness} />
-                <BreakdownRow label="Difficulty" score={professor.avg_difficulty} />
+                <BreakdownRow label="Overall" score={professor.avg_overall_rating} />
+                <BreakdownRow label="Clarity" score={professor.avg_clarity_rating} />
+                <BreakdownRow label="Helpfulness" score={professor.avg_helpfulness_rating} />
+                <BreakdownRow label="Difficulty" score={professor.avg_difficulty_rating} />
               </div>
             </div>
           </section>
@@ -450,7 +459,7 @@ export default function ProfessorProfilePage() {
         <div className={styles.mainContent}>
           {/* Reviews */}
           <section className={styles.reviewsSection}>
-            <h2>{reviews.length > 0 ? 'Student Reviews' : 'Reviews'}</h2>
+            <h2>{reviews.length > 0 ? `${reviews.length} Student Review${reviews.length !== 1 ? 's' : ''}` : 'Reviews'}</h2>
 
             {reviews.length === 0 ? (
               <div className={styles.emptyReviews}>
@@ -468,9 +477,9 @@ export default function ProfessorProfilePage() {
                           Course: <span>{review.course_code}</span>
                         </span>
                       )}
-                      {review.grade && (
+                      {review.grade_received && (
                         <span className={styles.reviewMetaItem}>
-                          Grade: <span>{review.grade}</span>
+                          Grade: <span>{review.grade_received}</span>
                         </span>
                       )}
                       {review.would_take_again != null && (
@@ -485,29 +494,29 @@ export default function ProfessorProfilePage() {
                     </div>
 
                     <div className={styles.reviewStars}>
-                      {review.overall > 0 && (
+                      {review.overall_rating > 0 && (
                         <span className={styles.reviewStarGroup}>
                           <span>Overall</span>
-                          <MiniStars value={review.overall} />
-                          <span>{review.overall}/5</span>
+                          <MiniStars value={review.overall_rating} />
+                          <span>{review.overall_rating}/5</span>
                         </span>
                       )}
-                      {review.clarity != null && review.clarity > 0 && (
+                      {review.clarity_rating != null && review.clarity_rating > 0 && (
                         <span className={styles.reviewStarGroup}>
                           <span>Clarity</span>
-                          <MiniStars value={review.clarity} />
+                          <MiniStars value={review.clarity_rating} />
                         </span>
                       )}
-                      {review.helpfulness != null && review.helpfulness > 0 && (
+                      {review.helpfulness_rating != null && review.helpfulness_rating > 0 && (
                         <span className={styles.reviewStarGroup}>
                           <span>Helpfulness</span>
-                          <MiniStars value={review.helpfulness} />
+                          <MiniStars value={review.helpfulness_rating} />
                         </span>
                       )}
-                      {review.difficulty != null && review.difficulty > 0 && (
+                      {review.difficulty_rating != null && review.difficulty_rating > 0 && (
                         <span className={styles.reviewStarGroup}>
                           <span>Difficulty</span>
-                          <MiniStars value={review.difficulty} />
+                          <MiniStars value={review.difficulty_rating} />
                         </span>
                       )}
                     </div>
@@ -524,7 +533,7 @@ export default function ProfessorProfilePage() {
           </section>
 
           {/* Rating form or sign-in CTA */}
-          <section className={styles.ratingForm}>
+          <aside className={styles.ratingForm}>
             {isSignedIn ? (
               <RatingForm
                 professorId={professor.id}
@@ -541,7 +550,7 @@ export default function ProfessorProfilePage() {
                 </Link>
               </div>
             )}
-          </section>
+          </aside>
         </div>
       </main>
       <SiteFooter />
