@@ -376,6 +376,76 @@
   color: var(--sv-muted);
 }
 
+/* ── New card sub-elements (dynamic listing) ── */
+
+.orgAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--sv-purple);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.orgInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.orgMeta {
+  font-size: 11px;
+  color: var(--sv-faint);
+}
+
+.cardDesc {
+  font-size: 13px;
+  color: var(--sv-muted);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rewardDetail {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sv-green);
+  background: var(--sv-green-bg);
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+
+/* ── Featured card ── */
+
+.cardFeatured {
+  border-color: var(--sv-purple);
+  box-shadow: 0 0 0 3px rgba(107, 62, 242, 0.08);
+  position: relative;
+}
+
+.featuredRibbon {
+  position: absolute;
+  top: 16px;
+  right: -1px;
+  background: var(--sv-purple);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 3px 10px 3px 12px;
+  border-radius: 4px 0 0 4px;
+  clip-path: polygon(8px 0, 100% 0, 100% 100%, 8px 100%, 0 50%);
+}
+
 /* ── Run-a-survey CTA ── */
 .runCta {
   margin-top: 64px;
@@ -417,6 +487,13 @@
   line-height: 1.6;
 }
 
+.runCtaBtns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
 .runCtaBtn {
   padding: 14px 32px;
   background: var(--sv-purple);
@@ -427,12 +504,32 @@
   text-decoration: none;
   transition: background 0.15s, transform 0.1s;
   white-space: nowrap;
-  flex-shrink: 0;
+  text-align: center;
 }
 
 .runCtaBtn:hover {
   background: var(--sv-purhi);
   transform: translateY(-1px);
+}
+
+.runCtaBtnSecondary {
+  padding: 12px 32px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.runCtaBtnSecondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
 }
 
 /* ── Responsive ── */
@@ -451,8 +548,12 @@
     padding: 36px 24px;
   }
 
-  .runCtaBtn {
+  .runCtaBtns {
     width: 100%;
-    text-align: center;
+  }
+
+  .runCtaBtn,
+  .runCtaBtnSecondary {
+    width: 100%;
   }
 }

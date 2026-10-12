@@ -59,7 +59,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/professors`, lastModified: now, changeFrequency: 'daily', priority: 0.85 },
     { url: `${BASE}/surveys`, lastModified: now, changeFrequency: 'daily', priority: 0.75 },
     { url: `${BASE}/surveys/create`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE}/surveys/for-organizations`, lastModified: now, changeFrequency: 'monthly', priority: 0.65 },
     { url: `${BASE}/events`, lastModified: now, changeFrequency: 'daily', priority: 0.85 },
+    { url: `${BASE}/volunteer`, lastModified: now, changeFrequency: 'daily', priority: 0.85 },
   ]
 
   const schoolPages: MetadataRoute.Sitemap = SCHOOL_SLUGS.map((slug) => ({

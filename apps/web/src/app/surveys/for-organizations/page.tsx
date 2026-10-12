@@ -115,7 +115,7 @@ const PLANS = [
       'Priority listing placement',
     ],
     cta: 'Start with Starter',
-    href: '/partners/survey-enquiry',
+    href: '/surveys/create',
     highlight: false,
   },
   {
@@ -133,7 +133,7 @@ const PLANS = [
       'Priority email support',
     ],
     cta: 'Start Professional',
-    href: '/partners/survey-enquiry',
+    href: '/surveys/create',
     highlight: true,
   },
   {
@@ -151,7 +151,7 @@ const PLANS = [
       'Invoiced billing',
     ],
     cta: 'Contact us',
-    href: '/partners/survey-enquiry',
+    href: '/partners/employers',
     highlight: false,
   },
 ]

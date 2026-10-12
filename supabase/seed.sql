@@ -453,3 +453,172 @@ CROSS JOIN (VALUES
 ) AS q(question_text, question_type, options, is_required, sort_order)
 WHERE s.created_by = 'seed_rbc'
 ON CONFLICT DO NOTHING;
+
+-- ============================================================
+-- Volunteer Opportunities (25 realistic Canadian opportunities)
+-- ============================================================
+INSERT INTO public.volunteer_opportunities (
+  id, title, organization_name, organization_type, description,
+  cause, location, city, province, is_remote, school_slug,
+  commitment_hours_week, commitment_duration, is_one_time,
+  skills_needed, spots_available, spots_filled,
+  application_url, application_email, deadline_date, is_published, created_by
+) VALUES
+  -- Food Banks
+  (gen_random_uuid(), 'Weekend Food Sorting Volunteer', 'Vancouver Food Bank', 'nonprofit',
+   'Sort and package donated food items for distribution to families across Metro Vancouver. No experience needed — just a willingness to help.',
+   'food', '1150 Station Street', 'Vancouver', 'BC', false, null,
+   3, 'ongoing', false, ARRAY['teamwork','physical-work','reliability'], 30, 8,
+   'https://vancouverfoodbank.com/volunteer', null, null, true, 'seed'),
+
+  (gen_random_uuid(), 'Daily Bread Food Bank Sorter & Packer', 'Daily Bread Food Bank', 'nonprofit',
+   'Help sort, pack, and distribute food hampers to thousands of Torontonians in need each week. Shifts available weekday mornings and evenings.',
+   'food', '191 New Toronto Street', 'Toronto', 'ON', false, null,
+   4, 'ongoing', false, ARRAY['teamwork','physical-work','communication'], 50, 12,
+   'https://www.dailybread.ca/get-involved/volunteer/', null, null, true, 'seed'),
+
+  (gen_random_uuid(), 'Moisson Montréal Warehouse Volunteer', 'Moisson Montréal', 'nonprofit',
+   'Répartissez les dons alimentaires dans notre entrepôt et aidez à alimenter 300 organismes communautaires à Montréal.',
+   'food', '6880 Henri-Bourassa Est', 'Montréal', 'QC', false, null,
+   3, 'ongoing', false, ARRAY['teamwork','bilingual-preferred','physical-work'], 40, 15,
+   'https://www.moissonmontreal.org/benevoles/', null, null, true, 'seed'),
+
+  -- Environmental
+  (gen_random_uuid(), 'Stanley Park Shoreline Cleanup', 'Vancouver Park Board', 'government',
+   'Join monthly cleanups along the Stanley Park seawall. You will remove marine debris, record data, and help keep one of Canada\'s most iconic parks pristine.',
+   'environment', 'Stanley Park', 'Vancouver', 'BC', false, null,
+   2, 'ongoing', false, ARRAY['environmental-awareness','data-collection','physical-fitness'], 25, 6,
+   null, 'volunteer@vancouver.ca', null, true, 'seed'),
+
+  (gen_random_uuid(), 'Great Canadian Shoreline Cleanup — Halifax', 'Great Canadian Shoreline Cleanup', 'nonprofit',
+   'Protect Nova Scotia\'s coastline in this national cleanup event. Collect and categorize waste, learn about marine pollution, and make a direct local impact.',
+   'environment', 'Point Pleasant Park', 'Halifax', 'NS', false, null,
+   null, null, true, ARRAY['environmental-awareness','teamwork','data-entry'], 60, 0,
+   'https://www.shorelinecleanup.ca', null, '2027-06-15', true, 'seed'),
+
+  (gen_random_uuid(), 'Urban Reforestation Field Volunteer', 'David Suzuki Foundation', 'nonprofit',
+   'Plant native trees and shrubs in urban corridors across Metro Vancouver. Training provided. Contribute to local biodiversity and climate resilience.',
+   'environment', 'Various Metro Vancouver sites', 'Vancouver', 'BC', false, null,
+   3, '6 months', false, ARRAY['environmental-awareness','physical-work','teamwork'], 20, 4,
+   'https://davidsuzuki.org/take-action/volunteer/', null, '2027-03-31', true, 'seed'),
+
+  -- Youth Mentorship
+  (gen_random_uuid(), 'Big Brothers Big Sisters — Youth Mentor', 'Big Brothers Big Sisters of Greater Vancouver', 'nonprofit',
+   'Be matched one-on-one with a young person aged 6–17 who needs a positive adult role model. Meet weekly for activities, conversation, and support.',
+   'youth', null, 'Vancouver', 'BC', false, null,
+   3, '12 months', false, ARRAY['mentorship','communication','empathy','reliability'], 15, 3,
+   'https://www.bigbrothersvancouver.com/volunteer', null, null, true, 'seed'),
+
+  (gen_random_uuid(), 'YMCA After-School Homework Club Tutor', 'YMCA of Greater Toronto', 'nonprofit',
+   'Support elementary and middle-school students with homework, reading, and study skills at our community after-school programs.',
+   'youth', '20 Grosvenor Street', 'Toronto', 'ON', false, null,
+   4, 'school-year', false, ARRAY['tutoring','communication','patience','math','literacy'], 20, 7,
+   null, 'volunteer@ymcato.org', null, true, 'seed'),
+
+  (gen_random_uuid(), 'Boys and Girls Club — Evening Program Leader', 'Boys and Girls Clubs of Calgary', 'nonprofit',
+   'Lead structured recreation, arts, and life-skills activities for youth aged 8–17 at our afterschool program in NE Calgary.',
+   'youth', '416 Meridian Road NE', 'Calgary', 'AB', false, null,
+   5, '8 months', false, ARRAY['youth-work','leadership','communication','creativity'], 12, 2,
+   'https://www.bgcc.ca/volunteer', null, null, true, 'seed'),
+
+  -- Hospital / Health
+  (gen_random_uuid(), 'Patient Visitor & Wayfinding Volunteer', 'Vancouver General Hospital', 'hospital',
+   'Greet patients and visitors at the main entrance, assist with wayfinding, deliver newspapers and reading materials to patients, and provide compassionate support.',
+   'health', '899 West 12th Avenue', 'Vancouver', 'BC', false, null,
+   4, 'ongoing', false, ARRAY['communication','empathy','reliability','customer-service'], 30, 10,
+   'https://vchri.ca/volunteer', null, null, true, 'seed'),
+
+  (gen_random_uuid(), 'SickKids Hospital Play Companion', 'The Hospital for Sick Children', 'hospital',
+   'Brighten the day of pediatric patients by engaging them in art, reading, games, and crafts in the playroom and family lounges.',
+   'health', '555 University Avenue', 'Toronto', 'ON', false, null,
+   4, 'ongoing', false, ARRAY['empathy','creativity','child-care','communication'], 20, 5,
+   'https://www.sickkids.ca/en/get-involved/volunteer/', null, null, true, 'seed'),
+
+  (gen_random_uuid(), 'Montreal General Hospital Volunteer', 'McGill University Health Centre', 'hospital',
+   'Assist nursing staff with non-clinical tasks, deliver items throughout the hospital, and provide comfort and wayfinding support to patients and families.',
+   'health', '1001 Décarie Boulevard', 'Montréal', 'QC', false, null,
+   3, 'ongoing', false, ARRAY['communication','bilingual-preferred','empathy','reliability'], 25, 8,
+   'https://www.muhcvolunteer.ca/', null, null, true, 'seed'),
+
+  -- Community Centres
+  (gen_random_uuid(), 'Seniors Drop-In Program Assistant', 'Kitsilano Neighbourhood House', 'community',
+   'Help run weekly social programs for seniors including fitness, crafts, and conversation groups. Bring energy and companionship to older adults living independently.',
+   'seniors', '2305 West 7th Avenue', 'Vancouver', 'BC', false, null,
+   3, '6 months', false, ARRAY['empathy','communication','event-planning','patience'], 10, 2,
+   null, 'volunteer@knhca.org', null, true, 'seed'),
+
+  (gen_random_uuid(), 'Community Legal Clinic Intake Volunteer', 'University of Ottawa Community Legal Clinic', 'nonprofit',
+   'Support low-income clients by helping with intake paperwork, scheduling, and reception duties. Law students especially welcome.',
+   'community', '57 Louis-Pasteur', 'Ottawa', 'ON', false, 'uottawa',
+   5, 'semester', false, ARRAY['communication','legal-knowledge-an-asset','organization','empathy'], 8, 2,
+   null, 'volunteer@uolcc.ca', '2027-01-15', true, 'seed'),
+
+  (gen_random_uuid(), 'Winnipeg Harvest Mobile Food Pantry', 'Winnipeg Harvest', 'nonprofit',
+   'Drive or assist at mobile food distribution events in underserved Winnipeg neighbourhoods. Help load, unload, and hand out groceries to community members.',
+   'food', '1085 Winnipeg Avenue', 'Winnipeg', 'MB', false, null,
+   3, 'ongoing', false, ARRAY['physical-work','teamwork','customer-service','driving-an-asset'], 20, 6,
+   'https://winnipeggharvest.ca/volunteer', null, null, true, 'seed'),
+
+  -- Campus-specific
+  (gen_random_uuid(), 'UBC Peer Tutor — STEM Subjects', 'UBC Centre for Student Involvement', 'school',
+   'Provide one-on-one and small-group tutoring in math, physics, chemistry, or computer science to first- and second-year UBC students.',
+   'education', 'Irving K. Barber Learning Centre', 'Vancouver', 'BC', false, 'ubc',
+   4, 'semester', false, ARRAY['math','communication','tutoring','patience'], 25, 10,
+   null, 'csi.volunteer@ubc.ca', null, true, 'seed'),
+
+  (gen_random_uuid(), 'UofT Orientation Week Crew Leader', 'University of Toronto', 'school',
+   'Lead a group of 20 incoming students through O-Week activities, campus tours, and social events. Build community and help new students feel welcome.',
+   'community', 'St. George Campus', 'Toronto', 'ON', false, 'uoft',
+   null, null, true, ARRAY['leadership','communication','event-planning','teamwork'], 60, 0,
+   null, 'orientation@utoronto.ca', '2027-04-30', true, 'seed'),
+
+  (gen_random_uuid(), 'McGill Campus Accessibility Aide', 'McGill University', 'school',
+   'Assist students with disabilities by providing mobility support, note-taking, and exam assistance through the McGill Office for Students with Disabilities.',
+   'education', 'Downtown Campus', 'Montréal', 'QC', false, 'mcgill',
+   5, 'semester', false, ARRAY['empathy','reliability','note-taking','communication'], 15, 4,
+   null, 'osd.volunteer@mcgill.ca', null, true, 'seed'),
+
+  (gen_random_uuid(), 'Waterloo Hack the North Volunteer', 'University of Waterloo Engineering Society', 'school',
+   'Help organize one of Canada\'s largest hackathons. Roles include logistics, mentorship, sponsor coordination, and day-of operations.',
+   'education', 'E5 Engineering Building', 'Waterloo', 'ON', false, 'uwaterloo',
+   null, null, true, ARRAY['tech','event-planning','communication','teamwork'], 120, 0,
+   'https://hackthenorth.com/volunteer', null, '2027-06-01', true, 'seed'),
+
+  -- Remote
+  (gen_random_uuid(), 'Online ESL Conversation Partner', 'Catholic Crosscultural Services', 'nonprofit',
+   'Converse weekly with a newcomer to Canada via video call to help them practise English in a friendly, low-pressure setting.',
+   'community', null, null, null, true, null,
+   2, 'ongoing', false, ARRAY['communication','empathy','patience','english'], 40, 12,
+   'https://www.ccscan.ca/volunteering', null, null, true, 'seed'),
+
+  (gen_random_uuid(), 'Crisis Text Line Volunteer (French/English)', 'Crisis Services Canada', 'nonprofit',
+   'Provide real-time text-based crisis support to Canadians in distress. Complete 30-hour online training before starting. Bilingual volunteers especially needed.',
+   'crisis', null, null, null, true, null,
+   4, 'ongoing', false, ARRAY['active-listening','empathy','crisis-support','bilingual-asset'], 50, 18,
+   'https://www.ementalhealth.ca/volunteer', null, null, true, 'seed'),
+
+  (gen_random_uuid(), 'Social Media Volunteer for Nonprofit', 'Écojustice', 'nonprofit',
+   'Create and schedule Instagram, LinkedIn, and Twitter content to amplify environmental law campaigns. Work remotely on your own schedule.',
+   'environment', null, null, 'BC', true, null,
+   3, '3 months', false, ARRAY['social-media','content-creation','writing','design-an-asset'], 5, 1,
+   'https://ecojustice.ca/get-involved/', null, '2027-02-28', true, 'seed'),
+
+  (gen_random_uuid(), 'Remote Online Tutor — Indigenous Youth', 'Indspire', 'nonprofit',
+   'Provide weekly online tutoring sessions in math, science, or English to Indigenous high-school students across Canada through Indspire''s Building Brighter Futures program.',
+   'education', null, null, null, true, null,
+   2, 'school-year', false, ARRAY['tutoring','communication','cultural-competency','patience'], 30, 8,
+   'https://indspire.ca/programs/building-brighter-futures/', null, null, true, 'seed'),
+
+  (gen_random_uuid(), 'Trans-Canada Trail Digital Trail Guide Updater', 'The Trans Canada Trail', 'nonprofit',
+   'Research and update trail condition reports, accessibility notes, and points-of-interest data on our online trail mapping platform.',
+   'environment', null, null, null, true, null,
+   2, '4 months', false, ARRAY['research','data-entry','attention-to-detail','outdoors-knowledge'], 10, 3,
+   'https://thegreattrail.ca/volunteer/', null, '2027-05-01', true, 'seed'),
+
+  (gen_random_uuid(), 'Edmonton Seniors Tech Help Volunteer', 'Edmonton Seniors Coordinating Council', 'nonprofit',
+   'Visit seniors at home or community centres in Edmonton to help with smartphones, tablets, video calling, and online safety. Training provided.',
+   'seniors', 'Various sites', 'Edmonton', 'AB', false, null,
+   3, 'ongoing', false, ARRAY['tech','communication','patience','teaching','empathy'], 20, 5,
+   null, 'escc@volunteer.ca', null, true, 'seed')
+
+ON CONFLICT DO NOTHING;
