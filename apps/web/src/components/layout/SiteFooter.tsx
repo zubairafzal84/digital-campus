@@ -10,6 +10,8 @@ const COLS = [
       { label: 'Clubs & Events', href: '/clubs' },
       { label: 'Scholarships', href: '/scholarships' },
       { label: 'Housing', href: '/housing' },
+      { label: 'Student Deals', href: '/deals' },
+      { label: 'Study Groups', href: '/study-groups' },
       { label: 'Student Profiles', href: '/students' },
     ],
   },

@@ -48,10 +48,34 @@
 .filters {
   background: var(--white);
   border-bottom: 1px solid var(--border);
-  padding: 18px 0;
+  padding: 14px 0 16px;
   position: sticky;
   top: 64px;
   z-index: 10;
+}
+
+.filterRow {
+  margin-bottom: 12px;
+}
+
+.schoolSelect {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg);
+  cursor: pointer;
+  min-width: 220px;
+  transition: border-color 0.15s;
+}
+
+.schoolSelect:hover,
+.schoolSelect:focus {
+  border-color: var(--purple);
+  outline: none;
 }
 
 .chips {
@@ -216,6 +240,33 @@
 }
 
 .joinBtn:hover { background: var(--lav-dim); }
+
+.empty {
+  font-size: 15px;
+  color: var(--muted);
+  padding: 48px 0;
+  text-align: center;
+}
+
+.clearBtn {
+  background: none;
+  border: none;
+  color: var(--purple);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.chipCount {
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(107,62,242,0.15);
+  border-radius: 10px;
+  padding: 1px 5px;
+  margin-left: 3px;
+}
 
 /* Register CTA */
 .registerCta {

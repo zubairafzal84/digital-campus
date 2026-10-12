@@ -1,0 +1,313 @@
+/* Student Deals & Perks — deals.module.css */
+
+:root {
+  --deals-navy: #0A1F5D;
+  --deals-purple: #6B3EF2;
+  --deals-purple-hi: #8B5CFF;
+  --deals-lav: #E9E2FF;
+  --deals-surface: #ffffff;
+  --deals-surface-alt: #f8f7fe;
+  --deals-border: #e2dcfc;
+  --deals-text: #1a1a2e;
+  --deals-text-muted: #5a5a7a;
+  --deals-pill-bg: #e9e2ff;
+  --deals-pill-text: #4a1fd6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --deals-surface: #0f0f1a;
+    --deals-surface-alt: #181828;
+    --deals-border: #2a2a4a;
+    --deals-text: #eeeef8;
+    --deals-text-muted: #9090b8;
+    --deals-pill-bg: #2a1a60;
+    --deals-pill-text: #b899ff;
+  }
+}
+
+:root[data-theme="dark"] {
+  --deals-surface: #0f0f1a;
+  --deals-surface-alt: #181828;
+  --deals-border: #2a2a4a;
+  --deals-text: #eeeef8;
+  --deals-text-muted: #9090b8;
+  --deals-pill-bg: #2a1a60;
+  --deals-pill-text: #b899ff;
+}
+
+/* ── Page shell ── */
+.page {
+  background: var(--deals-surface);
+  color: var(--deals-text);
+  min-height: 100vh;
+}
+
+/* ── Hero header ── */
+.header {
+  background: linear-gradient(135deg, var(--deals-navy) 0%, #1a0a4a 60%, #2d1070 100%);
+  padding: 56px 16px 48px;
+  text-align: center;
+}
+
+.h1 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.h1 span {
+  background: linear-gradient(90deg, #a78bfa, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sub {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── Filter bar ── */
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 24px 16px 8px;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.filterBtn {
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--deals-border);
+  background: var(--deals-surface);
+  color: var(--deals-text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.filterBtn:hover {
+  border-color: var(--deals-purple);
+  color: var(--deals-purple);
+}
+
+.filterBtnActive {
+  background: var(--deals-purple);
+  border-color: var(--deals-purple);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.filterBtnActive:hover {
+  background: var(--deals-purple-hi);
+  border-color: var(--deals-purple-hi);
+  color: #ffffff;
+}
+
+/* ── Cards grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+/* ── Individual card ── */
+.card {
+  background: var(--deals-surface);
+  border: 1.5px solid var(--deals-border);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.card:hover {
+  border-color: var(--deals-purple);
+  box-shadow: 0 8px 32px rgba(107, 62, 242, 0.14);
+  transform: translateY(-2px);
+}
+
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cardBadge {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  flex-shrink: 0;
+  letter-spacing: -0.03em;
+}
+
+.discountPill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--deals-pill-bg);
+  color: var(--deals-pill-text);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+.cardName {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--deals-text);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.cardProvider {
+  font-size: 0.82rem;
+  color: var(--deals-text-muted);
+  margin: 0;
+  font-weight: 500;
+}
+
+.cardCategory {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--deals-purple);
+}
+
+.cardDesc {
+  font-size: 0.88rem;
+  color: var(--deals-text-muted);
+  line-height: 1.55;
+  margin: 0;
+  flex: 1;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.verifiedBadge {
+  font-size: 0.75rem;
+  color: #16a34a;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.verifiedBadge::before {
+  content: "✓";
+  font-weight: 700;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  background: var(--deals-purple);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s ease, transform 0.1s ease;
+  white-space: nowrap;
+}
+
+.ctaBtn:hover {
+  background: var(--deals-purple-hi);
+  transform: translateY(-1px);
+}
+
+.ctaBtn::after {
+  content: "→";
+}
+
+/* ── Merchant CTA banner ── */
+.merchantCta {
+  background: var(--deals-surface-alt);
+  border-top: 1px solid var(--deals-border);
+  padding: 48px 16px;
+  text-align: center;
+}
+
+.merchantCta p {
+  font-size: 1rem;
+  color: var(--deals-text-muted);
+  margin: 0 0 16px;
+}
+
+.merchantCta strong {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--deals-text);
+  margin-bottom: 8px;
+}
+
+.partnerBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--deals-navy), var(--deals-purple));
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.partnerBtn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.partnerBtn::after {
+  content: "→";
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .cardFooter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ctaBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}

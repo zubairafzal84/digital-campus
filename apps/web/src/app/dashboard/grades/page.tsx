@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import GradeTracker from './GradeTracker'
+import styles from './grades.module.css'
 
 export const metadata: Metadata = {
   title: 'Grades | Digital Kampus',
@@ -7,5 +8,12 @@ export const metadata: Metadata = {
 }
 
 export default function GradesPage() {
-  return <GradeTracker />
+  return (
+    <>
+      <p className={styles.privacyNote}>
+        🔒 Your grades are stored locally and never shared without your permission.
+      </p>
+      <GradeTracker />
+    </>
+  )
 }

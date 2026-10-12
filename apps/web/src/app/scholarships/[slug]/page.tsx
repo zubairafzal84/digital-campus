@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 import styles from './scholarship.module.css'
 
 export const revalidate = 3600
@@ -163,13 +164,11 @@ export default async function ScholarshipDetailPage({ params }: Props) {
 
   return (
     <main className={styles.page}>
-      <nav className={styles.breadcrumb}>
-        <Link href="/">Home</Link>
-        <span aria-hidden>›</span>
-        <Link href="/scholarships">Scholarships</Link>
-        <span aria-hidden>›</span>
-        <span>{s.name}</span>
-      </nav>
+      <Breadcrumbs items={[
+        { label: 'Home', href: '/' },
+        { label: 'Scholarships', href: '/scholarships' },
+        { label: s.name },
+      ]} />
 
       <div className={styles.layout}>
         <article className={styles.main}>

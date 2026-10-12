@@ -1,0 +1,418 @@
+/* ── Page shell ── */
+.page {
+  min-height: 100vh;
+  background: var(--bg, #f8f7ff);
+}
+
+.header {
+  background: linear-gradient(135deg, var(--navy, #0A1F5D) 0%, #1a3580 100%);
+  padding: 64px 0 56px;
+  color: #ffffff;
+}
+
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.h1 {
+  font-family: var(--font-heading, system-ui, sans-serif);
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 12px;
+}
+
+.hi {
+  background: linear-gradient(135deg, var(--purple-hi, #8B5CFF) 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sub {
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.68);
+  max-width: 540px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Content area ── */
+.content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Create card ── */
+.createCard {
+  background: #ffffff;
+  border: 1px solid #e2dff7;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 24px rgba(10, 31, 93, 0.07);
+}
+
+.createCard h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--navy, #0A1F5D);
+  margin: 0 0 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy, #0A1F5D);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.input,
+.select {
+  height: 44px;
+  border: 1.5px solid #d4cfee;
+  border-radius: 8px;
+  padding: 0 14px;
+  font-size: 15px;
+  color: var(--navy, #0A1F5D);
+  background: #faf9ff;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--purple, #6B3EF2);
+  box-shadow: 0 0 0 3px rgba(107, 62, 242, 0.12);
+}
+
+.select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B3EF2' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+.createBtn {
+  height: 48px;
+  background: var(--purple, #6B3EF2);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  margin-top: 4px;
+}
+
+.createBtn:hover {
+  background: var(--purple-hi, #8B5CFF);
+  transform: translateY(-1px);
+}
+
+.createBtn:active {
+  transform: translateY(0);
+}
+
+/* ── Room result ── */
+.roomResult {
+  background: var(--lav, #E9E2FF);
+  border: 1.5px solid var(--purple, #6B3EF2);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 24px;
+}
+
+.roomResult p {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--purple, #6B3EF2);
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.roomUrl {
+  font-size: 13px;
+  color: var(--navy, #0A1F5D);
+  word-break: break-all;
+  background: rgba(107, 62, 242, 0.08);
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  font-family: monospace;
+}
+
+.roomActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.copyBtn {
+  flex: 1;
+  height: 40px;
+  background: transparent;
+  border: 1.5px solid var(--purple, #6B3EF2);
+  border-radius: 8px;
+  color: var(--purple, #6B3EF2);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  min-width: 120px;
+}
+
+.copyBtn:hover {
+  background: var(--lav, #E9E2FF);
+}
+
+.copyBtn.copied {
+  background: var(--purple, #6B3EF2);
+  color: #fff;
+  border-color: var(--purple, #6B3EF2);
+}
+
+.joinBtn {
+  flex: 1;
+  height: 40px;
+  background: var(--purple, #6B3EF2);
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  min-width: 120px;
+}
+
+.joinBtn:hover {
+  background: var(--purple-hi, #8B5CFF);
+}
+
+/* ── Popular section ── */
+.popularSection {
+  background: #ffffff;
+  border: 1px solid #e2dff7;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 24px rgba(10, 31, 93, 0.07);
+}
+
+.popularH {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--navy, #0A1F5D);
+  margin: 0 0 6px;
+}
+
+.popularSub {
+  font-size: 14px;
+  color: #7c7aaa;
+  margin: 0 0 24px;
+}
+
+.roomGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.roomCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  background: #faf9ff;
+  border: 1px solid #e6e2f8;
+  border-radius: 10px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.roomCard:hover {
+  border-color: var(--purple, #6B3EF2);
+  box-shadow: 0 2px 12px rgba(107, 62, 242, 0.1);
+}
+
+.roomInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.roomName {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy, #0A1F5D);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.roomSubject {
+  font-size: 12px;
+  color: #7c7aaa;
+  margin-top: 2px;
+}
+
+.liveBadge {
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(107, 62, 242, 0.1);
+  color: var(--purple, #6B3EF2);
+  padding: 2px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.joinRoomBtn {
+  height: 34px;
+  padding: 0 16px;
+  background: var(--purple, #6B3EF2);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.joinRoomBtn:hover {
+  background: var(--purple-hi, #8B5CFF);
+}
+
+/* ── Info strip ── */
+.infoStrip {
+  border-top: 1px solid #e2dff7;
+  background: var(--lav, #E9E2FF);
+  padding: 16px 24px;
+  text-align: center;
+  font-size: 13px;
+  color: #5a4a9c;
+}
+
+.infoStrip strong {
+  color: var(--navy, #0A1F5D);
+}
+
+/* ── Dark mode ── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .page {
+    background: #0d0d1a;
+  }
+
+  :root:not([data-theme="light"]) .createCard,
+  :root:not([data-theme="light"]) .popularSection {
+    background: #12122a;
+    border-color: #2a2650;
+  }
+
+  :root:not([data-theme="light"]) .createCard h2,
+  :root:not([data-theme="light"]) .popularH {
+    color: #e0d8ff;
+  }
+
+  :root:not([data-theme="light"]) .label {
+    color: #b0a8e0;
+  }
+
+  :root:not([data-theme="light"]) .input,
+  :root:not([data-theme="light"]) .select {
+    background: #1a1a38;
+    border-color: #3a3560;
+    color: #e0d8ff;
+  }
+
+  :root:not([data-theme="light"]) .roomCard {
+    background: #1a1a38;
+    border-color: #2a2650;
+  }
+
+  :root:not([data-theme="light"]) .roomName {
+    color: #e0d8ff;
+  }
+
+  :root:not([data-theme="light"]) .roomUrl {
+    background: rgba(107, 62, 242, 0.15);
+    color: #c0b8f0;
+  }
+
+  :root:not([data-theme="light"]) .roomResult {
+    background: #1a1a38;
+    border-color: var(--purple, #6B3EF2);
+  }
+
+  :root:not([data-theme="light"]) .popularSub {
+    color: #8882b8;
+  }
+
+  :root:not([data-theme="light"]) .infoStrip {
+    background: #12122a;
+    border-color: #2a2650;
+    color: #9088c8;
+  }
+
+  :root:not([data-theme="light"]) .infoStrip strong {
+    color: #e0d8ff;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 40px 0 36px;
+  }
+
+  .createCard,
+  .popularSection {
+    padding: 24px 20px;
+  }
+
+  .roomActions {
+    flex-direction: column;
+  }
+
+  .copyBtn,
+  .joinBtn {
+    min-width: unset;
+  }
+}

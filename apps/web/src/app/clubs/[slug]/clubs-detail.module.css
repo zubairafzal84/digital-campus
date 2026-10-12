@@ -418,6 +418,68 @@
   text-decoration: underline;
 }
 
+/* --- Website link (in hero stats) ------------------------- */
+.websiteLink {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.websiteLink:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* --- Website card (in sidebar) ---------------------------- */
+.websiteCard {
+  margin-top: 16px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.websiteLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.websiteCardLink {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--purple);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.websiteCardLink:hover {
+  text-decoration: underline;
+}
+
+/* --- Related school link ---------------------------------- */
+.relatedSchool {
+  margin-top: -16px;
+}
+
+.relatedLink {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--purple);
+  text-decoration: none;
+}
+
+.relatedLink:hover {
+  text-decoration: underline;
+}
+
 /* --- Responsive phone ------------------------------------ */
 @media (max-width: 480px) {
   .heroBody {

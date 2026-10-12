@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { SiteNav } from '@/components/layout/SiteNav'
 import { SiteFooter } from '@/components/layout/SiteFooter'
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
 import styles from './housing-detail.module.css'
 
 const LISTINGS = [
@@ -201,13 +202,11 @@ export default async function HousingDetailPage({ params }: Props) {
       <main>
         <section className={styles.hero}>
           <div className={styles.inner}>
-            <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-              <Link href="/">Home</Link>
-              <span> › </span>
-              <Link href="/housing">Housing</Link>
-              <span> › </span>
-              <span aria-current="page">{listing.title}</span>
-            </nav>
+            <Breadcrumbs items={[
+              { label: 'Home', href: '/' },
+              { label: 'Housing', href: '/housing' },
+              { label: listing.title },
+            ]} />
           </div>
         </section>
 

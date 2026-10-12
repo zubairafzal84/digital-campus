@@ -3,8 +3,17 @@ import type { MetadataRoute } from 'next'
 const BASE = 'https://digitalkampus.ca'
 
 const SCHOOL_SLUGS = [
+  // Original 12
   'ubc', 'sfu', 'uoft', 'mcgill', 'uwaterloo',
   'queens', 'ualberta', 'uvic', 'dal', 'bcit', 'seneca', 'humber',
+  // Expanded universities
+  'western', 'mcmaster', 'ucalgary', 'umanitoba', 'uottawa', 'carleton',
+  'concordia', 'yorku', 'ryerson', 'udem', 'laval',
+  // Additional universities
+  'usask', 'usherbrooke', 'uqam', 'stfx', 'mun', 'unb', 'upei',
+  // Colleges & polytechnics
+  'georgebrown', 'centennial', 'mohawk', 'conestoga', 'algonquin', 'sheridan',
+  'langara', 'kwantlen', 'nait', 'sait', 'nscc',
 ]
 
 const CLUB_SLUGS = [
@@ -45,6 +54,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/partners/employers`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/partners/merchants`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/clubs/register`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${BASE}/study-groups`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
+    { url: `${BASE}/deals`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
   ]
 
   const schoolPages: MetadataRoute.Sitemap = SCHOOL_SLUGS.map((slug) => ({

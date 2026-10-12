@@ -3,113 +3,16 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { SiteNav } from '@/components/layout/SiteNav'
 import { SiteFooter } from '@/components/layout/SiteFooter'
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs'
+import { CLUBS } from '../clubs-data'
 import styles from './clubs-detail.module.css'
 
-interface ClubEvent {
-  title: string
-  date: string
-  location: string
-}
-
-interface Club {
-  slug: string
-  name: string
-  school: string
-  category: string
-  members: number
-  founded: number
-  description: string
-  events: ClubEvent[]
-}
-
-const CLUBS: Club[] = [
-  {
-    slug: 'ubc-computer-science-club',
-    name: 'UBC Computer Science Club',
-    school: 'UBC',
-    category: 'Tech',
-    members: 340,
-    founded: 2008,
-    description:
-      'Weekly socials, hackathons, career panels, and industry talks. Open to all CS and engineering students.',
-    events: [
-      { title: 'Annual Hackathon', date: 'Nov 8–9', location: 'ESB 1013' },
-      { title: 'Industry Panel', date: 'Nov 15 6 PM', location: 'ICCS 246' },
-    ],
-  },
-  {
-    slug: 'mcgill-debating-union',
-    name: 'McGill Debating Union',
-    school: 'McGill',
-    category: 'Academic',
-    members: 210,
-    founded: 1952,
-    description: 'Competitive and recreational debating in English and French.',
-    events: [
-      { title: 'Open Tournament', date: 'Nov 14–15', location: 'Leacock Building' },
-    ],
-  },
-  {
-    slug: 'uoft-muslim-students-association',
-    name: 'UofT Muslim Students Association',
-    school: 'UofT',
-    category: 'Cultural',
-    members: 650,
-    founded: 1969,
-    description:
-      'Community, events, and support for Muslim students at all three UofT campuses.',
-    events: [
-      { title: 'Halal Food Fair', date: 'Nov 5 11 AM – 3 PM', location: 'Bahen Centre Atrium' },
-    ],
-  },
-  {
-    slug: 'sfu-hiking-club',
-    name: 'SFU Hiking Club',
-    school: 'SFU',
-    category: 'Sports',
-    members: 520,
-    founded: 1973,
-    description:
-      'Weekend hikes across the Lower Mainland, Whistler, and Sea-to-Sky. All fitness levels welcome.',
-    events: [
-      { title: 'Garibaldi Lake Day Hike', date: 'Nov 2 7 AM', location: 'SFU West Mall' },
-      { title: 'Cypress Bowl Snowshoe', date: 'Dec 7', location: 'SFU West Mall' },
-    ],
-  },
-  {
-    slug: 'carleton-film-collective',
-    name: 'Carleton Film Collective',
-    school: 'Carleton',
-    category: 'Arts',
-    members: 120,
-    founded: 2015,
-    description:
-      'Student filmmaking, screenings, and production workshops. Equipment loans and editing suite access.',
-    events: [
-      { title: 'Short Film Night', date: 'Nov 10 7 PM', location: 'Richcraft Hall 2200' },
-    ],
-  },
-  {
-    slug: 'ualberta-sustainability-network',
-    name: 'UAlberta Sustainability Network',
-    school: 'UAlberta',
-    category: 'Environment',
-    members: 180,
-    founded: 2010,
-    description:
-      'Campus sustainability initiatives, green campaigns, and community garden.',
-    events: [
-      { title: 'Climate Action Summit', date: 'Nov 18 9 AM – 5 PM', location: 'SUB Ballroom' },
-    ],
-  },
-]
-
-function getClub(slug: string): Club | undefined {
-  return CLUBS.find((c) => c.slug === slug)
+function getClub(slug: string) {
+  return CLUBS.find((c) => c.id === slug)
 }
 
 export function generateStaticParams() {
-  return CLUBS.map((c) => ({ slug: c.slug }))
+  return CLUBS.map((c) => ({ slug: c.id }))
 }
 
 export async function generateMetadata({
@@ -122,13 +25,13 @@ export async function generateMetadata({
   if (!club) return { title: 'Club Not Found | Digital Kampus' }
 
   return {
-    title: `${club.name} | Digital Kampus`,
+    title: `${club.name} — ${club.university} | Digital Kampus`,
     description: club.description,
     alternates: {
-      canonical: `https://digitalkampus.ca/clubs/${club.slug}`,
+      canonical: `https://digitalkampus.ca/clubs/${club.id}`,
       languages: {
-        'en-CA': `https://digitalkampus.ca/clubs/${club.slug}`,
-        'fr-CA': `https://digitalkampus.ca/fr/clubs/${club.slug}`,
+        'en-CA': `https://digitalkampus.ca/clubs/${club.id}`,
+        'fr-CA': `https://digitalkampus.ca/fr/clubs/${club.id}`,
       },
     },
   }
@@ -150,13 +53,12 @@ export default async function ClubDetailPage({
         {/* Hero */}
         <section className={styles.hero}>
           <div className={styles.inner}>
-            <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-              <Link href="/">Home</Link>
-              <span aria-hidden="true"> › </span>
-              <Link href="/clubs">Clubs</Link>
-              <span aria-hidden="true"> › </span>
-              <span aria-current="page">{club.name}</span>
-            </nav>
+            <Breadcrumbs items={[
+              { label: 'Home', href: '/' },
+              { label: 'Clubs', href: '/clubs' },
+              { label: club.university, href: `/clubs?school=${club.universitySlug}` },
+              { label: club.name },
+            ]} />
 
             <div className={styles.heroBody}>
               <div className={styles.clubIcon} aria-hidden="true">
@@ -165,17 +67,34 @@ export default async function ClubDetailPage({
               <div className={styles.heroText}>
                 <div className={styles.heroMeta}>
                   <span className={styles.categoryBadge}>{club.category}</span>
-                  <span className={styles.schoolBadge}>{club.school}</span>
+                  <span className={styles.schoolBadge}>{club.university}</span>
                 </div>
                 <h1 className={styles.h1}>{club.name}</h1>
                 <div className={styles.stats}>
                   <span className={styles.stat}>
-                    <strong>{club.members.toLocaleString()}</strong> members
+                    <strong>{club.members.toLocaleString('en-CA')}</strong> members
                   </span>
-                  <span className={styles.statDivider} aria-hidden="true">·</span>
-                  <span className={styles.stat}>
-                    Founded <strong>{club.founded}</strong>
-                  </span>
+                  {club.founded && (
+                    <>
+                      <span className={styles.statDivider} aria-hidden="true">·</span>
+                      <span className={styles.stat}>
+                        Founded <strong>{club.founded}</strong>
+                      </span>
+                    </>
+                  )}
+                  {club.website && (
+                    <>
+                      <span className={styles.statDivider} aria-hidden="true">·</span>
+                      <a
+                        href={club.website}
+                        className={styles.websiteLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Official website ↗
+                      </a>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -218,6 +137,13 @@ export default async function ClubDetailPage({
                 ) : (
                   <p className={styles.noEvents}>No upcoming events scheduled.</p>
                 )}
+
+                {/* Back to school clubs */}
+                <div className={styles.relatedSchool}>
+                  <Link href={`/clubs?school=${club.universitySlug}`} className={styles.relatedLink}>
+                    ← More clubs at {club.university}
+                  </Link>
+                </div>
               </div>
 
               {/* Sidebar CTA */}
@@ -235,6 +161,20 @@ export default async function ClubDetailPage({
                     <Link href="/login" className={styles.ctaLoginLink}>Log in</Link>
                   </p>
                 </div>
+
+                {club.website && (
+                  <div className={styles.websiteCard}>
+                    <p className={styles.websiteLabel}>Official website</p>
+                    <a
+                      href={club.website}
+                      className={styles.websiteCardLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {club.website.replace(/^https?:\/\//, '')} ↗
+                    </a>
+                  </div>
+                )}
               </aside>
             </div>
           </div>

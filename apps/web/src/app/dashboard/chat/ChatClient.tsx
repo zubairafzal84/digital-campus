@@ -19,6 +19,12 @@ interface Message {
   created_at: string
 }
 
+interface UserInfo {
+  displayName: string | null
+  avatarUrl: string | null
+  institution: string | null
+}
+
 function relativeTime(iso: string | null): string {
   if (!iso) return ''
   const diff = Date.now() - new Date(iso).getTime()
@@ -32,14 +38,24 @@ function relativeTime(iso: string | null): string {
   return new Date(iso).toLocaleDateString('en-CA', { month: 'short', day: 'numeric' })
 }
 
-function avatarInitials(userId: string): string {
-  // Show first 2 chars of the id as a stand-in avatar
+function initialsFromName(name: string): string {
+  return name
+    .trim()
+    .split(/\s+/)
+    .map((w) => w[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase()
+}
+
+function avatarInitials(userId: string, info: UserInfo | undefined): string {
+  if (info?.displayName) return initialsFromName(info.displayName)
   return userId.slice(0, 2).toUpperCase()
 }
 
-function truncateId(userId: string): string {
-  if (userId.length <= 12) return userId
-  return `${userId.slice(0, 6)}…${userId.slice(-4)}`
+function displayLabel(userId: string, info: UserInfo | undefined): string {
+  if (info?.displayName) return info.displayName
+  return `Student …${userId.slice(-4)}`
 }
 
 export default function ChatClient() {
@@ -54,8 +70,28 @@ export default function ChatClient() {
   const [loadingMessages, setLoadingMessages] = useState(false)
   const [sending, setSending] = useState(false)
 
+  // Cache of resolved user info keyed by userId
+  const [userCache, setUserCache] = useState<Record<string, UserInfo>>({})
+  const resolving = useRef<Set<string>>(new Set())
+
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  const resolveUser = useCallback(async (userId: string) => {
+    if (userCache[userId] !== undefined) return
+    if (resolving.current.has(userId)) return
+    resolving.current.add(userId)
+    try {
+      const r = await fetch(`/api/users/public/${userId}`)
+      if (!r.ok) return
+      const data: UserInfo = await r.json()
+      setUserCache((prev) => ({ ...prev, [userId]: data }))
+    } catch {
+      // leave cache empty for this id; avatarInitials/displayLabel will fall back
+    } finally {
+      resolving.current.delete(userId)
+    }
+  }, [userCache])
 
   // Fetch conversation list on mount
   useEffect(() => {
@@ -74,6 +110,18 @@ export default function ChatClient() {
       })
     return () => { cancelled = true }
   }, [])
+
+  // Resolve display names for all conversation partners when list loads
+  useEffect(() => {
+    if (!currentUserId) return
+    for (const convo of conversations) {
+      const other = convo.participant_a === currentUserId
+        ? convo.participant_b
+        : convo.participant_a
+      resolveUser(other)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [conversations, currentUserId])
 
   // Fetch messages for active conversation
   const fetchMessages = useCallback(async (id: string) => {
@@ -115,6 +163,16 @@ export default function ChatClient() {
       }
     }
   }, [activeId, fetchMessages])
+
+  // Resolve names for message senders as they appear
+  useEffect(() => {
+    for (const msg of messages) {
+      if (msg.sender_id !== currentUserId) {
+        resolveUser(msg.sender_id)
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [messages])
 
   // Scroll to bottom when messages change
   useEffect(() => {
@@ -181,6 +239,7 @@ export default function ChatClient() {
           <div className={styles.threadList}>
             {conversations.map((convo) => {
               const other = getOtherUserId(convo)
+              const info = userCache[other]
               const isActive = convo.id === activeId
               return (
                 <button
@@ -189,13 +248,25 @@ export default function ChatClient() {
                   onClick={() => setActiveId(convo.id)}
                   type="button"
                 >
-                  <div className={styles.threadAvatar}>{avatarInitials(other)}</div>
+                  {info?.avatarUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={info.avatarUrl}
+                      alt={displayLabel(other, info)}
+                      className={styles.threadAvatar}
+                      style={{ objectFit: 'cover', borderRadius: '50%' }}
+                    />
+                  ) : (
+                    <div className={styles.threadAvatar}>{avatarInitials(other, info)}</div>
+                  )}
                   <div className={styles.threadInfo}>
                     <div className={styles.threadTop}>
-                      <span className={styles.threadName}>{truncateId(other)}</span>
+                      <span className={styles.threadName}>{displayLabel(other, info)}</span>
                       <span className={styles.threadTime}>{relativeTime(convo.last_message_at)}</span>
                     </div>
-                    <span className={styles.threadMsg}>{other}</span>
+                    <span className={styles.threadMsg}>
+                      {info?.institution ?? 'Student'}
+                    </span>
                   </div>
                 </button>
               )
@@ -230,14 +301,28 @@ export default function ChatClient() {
           <>
             {/* Header */}
             <div className={styles.convoHeader}>
-              <div className={styles.convoAvatar}>
-                {otherUserId ? avatarInitials(otherUserId) : '?'}
-              </div>
+              {otherUserId && userCache[otherUserId]?.avatarUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={userCache[otherUserId].avatarUrl!}
+                  alt={displayLabel(otherUserId, userCache[otherUserId])}
+                  className={styles.convoAvatar}
+                  style={{ objectFit: 'cover', borderRadius: '50%' }}
+                />
+              ) : (
+                <div className={styles.convoAvatar}>
+                  {otherUserId ? avatarInitials(otherUserId, userCache[otherUserId]) : '?'}
+                </div>
+              )}
               <div>
                 <div className={styles.convoName}>
-                  {otherUserId ? truncateId(otherUserId) : '—'}
+                  {otherUserId ? displayLabel(otherUserId, userCache[otherUserId]) : '—'}
                 </div>
-                <div className={styles.convoSchool}>Student</div>
+                <div className={styles.convoSchool}>
+                  {otherUserId && userCache[otherUserId]?.institution
+                    ? userCache[otherUserId].institution
+                    : 'Student'}
+                </div>
               </div>
             </div>
 

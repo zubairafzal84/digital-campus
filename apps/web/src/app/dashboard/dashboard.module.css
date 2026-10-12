@@ -122,10 +122,138 @@
   color: var(--muted);
 }
 
+/* Quick stats bar */
+.statsBar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.statChip {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  flex: 1;
+  min-width: 140px;
+}
+
+.statNum {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--purple);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Events section */
+.eventsSection {
+  margin-bottom: 28px;
+}
+
+.eventsSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.eventsScroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.eventsScroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.eventsScroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.eventsScroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+.eventCard {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  min-width: 200px;
+  max-width: 220px;
+  flex-shrink: 0;
+  text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.eventCard:hover {
+  border-color: var(--purple);
+  box-shadow: 0 2px 12px rgba(107, 62, 242, 0.1);
+}
+
+.eventDate {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--purple);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.eventName {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+.eventClub {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.eventLocation {
+  font-size: 11px;
+  color: var(--faint);
+  margin-top: 2px;
+}
+
+/* Dashboard grid — 3 cols on desktop */
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
+}
+
+/* Scholarships card spans 2 columns */
+.cardScholarships {
+  grid-column: span 2;
 }
 
 /* Card */
@@ -515,9 +643,23 @@
   text-align: center;
 }
 
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cardScholarships {
+    grid-column: span 2;
+  }
+}
+
 @media (max-width: 1024px) {
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cardScholarships {
+    grid-column: span 2;
   }
 }
 
@@ -540,5 +682,21 @@
 
   .main {
     padding: 24px 16px 40px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardScholarships {
+    grid-column: span 1;
+  }
+
+  .statsBar {
+    gap: 8px;
+  }
+
+  .statChip {
+    min-width: 100px;
   }
 }

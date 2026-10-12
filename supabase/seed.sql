@@ -23,7 +23,27 @@ VALUES
   (gen_random_uuid(), 'dal',   'Dalhousie University',           'Université Dalhousie',                   'Dal', 'university', 'NS', 'Halifax',   'https://dal.ca',     1818, 19000, 62, 9000, 10000, 22000, 24000, true, true),
   (gen_random_uuid(), 'bcit',  'British Columbia Institute of Technology','Institut de technologie de la C.-B.','BCIT','polytechnic','BC','Burnaby','https://bcit.ca', 1964, 48000, 75, 4500, 5500, 18000, 20000, true, true),
   (gen_random_uuid(), 'seneca','Seneca Polytechnic',             'Sénéca Polytechnique',                   'Seneca','college',  'ON', 'Toronto',   'https://senecacollege.ca', 1967, 35000, 80, 3800, 4800, 16500, 18500, true, true),
-  (gen_random_uuid(), 'humber','Humber College',                 'Collège Humber',                         'Humber','college', 'ON', 'Etobicoke', 'https://humber.ca',  1967, 30000, 78, 3700, 4700, 15800, 17800, true, true)
+  (gen_random_uuid(), 'humber','Humber College',                 'Collège Humber',                         'Humber','college', 'ON', 'Etobicoke', 'https://humber.ca',  1967, 30000, 78, 3700, 4700, 15800, 17800, true, true),
+  -- Expanded universities
+  (gen_random_uuid(), 'western',  'Western University',                  'Université Western',                         'Western',  'university',  'ON', 'London',      'https://uwo.ca',          1878, 32000, 58, 6800, 7800, 32000, 34000, true,  true),
+  (gen_random_uuid(), 'mcmaster', 'McMaster University',                 'Université McMaster',                        'Mac',       'university',  'ON', 'Hamilton',    'https://mcmaster.ca',     1887, 37000, 55, 7200, 8200, 30000, 32000, true,  true),
+  (gen_random_uuid(), 'ucalgary', 'University of Calgary',               'Université de Calgary',                      'UCalgary',  'university',  'AB', 'Calgary',     'https://ucalgary.ca',     1966, 35000, 60, 6000, 7000, 28500, 30500, true,  true),
+  (gen_random_uuid(), 'umanitoba','University of Manitoba',              'Université du Manitoba',                     'UManitoba', 'university',  'MB', 'Winnipeg',    'https://umanitoba.ca',    1877, 30000, 65, 4600, 5600, 18500, 20500, true,  true),
+  (gen_random_uuid(), 'uottawa',  'University of Ottawa',                'Université d''Ottawa',                       'UOttawa',   'university',  'ON', 'Ottawa',      'https://uottawa.ca',      1848, 44000, 68, 6800, 7800, 29000, 31000, true,  true),
+  (gen_random_uuid(), 'carleton', 'Carleton University',                 'Université Carleton',                        'Carleton',  'university',  'ON', 'Ottawa',      'https://carleton.ca',     1942, 30000, 72, 6400, 7400, 27500, 29500, true,  true),
+  (gen_random_uuid(), 'concordia','Concordia University',                'Université Concordia',                       'Concordia', 'university',  'QC', 'Montréal',    'https://concordia.ca',    1974, 51000, 66, 4700, 5700, 21000, 23000, true,  true),
+  (gen_random_uuid(), 'yorku',    'York University',                     'Université York',                            'York',      'university',  'ON', 'Toronto',     'https://yorku.ca',        1959, 55000, 64, 6600, 7600, 31000, 33000, true,  true),
+  (gen_random_uuid(), 'ryerson',  'Toronto Metropolitan University',     'Université métropolitaine de Toronto',       'TMU',       'university',  'ON', 'Toronto',     'https://torontomu.ca',    1948, 48000, 62, 7200, 8200, 29000, 31000, true,  true),
+  (gen_random_uuid(), 'udem',     'Université de Montréal',              'Université de Montréal',                     'UdeM',      'university',  'QC', 'Montréal',    'https://umontreal.ca',    1878, 67000, 55, 4000, 5000, 20000, 22000, true,  true),
+  (gen_random_uuid(), 'laval',    'Université Laval',                    'Université Laval',                           'Laval',     'university',  'QC', 'Québec City', 'https://ulaval.ca',       1852, 50000, 58, 3800, 4800, 19000, 21000, true,  true),
+  (gen_random_uuid(), 'usask',    'University of Saskatchewan',          'Université de la Saskatchewan',              'USask',     'university',  'SK', 'Saskatoon',   'https://usask.ca',        1907, 26000, 68, 5600, 6600, 22000, 24000, true,  true),
+  (gen_random_uuid(), 'mun',      'Memorial University of Newfoundland', 'Université Memorial de Terre-Neuve',         'MUN',       'university',  'NL', 'St. John''s', 'https://mun.ca',          1925, 19000, 70, 3200, 4200, 11500, 13500, true,  true),
+  (gen_random_uuid(), 'unb',      'University of New Brunswick',         'Université du Nouveau-Brunswick',            'UNB',       'university',  'NB', 'Fredericton', 'https://unb.ca',          1785, 10000, 72, 7700, 8700, 17000, 19000, true,  true),
+  -- Colleges & polytechnics
+  (gen_random_uuid(), 'georgebrown','George Brown College',              'Collège George Brown',                       'GBC',       'college',     'ON', 'Toronto',     'https://georgebrown.ca',  1967, 31000, 80, 3900, 4900, 16000, 18000, false, true),
+  (gen_random_uuid(), 'sheridan',  'Sheridan College',                   'Collège Sheridan',                           'Sheridan',  'college',     'ON', 'Brampton',    'https://sheridancollege.ca',1967,24000, 79, 3800, 4800, 15500, 17500, false, true),
+  (gen_random_uuid(), 'algonquin', 'Algonquin College',                  'Collège Algonquin',                          'AC',        'college',     'ON', 'Ottawa',      'https://algonquincollege.com',1957,22000,82, 3600, 4600, 15000, 17000, false, true),
+  (gen_random_uuid(), 'kwantlen',  'Kwantlen Polytechnic University',    'Université polytechnique Kwantlen',          'KPU',       'polytechnic', 'BC', 'Surrey',      'https://kpu.ca',          1981, 20000, 80, 4200, 5200, 17500, 19500, false, true)
 ON CONFLICT (slug) DO NOTHING;
 
 -- ============================================================
@@ -87,6 +107,51 @@ VALUES
    5000, 5000, true, '2025-04-30',
    'https://bmo.com/scholarship',
    'Awarded to students from underrepresented communities entering their first year of post-secondary education at a Canadian institution. Covers tuition and living expenses.',
+   ARRAY['AB','BC','MB','NB','NL','NS','ON','PE','QC','SK']::province[],
+   true, true),
+
+  (gen_random_uuid(),
+   'Vanier Canada Graduate Scholarship', 'Bourse d''études supérieures du Canada Vanier',
+   'scholarship', 'government', 'Government of Canada (CIHR/NSERC/SSHRC)',
+   50000, 50000, true, '2025-11-01',
+   'https://vanier.gc.ca',
+   'Canada''s most prestigious doctoral scholarship. Awarded to world-class doctoral students who demonstrate leadership skills and high academic achievement ($50,000/year for 3 years).',
+   ARRAY['AB','BC','MB','NB','NL','NS','ON','PE','QC','SK']::province[],
+   true, true),
+
+  (gen_random_uuid(),
+   'NSERC Postgraduate Scholarship – Doctoral (PGS D)', 'Bourse d''études supérieures du Canada au niveau du doctorat (BESC D) du CRSNG',
+   'scholarship', 'government', 'Natural Sciences and Engineering Research Council of Canada',
+   21000, 21000, true, '2025-10-17',
+   'https://www.nserc-crsng.gc.ca/Students-Etudiants/PG-CS/PGSD-BESCD_eng.asp',
+   'Supports full-time graduate students engaged in doctoral programs in natural sciences or engineering. Award provides $21,000/year for up to 3 years.',
+   ARRAY['AB','BC','MB','NB','NL','NS','ON','PE','QC','SK']::province[],
+   true, true),
+
+  (gen_random_uuid(),
+   'Pierre Elliott Trudeau Foundation Doctoral Scholarship', 'Bourse doctorale de la Fondation Pierre Elliott Trudeau',
+   'scholarship', 'foundation', 'Pierre Elliott Trudeau Foundation',
+   40000, 40000, true, '2025-12-01',
+   'https://www.trudeaufoundation.ca',
+   'Awarded to exceptional doctoral candidates in social sciences and humanities who demonstrate leadership, engagement with Canadian society, and a commitment to public dialogue.',
+   ARRAY['AB','BC','MB','NB','NL','NS','ON','PE','QC','SK']::province[],
+   true, true),
+
+  (gen_random_uuid(),
+   'Ontario Graduate Scholarship (OGS)', 'Bourse d''études supérieures de l''Ontario (BESO)',
+   'scholarship', 'government', 'Government of Ontario',
+   15000, 15000, true, '2025-01-14',
+   'https://osap.gov.on.ca/OSAPPortal/en/OtherOSAPGrants/OSAP004117.html',
+   'Merit-based provincial scholarship supporting master''s and doctoral students studying at an eligible Ontario university. $5,000/term for 3 terms.',
+   ARRAY['ON']::province[],
+   true, true),
+
+  (gen_random_uuid(),
+   'SSHRC Doctoral Fellowship', 'Bourse de doctorat du CRSH',
+   'scholarship', 'government', 'Social Sciences and Humanities Research Council of Canada',
+   20000, 20000, true, '2025-10-15',
+   'https://www.sshrc-crsh.gc.ca/funding-financement/programs-programmes/fellowships/doctoral-doctorat-eng.aspx',
+   'Supports Canadian citizens and permanent residents engaged in full-time doctoral programs in the social sciences and humanities. Valued at $20,000/year for up to 4 years.',
    ARRAY['AB','BC','MB','NB','NL','NS','ON','PE','QC','SK']::province[],
    true, true)
 ON CONFLICT DO NOTHING;

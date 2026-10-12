@@ -6,18 +6,20 @@ import styles from './profile.module.css'
 /* ── Personal info form ─────────────────────────────────── */
 
 interface PersonalProps {
-  firstName: string
-  lastName:  string
-  email:     string
+  firstName:    string
+  lastName:     string
+  email:        string
+  displayName?: string | null
 }
 
-export function PersonalInfoForm({ firstName, lastName, email }: PersonalProps) {
-  const [first,    setFirst]    = useState(firstName)
-  const [last,     setLast]     = useState(lastName)
-  const [lang,     setLang]     = useState('en')
-  const [saving,   setSaving]   = useState(false)
-  const [success,  setSuccess]  = useState(false)
-  const [error,    setError]    = useState('')
+export function PersonalInfoForm({ firstName, lastName, email, displayName: initDisplayName }: PersonalProps) {
+  const [first,       setFirst]       = useState(firstName)
+  const [last,        setLast]        = useState(lastName)
+  const [displayName, setDisplayName] = useState(initDisplayName ?? '')
+  const [lang,        setLang]        = useState('en')
+  const [saving,      setSaving]      = useState(false)
+  const [success,     setSuccess]     = useState(false)
+  const [error,       setError]       = useState('')
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -29,7 +31,10 @@ export function PersonalInfoForm({ firstName, lastName, email }: PersonalProps) 
       const res = await fetch('/api/profile', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ preferred_language: lang }),
+        body: JSON.stringify({
+          preferred_language: lang,
+          display_name: displayName.trim() || null,
+        }),
       })
       if (!res.ok) throw new Error('Save failed.')
       setSuccess(true)
@@ -56,6 +61,19 @@ export function PersonalInfoForm({ firstName, lastName, email }: PersonalProps) 
           <label className={styles.label}>Last name</label>
           <input type="text" value={last} onChange={e => setLast(e.target.value)} className={styles.input} />
         </div>
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label}>Display name</label>
+        <input
+          type="text"
+          value={displayName}
+          onChange={e => setDisplayName(e.target.value.slice(0, 40))}
+          placeholder="How should other students see you?"
+          maxLength={40}
+          className={styles.input}
+        />
+        <p className={styles.hint}>This is what other students see in chat and on your profile. Max 40 characters.</p>
       </div>
 
       <div className={styles.field}>
