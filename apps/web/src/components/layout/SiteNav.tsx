@@ -13,6 +13,8 @@ const NAV_LINKS = [
   { href: '/students', label: 'Students', labelFr: 'Étudiants' },
   { href: '/deals', label: 'Deals', labelFr: 'Offres' },
   { href: '/professors', label: 'Professors', labelFr: 'Professeurs' },
+  { href: '/surveys', label: 'Surveys', labelFr: 'Sondages' },
+  { href: '/events', label: 'Events', labelFr: 'Événements' },
 ]
 
 export function SiteNav() {

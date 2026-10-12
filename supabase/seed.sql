@@ -200,3 +200,256 @@ VALUES
   ('Dr. Kenji Watanabe',    'ubc',       'Physics & Astronomy',       ARRAY['PHYS 101', 'PHYS 301'],         true),
   ('Prof. Amara Diallo',    'mcmaster',  'Health Sciences',           ARRAY['HLTHSCI 2A06', 'HLTHSCI 3P03'], true)
 ON CONFLICT DO NOTHING;
+
+-- ============================================================
+-- Campus Events (Nov – Dec 2026)
+-- ============================================================
+INSERT INTO public.events (
+  title, description, event_type, school_slug, organizer_name,
+  location, is_online, online_url, starts_at, ends_at,
+  max_attendees, is_free, price_cents, is_published
+)
+VALUES
+  (
+    'UBC Involvement Fair',
+    'Connect with 200+ clubs, teams, and student organizations at UBC''s annual Involvement Fair. Bring your student card and an open mind.',
+    'social', 'ubc', 'UBC Student Services',
+    'UBC Life Building, 6138 Student Union Blvd', false, NULL,
+    '2026-11-03 11:00:00-08', '2026-11-03 15:00:00-08',
+    2000, true, 0, true
+  ),
+  (
+    'McGill Winter Carnival Kickoff',
+    'Kick off McGill''s iconic Winter Carnival with live music, hot cocoa stations, and the lighting of the carnival tree on Lower Campus.',
+    'social', 'mcgill', 'McGill Student Union',
+    'McGill Lower Campus, Milton St', false, NULL,
+    '2026-11-28 17:00:00-05', '2026-11-28 21:00:00-05',
+    1500, true, 0, true
+  ),
+  (
+    'Waterloo Co-op Info Session',
+    'Everything you need to know about the Waterloo co-op program: how to apply, what employers look for, and how to ace WaterlooWorks.',
+    'career', 'uwaterloo', 'Waterloo Centre for Career Action',
+    'EV1 241, University of Waterloo', false, NULL,
+    '2026-11-05 14:30:00-05', '2026-11-05 16:00:00-05',
+    120, true, 0, true
+  ),
+  (
+    'UofT Study Hall — Finals Prep',
+    'Open study hall with peer tutors, free printing, and light snacks. All programs welcome.',
+    'academic', 'uoft', 'UofT Student Success Centre',
+    'Robarts Library, 3rd Floor Reading Room', false, NULL,
+    '2026-11-25 09:00:00-05', '2026-11-25 22:00:00-05',
+    300, true, 0, true
+  ),
+  (
+    'Queen''s Homecoming Tailgate',
+    'The official Queen''s Homecoming pre-game tailgate on Richardson Stadium grounds. Food trucks, merch, and Golden Gaels spirit.',
+    'social', 'queens', 'Queen''s AMS',
+    'Richardson Stadium, 98 Union St, Kingston', false, NULL,
+    '2026-11-07 10:00:00-05', '2026-11-07 13:00:00-05',
+    1000, false, 1500, true
+  ),
+  (
+    'SFU Open House 2026',
+    'Explore SFU Burnaby — campus tours, faculty showcases, admissions Q&A, and research demos. Perfect for prospective students and families.',
+    'academic', 'sfu', 'SFU Undergraduate Admissions',
+    'SFU Burnaby Mountain Campus', false, NULL,
+    '2026-11-14 10:00:00-08', '2026-11-14 16:00:00-08',
+    3000, true, 0, true
+  ),
+  (
+    'McMaster Science Fair & Research Showcase',
+    'Undergraduate and graduate students present research posters across biology, chemistry, physics, and engineering.',
+    'academic', 'mcmaster', 'McMaster Faculty of Science',
+    'Burke Science Building Atrium, McMaster University', false, NULL,
+    '2026-11-19 13:00:00-05', '2026-11-19 17:00:00-05',
+    400, true, 0, true
+  ),
+  (
+    'Carleton Grad School Info Night',
+    'Find out how to apply to Carleton graduate programs. Panel of current grad students and faculty supervisors.',
+    'academic', 'carleton', 'Carleton School of Graduate and Postdoctoral Studies',
+    'River Building 2200, Carleton University', false, NULL,
+    '2026-11-10 18:00:00-05', '2026-11-10 20:00:00-05',
+    200, true, 0, true
+  ),
+  (
+    'UBC Intramural Basketball Championship',
+    'Cheer on the finalists of UBC''s intramural basketball league. Free admission for all students with your UCard.',
+    'sports', 'ubc', 'UBC Recreation',
+    'UBC Thunderbird Arena — Practice Gym', false, NULL,
+    '2026-11-21 14:00:00-08', '2026-11-21 18:00:00-08',
+    500, true, 0, true
+  ),
+  (
+    'Dalhousie Acoustic Night — Open Mic',
+    'Grab a mic or just a seat. Monthly acoustic open mic night hosted by Dal Arts Society in the Grawood Lounge.',
+    'arts', 'dal', 'Dalhousie Arts Society',
+    'Grawood Lounge, Dalhousie Student Union', false, NULL,
+    '2026-11-12 19:00:00-04', '2026-11-12 22:00:00-04',
+    150, true, 0, true
+  ),
+  (
+    'UAlberta Climate Action Volunteer Day',
+    'Join fellow students to plant native trees and restore riparian habitat along the North Saskatchewan River.',
+    'volunteer', 'ualberta', 'UAlberta Sustainability Council',
+    'Kinsmen Park, Edmonton (meet at main gate)', false, NULL,
+    '2026-11-08 08:30:00-07', '2026-11-08 14:00:00-07',
+    80, true, 0, true
+  ),
+  (
+    'Seneca Resume & LinkedIn Workshop',
+    'Land your first co-op or full-time job. Hands-on workshop with Seneca Career Services advisors.',
+    'career', 'seneca', 'Seneca Career Services',
+    NULL, true, 'https://events.senecacollege.ca/resume-workshop',
+    '2026-11-17 12:00:00-05', '2026-11-17 13:30:00-05',
+    60, true, 0, true
+  ),
+  (
+    'UVic Winter Arts Market',
+    'Local student artists, ceramicists, photographers, and makers selling original work. Perfect for holiday gifts.',
+    'arts', 'uvic', 'UVic Fine Arts Student Society',
+    'UVic Student Union Building Atrium', false, NULL,
+    '2026-12-05 10:00:00-08', '2026-12-05 17:00:00-08',
+    800, true, 0, true
+  ),
+  (
+    'Waterloo Startup Weekend',
+    'Build a company in 54 hours. Teams pitch ideas Friday night, then sprint through the weekend with mentors from the Waterloo startup ecosystem.',
+    'career', 'uwaterloo', 'Velocity — UW Entrepreneurship',
+    'Velocity Garage, 200 University Ave W', false, NULL,
+    '2026-12-11 18:00:00-05', '2026-12-13 21:00:00-05',
+    120, false, 7500, true
+  ),
+  (
+    'UofT Frosh Week End-of-Year Party',
+    'Celebrate the end of first semester with the first-year class. DJ, photo booth, and year-end awards.',
+    'frosh', 'uoft', 'University of Toronto Students'' Union',
+    'Bahen Centre Atrium, 40 St George St', false, NULL,
+    '2026-12-03 20:00:00-05', '2026-12-03 23:00:00-05',
+    600, false, 1000, true
+  )
+ON CONFLICT DO NOTHING;
+
+
+-- ============================================================
+-- Surveys (sample active surveys from orgs)
+-- created_by = 'seed' so no real Clerk user ID is needed here
+-- (In production these would be real org user IDs)
+-- ============================================================
+INSERT INTO public.surveys (
+  title,
+  description,
+  organization_name,
+  created_by,
+  status,
+  reward_description,
+  estimated_minutes,
+  closes_at,
+  max_participants,
+  current_participants,
+  is_anonymous,
+  target_schools,
+  tags,
+  is_featured,
+  plan
+) VALUES
+  (
+    'Student Banking & Financial Literacy Study',
+    'RBC wants to understand how Canadian students manage their finances, use banking apps, and plan for the future. Responses shape new student banking products.',
+    'RBC Royal Bank', 'seed_rbc', 'active',
+    '$25 Amazon gift card (draw entry)',
+    8, now() + interval '45 days', 500, 312, true,
+    NULL,
+    ARRAY['finance', 'banking', 'student-life'],
+    true, 'professional'
+  ),
+  (
+    'Mental Health & Academic Stress Survey',
+    'Research study from the University of Toronto examining the relationship between academic pressure, sleep, and student well-being across Canadian campuses.',
+    'University of Toronto — Psychology Dept.', 'seed_uoft', 'active',
+    'Entry into $200 draw',
+    12, now() + interval '60 days', 1000, 671, true,
+    ARRAY['uoft','mcgill','queens','ubc'],
+    ARRAY['health', 'wellness', 'research'],
+    true, 'professional'
+  ),
+  (
+    'Campus Music Discovery Habits',
+    'How do students find new music on campus? We''re looking at streaming habits, study playlists, and live event attendance.',
+    'Spotify Canada', 'seed_spotify', 'active',
+    '3 months Spotify Premium',
+    5, now() + interval '30 days', 300, 288, true,
+    NULL,
+    ARRAY['entertainment', 'tech', 'student-life'],
+    false, 'starter'
+  ),
+  (
+    'Off-Campus Housing Satisfaction',
+    'McGill''s Urban Planning Lab is studying off-campus housing affordability, conditions, and commute times among students in the greater Montreal area.',
+    'McGill Urban Planning Lab', 'seed_mcgill', 'active',
+    NULL,
+    10, now() + interval '90 days', 400, 157, true,
+    ARRAY['mcgill','concordia','udem','uqam'],
+    ARRAY['housing', 'research', 'student-life'],
+    false, 'free'
+  ),
+  (
+    'Campus Menu Feedback — New Autumn Items',
+    'Tim Hortons wants your honest opinion on our new autumn menu items piloted at campus locations. Timbits included.',
+    'Tim Hortons', 'seed_timhortons', 'active',
+    '$10 Tim Hortons card',
+    4, now() + interval '21 days', 600, 203, true,
+    NULL,
+    ARRAY['food', 'campus-life'],
+    false, 'starter'
+  ),
+  (
+    'Student Commuting & Sustainable Transportation',
+    'Which transit options do students actually use? UBC Sustainability wants to improve how students get around the Point Grey campus.',
+    'UBC Sustainability Initiative', 'seed_ubc', 'active',
+    NULL,
+    7, now() + interval '60 days', 800, 442, true,
+    ARRAY['ubc'],
+    ARRAY['sustainability', 'campus-life', 'research'],
+    false, 'free'
+  ),
+  (
+    'Co-op & Internship Experience Survey',
+    'Deloitte Canada is researching what students value most in a co-op placement — mentorship, compensation, remote flexibility, or industry exposure.',
+    'Deloitte Canada', 'seed_deloitte', 'active',
+    '$15 Starbucks gift card',
+    9, now() + interval '40 days', 400, 88, true,
+    NULL,
+    ARRAY['career', 'coop', 'professional-development'],
+    true, 'professional'
+  ),
+  (
+    'Technology & AI Tools in Education',
+    'How are Canadian students using AI tools like ChatGPT, Copilot, and Grammarly? Google Canada wants to understand student adoption and concerns.',
+    'Google Canada', 'seed_google', 'active',
+    'Google One storage (3 months)',
+    6, now() + interval '50 days', 700, 391, true,
+    NULL,
+    ARRAY['technology', 'ai', 'education'],
+    true, 'enterprise'
+  )
+ON CONFLICT DO NOTHING;
+
+-- ---- Questions for the RBC survey ----
+-- We use a sub-select to get the inserted survey ID dynamically
+INSERT INTO public.survey_questions
+  (survey_id, question_text, question_type, options, is_required, sort_order)
+SELECT s.id, q.question_text, q.question_type, q.options, q.is_required, q.sort_order
+FROM public.surveys s
+CROSS JOIN (VALUES
+  ('How do you primarily manage your money?',    'multiple_choice', '["RBC mobile app","Another bank app","Spreadsheet","I don''t actively track"]'::jsonb, true, 0),
+  ('Which banking features matter most to you?', 'checkbox',        '["No-fee chequing","High-interest savings","Student line of credit","Cashback","Investment tools","Tap-to-pay"]'::jsonb, false, 1),
+  ('How would you rate your current bank?',      'rating',          NULL, true, 2),
+  ('How likely are you to switch banks this year?', 'nps',          NULL, true, 3),
+  ('Have you ever used a robo-advisor or ETF?',  'yes_no',          NULL, false, 4),
+  ('What financial skill do you wish schools taught better?', 'long_text', NULL, false, 5)
+) AS q(question_text, question_type, options, is_required, sort_order)
+WHERE s.created_by = 'seed_rbc'
+ON CONFLICT DO NOTHING;

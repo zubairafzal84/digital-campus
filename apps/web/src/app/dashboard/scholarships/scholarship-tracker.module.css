@@ -1,0 +1,596 @@
+/* ─────────────────────────────────────────────────────────────────
+   Scholarship Tracker — navy/purple theme, dark-mode aware
+   ───────────────────────────────────────────────────────────────── */
+
+:root {
+  --navy:     #0A1F5D;
+  --purple:   #6B3EF2;
+  --purple-hi:#8B5CFF;
+  --lav:      #E9E2FF;
+}
+
+/* ── Tabs ── */
+.tabRow {
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid #e5e7eb;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 10px 20px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s, border-color 0.15s;
+  border-radius: 6px 6px 0 0;
+}
+
+.tab:hover {
+  color: var(--purple, #6B3EF2);
+}
+
+.tabActive {
+  color: var(--purple, #6B3EF2);
+  border-bottom-color: var(--purple, #6B3EF2);
+}
+
+/* ── Loading / empty states ── */
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 40px 0;
+  color: #6b7280;
+  font-size: 0.9375rem;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e5e7eb;
+  border-top-color: var(--purple, #6B3EF2);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.emptyState {
+  text-align: center;
+  padding: 56px 24px;
+  color: #9ca3af;
+}
+
+.emptyIcon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.emptyState p {
+  margin: 0 0 16px;
+  font-size: 0.9375rem;
+}
+
+.emptyLink {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--purple, #6B3EF2);
+  text-decoration: none;
+  padding: 8px 18px;
+  border: 2px solid var(--purple, #6B3EF2);
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.emptyLink:hover {
+  background: var(--purple, #6B3EF2);
+  color: #fff;
+}
+
+/* ── Recommendation cards ── */
+.recList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.recCard {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: grid;
+  grid-template-areas:
+    "badges  amount"
+    "name    name"
+    "footer  footer";
+  grid-template-columns: 1fr auto;
+  gap: 8px 12px;
+  transition: box-shadow 0.15s;
+}
+
+.recCard:hover {
+  box-shadow: 0 4px 20px rgba(107, 62, 242, 0.09);
+}
+
+.recBadges {
+  grid-area: badges;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.badgeType {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 9px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.badgeFederal    { background: #dbeafe; color: #1d4ed8; }
+.badgeProvincial { background: #dcfce7; color: #15803d; }
+.badgePrivate    { background: #fce7f3; color: #9d174d; }
+.badgeIndigenous { background: #fef9c3; color: #a16207; }
+.badgeInstitutional { background: var(--lav, #E9E2FF); color: var(--navy, #0A1F5D); }
+
+.recAmount {
+  grid-area: amount;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--navy, #0A1F5D);
+  white-space: nowrap;
+  align-self: start;
+}
+
+.recName {
+  grid-area: name;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--navy, #0A1F5D);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.recFooter {
+  grid-area: footer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.recDeadline {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.recActions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btnTrack {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: var(--lav, #E9E2FF);
+  color: var(--purple, #6B3EF2);
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.btnTrack:hover {
+  background: var(--purple, #6B3EF2);
+  color: #fff;
+}
+
+.btnTracked {
+  background: var(--purple, #6B3EF2);
+  color: #fff;
+}
+
+.btnDetails {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: color 0.12s, background 0.12s;
+  border: 1px solid #e5e7eb;
+}
+
+.btnDetails:hover {
+  color: var(--navy, #0A1F5D);
+  background: #f9fafb;
+}
+
+/* ── Stats row ── */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.statCard {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 16px;
+  text-align: center;
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--purple, #6B3EF2);
+  line-height: 1.1;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* ── Kanban board ── */
+.kanbanColumns {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.kanbanCol {
+  flex: 1 1 200px;
+  min-width: 190px;
+}
+
+.colHeader {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9ca3af;
+  margin-bottom: 10px;
+  padding: 0 2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.colCount {
+  background: #f3f4f6;
+  color: #6b7280;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 99px;
+}
+
+.colBookmarked .colCount  { background: #e0e7ff; color: #3730a3; }
+.colInProgress .colCount  { background: #fef9c3; color: #a16207; }
+.colSubmitted .colCount   { background: #dbeafe; color: #1d4ed8; }
+.colAwarded .colCount     { background: #dcfce7; color: #15803d; }
+.colRejected .colCount    { background: #fee2e2; color: #991b1b; }
+
+.colCards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 60px;
+}
+
+/* ── Application card (kanban) ── */
+.appCard {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 16px;
+  position: relative;
+}
+
+.appCardAwarded {
+  border-color: #86efac;
+  background: #f0fdf4;
+}
+
+.appName {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--navy, #0A1F5D);
+  margin: 0 0 4px;
+  line-height: 1.35;
+}
+
+.appAmount {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--purple, #6B3EF2);
+  margin-bottom: 6px;
+}
+
+.appDeadline {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.appDeadlineUrgent {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.appNotes {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 8px;
+}
+
+.appActions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.statusSelect {
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 4px 8px;
+  background: #f9fafb;
+  color: #374151;
+  cursor: pointer;
+  flex: 1 1 auto;
+}
+
+.btnRemove {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #9ca3af;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: color 0.12s, background 0.12s;
+}
+
+.btnRemove:hover {
+  color: #dc2626;
+  background: #fee2e2;
+}
+
+/* ── Filter / search bar ── */
+.filterBar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filterSearch {
+  flex: 1 1 200px;
+  font-size: 0.875rem;
+  padding: 9px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  color: #111;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.filterSearch:focus {
+  border-color: var(--purple, #6B3EF2);
+}
+
+.filterSelect {
+  font-size: 0.875rem;
+  padding: 9px 12px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  color: #374151;
+  cursor: pointer;
+}
+
+/* ── Show all toggle ── */
+.showAllBtn {
+  display: block;
+  margin: 20px auto 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--purple, #6B3EF2);
+  background: transparent;
+  border: 2px solid var(--purple, #6B3EF2);
+  border-radius: 8px;
+  padding: 8px 22px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.showAllBtn:hover {
+  background: var(--purple, #6B3EF2);
+  color: #fff;
+}
+
+/* ── Dark mode ── */
+@media (prefers-color-scheme: dark) {
+  .tabRow {
+    border-bottom-color: #2d2d44;
+  }
+
+  .tab {
+    color: #9ca3af;
+  }
+
+  .tab:hover,
+  .tabActive {
+    color: #a78bfa;
+  }
+
+  .tabActive {
+    border-bottom-color: #a78bfa;
+  }
+
+  .recCard,
+  .appCard,
+  .statCard {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+  }
+
+  .appCardAwarded {
+    background: #052e16;
+    border-color: #14532d;
+  }
+
+  .recName,
+  .appName {
+    color: #e2e8f0;
+  }
+
+  .recAmount {
+    color: #c4b5fd;
+  }
+
+  .badgeFederal    { background: #1e3a5f; color: #93c5fd; }
+  .badgeProvincial { background: #052e16; color: #86efac; }
+  .badgePrivate    { background: #4a1942; color: #f9a8d4; }
+  .badgeIndigenous { background: #422006; color: #fde68a; }
+  .badgeInstitutional { background: #1e1b4b; color: #a5b4fc; }
+
+  .statCard {
+    background: #1a1a2e;
+  }
+
+  .statValue {
+    color: #a78bfa;
+  }
+
+  .colCount {
+    background: #2d2d44;
+    color: #9ca3af;
+  }
+
+  .colBookmarked .colCount  { background: #1e1b4b; color: #a5b4fc; }
+  .colInProgress .colCount  { background: #422006; color: #fde68a; }
+  .colSubmitted .colCount   { background: #1e3a5f; color: #93c5fd; }
+  .colAwarded .colCount     { background: #052e16; color: #86efac; }
+  .colRejected .colCount    { background: #450a0a; color: #fca5a5; }
+
+  .btnDetails {
+    border-color: #2d2d44;
+    color: #9ca3af;
+  }
+
+  .btnDetails:hover {
+    background: #2d2d44;
+    color: #e2e8f0;
+  }
+
+  .statusSelect {
+    background: #2d2d44;
+    border-color: #3f3f5a;
+    color: #e2e8f0;
+  }
+
+  .filterSearch,
+  .filterSelect {
+    background: #1a1a2e;
+    border-color: #2d2d44;
+    color: #e2e8f0;
+  }
+
+  .filterSearch:focus {
+    border-color: #a78bfa;
+  }
+
+  .showAllBtn {
+    color: #a78bfa;
+    border-color: #a78bfa;
+  }
+
+  .showAllBtn:hover {
+    background: #a78bfa;
+    color: #fff;
+  }
+
+  .emptyLink {
+    color: #a78bfa;
+    border-color: #a78bfa;
+  }
+
+  .emptyLink:hover {
+    background: #a78bfa;
+  }
+
+  .btnTrack {
+    background: #2d2d44;
+    color: #a78bfa;
+  }
+
+  .btnTrack:hover,
+  .btnTracked {
+    background: #a78bfa;
+    color: #fff;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .kanbanColumns {
+    flex-direction: column;
+  }
+
+  .kanbanCol {
+    min-width: 0;
+  }
+
+  .recCard {
+    grid-template-areas:
+      "badges"
+      "amount"
+      "name"
+      "footer";
+    grid-template-columns: 1fr;
+  }
+
+  .statsRow {
+    grid-template-columns: 1fr 1fr;
+  }
+}

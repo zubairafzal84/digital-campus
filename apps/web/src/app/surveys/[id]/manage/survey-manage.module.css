@@ -1,0 +1,567 @@
+/* ── Survey Manage dashboard ─────────────────────────────────────── */
+
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: var(--font-body);
+}
+
+.hero {
+  background: var(--navy);
+  padding: 56px 24px 44px;
+}
+
+.heroInner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.breadcrumb {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 14px;
+}
+
+.breadcrumb a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.breadcrumb a:hover {
+  color: #fff;
+}
+
+.breadcrumb span {
+  margin: 0 6px;
+}
+
+.heroTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.heroLeft {
+  flex: 1;
+  min-width: 0;
+}
+
+.orgLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--lav);
+  margin-bottom: 8px;
+}
+
+.heroTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+}
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: transform 0.1s, opacity 0.15s;
+}
+
+.statusPill:active {
+  transform: scale(0.96);
+}
+
+.statusActive {
+  background: rgba(22, 163, 74, 0.2);
+  color: #4ADE80;
+  border: 1.5px solid rgba(74, 222, 128, 0.35);
+}
+
+.statusPaused {
+  background: rgba(217, 119, 6, 0.2);
+  color: #FCD34D;
+  border: 1.5px solid rgba(252, 211, 77, 0.35);
+}
+
+.statusClosed {
+  background: rgba(100, 116, 139, 0.2);
+  color: #94A3B8;
+  border: 1.5px solid rgba(148, 163, 184, 0.35);
+}
+
+.heroDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ── Main content ── */
+
+.body {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 36px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ── Cards ── */
+
+.card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
+}
+
+/* ── Stats row ── */
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.stat {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statValue {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--purple);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--faint);
+  font-weight: 600;
+}
+
+/* ── Share row ── */
+
+.shareRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.shareLink {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 13px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 13px;
+  color: var(--muted);
+  background: var(--bg);
+  font-family: var(--font-body);
+  outline: none;
+  cursor: text;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copyBtn {
+  padding: 10px 18px;
+  background: var(--purple);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  white-space: nowrap;
+}
+
+.copyBtn:hover {
+  background: var(--purple-hi);
+}
+
+.copyBtn:active {
+  transform: scale(0.96);
+}
+
+.copiedBtn {
+  background: var(--green);
+}
+
+/* ── QR code ── */
+
+.qrBlock {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.qrCode {
+  font-family: monospace;
+  font-size: 9px;
+  line-height: 1.15;
+  color: var(--fg);
+  background: var(--bg);
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  white-space: pre;
+  flex-shrink: 0;
+}
+
+.qrMeta {
+  flex: 1;
+  min-width: 180px;
+}
+
+.qrNote {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+/* ── Progress bar ── */
+
+.progressWrap {
+  margin-top: 4px;
+}
+
+.progressLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--faint);
+  margin-bottom: 6px;
+}
+
+.progressTrack {
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--purple);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+/* ── Status toggle controls ── */
+
+.statusControls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.controlBtn {
+  padding: 9px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  color: var(--muted);
+}
+
+.controlBtn:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+  background: var(--lav);
+}
+
+.controlBtnActive {
+  background: var(--purple);
+  color: #fff;
+  border-color: var(--purple);
+}
+
+.controlBtnActive:hover {
+  background: var(--purple-hi);
+  color: #fff;
+}
+
+.controlBtnDanger {
+  color: var(--red);
+  border-color: currentColor;
+}
+
+.controlBtnDanger:hover {
+  background: rgba(239, 68, 68, 0.08);
+}
+
+/* ── Results section ── */
+
+.resultsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.questionResult {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.qrTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.qrTypeBadge {
+  display: inline-block;
+  padding: 2px 9px;
+  background: var(--lav);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--purple);
+  margin-bottom: 14px;
+}
+
+/* ── Bar chart (CSS only) ── */
+
+.barChart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 140px 1fr 48px;
+  gap: 10px;
+  align-items: center;
+}
+
+.barLabel {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.barTrack {
+  height: 20px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  background: var(--purple);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+  min-width: 4px;
+}
+
+.barCount {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* ── Numeric/rating results ── */
+
+.bigScore {
+  font-family: var(--font-heading);
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--purple);
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.bigScoreSub {
+  font-size: 13px;
+  color: var(--faint);
+  margin-top: 2px;
+}
+
+.distRow {
+  display: flex;
+  gap: 4px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.distCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.distBar {
+  width: 28px;
+  background: var(--purple);
+  border-radius: 4px 4px 0 0;
+  transition: height 0.4s ease;
+  min-height: 4px;
+}
+
+.distLabel {
+  font-size: 10px;
+  color: var(--faint);
+  font-weight: 600;
+}
+
+/* ── Text responses ── */
+
+.textResponses {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.textResponses::-webkit-scrollbar {
+  width: 4px;
+}
+
+.textResponses::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.textResponse {
+  padding: 10px 13px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.noResponses {
+  text-align: center;
+  padding: 40px 24px;
+  font-size: 14px;
+  color: var(--faint);
+}
+
+/* ── Export button ── */
+
+.exportRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.exportBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--fg);
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+
+.exportBtn:hover {
+  border-color: var(--purple);
+  background: var(--lav);
+  color: var(--purple);
+}
+
+.exportBtn:active {
+  transform: scale(0.97);
+}
+
+.exportNote {
+  font-size: 12px;
+  color: var(--faint);
+}
+
+/* ── Loading / error ── */
+
+.loading {
+  text-align: center;
+  padding: 80px 24px;
+  font-size: 15px;
+  color: var(--faint);
+}
+
+.errorState {
+  text-align: center;
+  padding: 60px 24px;
+  font-size: 15px;
+  color: var(--red);
+}
+
+@media (max-width: 640px) {
+  .statsRow {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .barRow {
+    grid-template-columns: 100px 1fr 40px;
+  }
+}
+
+@media (max-width: 400px) {
+  .statsRow {
+    grid-template-columns: 1fr;
+  }
+}
