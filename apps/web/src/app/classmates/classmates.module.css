@@ -1,0 +1,49 @@
+:root { --navy:#0A1F5D; --purple:#6B3EF2; --purple-hi:#8B5CFF; --lav:#E9E2FF; }
+
+.page { min-height: 100vh; background: #f8f7fc; }
+.hero { background: linear-gradient(135deg,var(--navy),#2D1B8C); padding: 72px 24px 40px; }
+.heroInner { max-width: 800px; margin: 0 auto; }
+.back { display: inline-block; color: rgba(255,255,255,.7); font: 500 13px/1 system-ui; margin-bottom: 12px; text-decoration: none; }
+.back:hover { color: #fff; }
+.hero h1 { color: #fff; font-size: 2rem; font-weight: 800; margin: 0 0 8px; }
+.hero p { color: rgba(255,255,255,.75); font-size: 1rem; margin: 0; }
+
+.wrap { max-width: 800px; margin: 0 auto; padding: 32px 24px 80px; display: flex; flex-direction: column; gap: 20px; }
+
+.courseFilter { display: flex; flex-wrap: wrap; gap: 8px; }
+.filterChip { padding: 7px 14px; border-radius: 10px; border: 1px solid #e0daf5; background: #fff; color: #6B7280; font: 600 13px/1 system-ui; cursor: pointer; }
+.filterActive { background: var(--lav); color: var(--purple); border-color: var(--purple); }
+
+.courseGroup { display: flex; flex-direction: column; gap: 10px; }
+.courseGroupHd { display: flex; align-items: center; gap: 10px; }
+.courseTag { background: var(--lav); color: var(--purple); padding: 5px 12px; border-radius: 8px; font: 700 13px/1 system-ui; }
+.courseCount { font: 400 13px/1 system-ui; color: #9CA3AF; }
+
+.classmateGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.classmateCard { background: #fff; border: 1px solid #e0daf5; border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 12px; }
+.avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg,var(--purple),var(--purple-hi)); display: flex; align-items: center; justify-content: center; color: #fff; font: 700 18px/1 system-ui; flex-shrink: 0; overflow: hidden; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.cmInfo { flex: 1; min-width: 0; }
+.cmName { font: 600 13px/1.2 system-ui; color: var(--navy); }
+.cmProgram { font: 400 11px/1 system-ui; color: #6B7280; margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cmYear { font: 400 11px/1 system-ui; color: #9CA3AF; margin-top: 2px; }
+.connectBtn { padding: 7px 12px; border: none; border-radius: 8px; background: var(--lav); color: var(--purple); font: 600 12px/1 system-ui; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
+.sent { background: #DCFCE7; color: #16A34A; cursor: not-allowed; }
+
+.loading, .empty { text-align: center; padding: 48px 24px; background: #fff; border-radius: 14px; border: 1px solid #e0daf5; }
+.emptyIcon { font-size: 40px; margin-bottom: 12px; }
+.empty h3 { font: 700 18px/1 system-ui; color: var(--navy); margin: 0 0 8px; }
+.empty p { font: 400 14px/1.5 system-ui; color: #6B7280; margin: 0 0 16px; }
+.btn { display: inline-block; padding: 11px 22px; background: var(--purple); color: #fff; border-radius: 10px; text-decoration: none; font: 600 14px/1 system-ui; }
+
+.authWall { min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; }
+.authWall h2 { font: 700 22px/1 system-ui; color: var(--navy); }
+
+@media (max-width: 600px) { .classmateGrid { grid-template-columns: 1fr; } }
+@media (prefers-color-scheme: dark) {
+  .page { background: #0D0C18; }
+  .classmateCard { background: #1A1830; border-color: #2E2B50; }
+  .cmName { color: #F0EEFF; }
+  .filterChip { background: #1A1830; border-color: #2E2B50; color: #A8A4D0; }
+  .courseCount { color: #5C5888; }
+}

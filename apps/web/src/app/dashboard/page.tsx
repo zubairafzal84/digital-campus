@@ -66,6 +66,40 @@ export default async function DashboardPage() {
         </div>
       </div>
 
+      {/* Your Courses widget — course-centric hub */}
+      <div className={styles.coursesWidget}>
+        <div className={styles.coursesWidgetHd}>
+          <h2 className={styles.coursesWidgetTitle}>Your courses</h2>
+          <Link href="/courses" className={styles.cardLink}>Manage →</Link>
+        </div>
+        <p className={styles.coursesWidgetSub}>Add your courses to unlock classmate matching, study groups, and textbooks.</p>
+        <div className={styles.coursesChips}>
+          <Link href="/courses" className={styles.courseChipAdd}>+ Add courses</Link>
+        </div>
+        <div className={styles.coursesQuickGrid}>
+          <Link href="/classmates" className={styles.coursesQuickItem}>
+            <span>👥</span>
+            <strong>Find classmates</strong>
+            <span className={styles.cqSub}>Connect with students in your courses</span>
+          </Link>
+          <Link href="/courses" className={styles.coursesQuickItem}>
+            <span>📚</span>
+            <strong>Study together</strong>
+            <span className={styles.cqSub}>Join an exam prep or homework group</span>
+          </Link>
+          <Link href="/textbooks" className={styles.coursesQuickItem}>
+            <span>🎒</span>
+            <strong>Course textbooks</strong>
+            <span className={styles.cqSub}>Find books being sold by other students</span>
+          </Link>
+          <Link href="/events" className={styles.coursesQuickItem}>
+            <span>🗓️</span>
+            <strong>What&rsquo;s happening</strong>
+            <span className={styles.cqSub}>Discover study sessions and events</span>
+          </Link>
+        </div>
+      </div>
+
       {/* Quick stats bar */}
       <div className={styles.statsBar}>
         <div className={styles.statChip}>

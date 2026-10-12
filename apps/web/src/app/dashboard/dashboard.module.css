@@ -699,4 +699,89 @@
   .statChip {
     min-width: 100px;
   }
+
+  .coursesQuickGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ── Your Courses Widget ── */
+.coursesWidget {
+  background: #fff;
+  border: 1px solid #e0daf5;
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin-bottom: 16px;
+}
+.coursesWidgetHd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.coursesWidgetTitle {
+  font: 700 17px/1 var(--font-sans, system-ui);
+  color: var(--navy, #0A1F5D);
+  margin: 0;
+}
+.coursesWidgetSub {
+  font: 400 13px/1.4 system-ui;
+  color: #6B7280;
+  margin: 0 0 14px;
+}
+.coursesChips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.courseChipAdd {
+  padding: 7px 16px;
+  border-radius: 10px;
+  border: 2px dashed #c4b8f5;
+  background: var(--lav, #E9E2FF);
+  color: var(--purple, #6B3EF2);
+  font: 600 13px/1 system-ui;
+  text-decoration: none;
+  transition: all .15s;
+}
+.courseChipAdd:hover { background: var(--purple, #6B3EF2); color: #fff; border-color: transparent; }
+
+.coursesQuickGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.coursesQuickItem {
+  background: #f8f7fc;
+  border: 1px solid #ede8ff;
+  border-radius: 12px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-decoration: none;
+  transition: all .15s;
+}
+.coursesQuickItem:hover {
+  border-color: var(--purple, #6B3EF2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(107,62,242,.1);
+}
+.coursesQuickItem > span:first-child { font-size: 22px; }
+.coursesQuickItem strong { font: 700 13px/1.2 system-ui; color: var(--navy, #0A1F5D); }
+.cqSub { font: 400 11px/1.4 system-ui; color: #9CA3AF; }
+
+@media (prefers-color-scheme: dark) {
+  .coursesWidget {
+    background: #1A1830;
+    border-color: #2E2B50;
+  }
+  .coursesWidgetTitle { color: #F0EEFF; }
+  .coursesWidgetSub { color: #A8A4D0; }
+  .coursesQuickItem {
+    background: #14122A;
+    border-color: #2E2B50;
+  }
+  .coursesQuickItem strong { color: #F0EEFF; }
 }
