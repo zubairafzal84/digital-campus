@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { href: '/student-life', label: 'Student Life', labelFr: 'Vie étudiante' },
   { href: '/students', label: 'Students', labelFr: 'Étudiants' },
   { href: '/deals', label: 'Deals', labelFr: 'Offres' },
+  { href: '/professors', label: 'Professors', labelFr: 'Professeurs' },
 ]
 
 export function SiteNav() {

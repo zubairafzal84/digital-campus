@@ -181,3 +181,22 @@ FROM (VALUES
 ) AS c (institution_slug, name, slug, category, description, member_count)
 JOIN institutions i ON i.slug = c.institution_slug
 ON CONFLICT DO NOTHING;
+
+-- ============================================================
+-- Professors
+-- Generic academic names — not based on any real specific person.
+-- rating_count = 0, all avg_ fields = NULL (no fabricated ratings).
+-- ============================================================
+INSERT INTO public.professors (name, school_slug, department, courses, is_published)
+VALUES
+  ('Dr. Sarah Chen',        'ubc',       'Computer Science',          ARRAY['CPSC 110', 'CPSC 313'],         true),
+  ('Prof. James Okafor',    'uoft',      'Electrical Engineering',    ARRAY['ECE 302', 'ECE 410'],           true),
+  ('Dr. Marie Tremblay',    'mcgill',    'Biochemistry',              ARRAY['BIOL 200', 'BIOL 460'],         true),
+  ('Prof. Arun Sharma',     'uwaterloo', 'Mathematics',               ARRAY['MATH 135', 'MATH 235'],         true),
+  ('Dr. Fatima Al-Hassan',  'ualberta',  'Economics',                 ARRAY['ECON 101', 'ECON 281'],         true),
+  ('Prof. David Kowalski',  'dal',       'History',                   ARRAY['HIST 1001', 'HIST 2201'],       true),
+  ('Dr. Priya Nair',        'sfu',       'Psychology',                ARRAY['PSYC 100', 'PSYC 280'],         true),
+  ('Prof. Étienne Bouchard','uottawa',   'Political Science',         ARRAY['POL 1101', 'POL 2302'],         true),
+  ('Dr. Kenji Watanabe',    'ubc',       'Physics & Astronomy',       ARRAY['PHYS 101', 'PHYS 301'],         true),
+  ('Prof. Amara Diallo',    'mcmaster',  'Health Sciences',           ARRAY['HLTHSCI 2A06', 'HLTHSCI 3P03'], true)
+ON CONFLICT DO NOTHING;

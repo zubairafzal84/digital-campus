@@ -1,0 +1,554 @@
+/* ── Professors listing page ──────────────────────────── */
+
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a3580 100%);
+  padding: 64px 0 56px;
+  color: #ffffff;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.breadcrumb {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 24px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.breadcrumb a {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: #ffffff;
+}
+
+.h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(30px, 5vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+.hi {
+  background: linear-gradient(135deg, var(--purple-hi) 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sub {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 32px;
+  max-width: 560px;
+  line-height: 1.65;
+}
+
+/* ── Hero search ──────────────────────────────────────── */
+.searchRow {
+  display: flex;
+  gap: 10px;
+  max-width: 640px;
+  flex-wrap: wrap;
+}
+
+.searchWrap {
+  flex: 1;
+  min-width: 200px;
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+  font-size: 16px;
+}
+
+.searchInput {
+  width: 100%;
+  height: 50px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 15px;
+  padding: 0 18px 0 42px;
+  outline: none;
+  transition: border 0.15s, background 0.15s;
+  box-sizing: border-box;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.searchInput:focus {
+  border-color: var(--purple-hi);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Filters ──────────────────────────────────────────── */
+.filters {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0 16px;
+  position: sticky;
+  top: 64px;
+  z-index: 10;
+}
+
+.filterRow {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filterSelect {
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 9px;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  color: var(--fg);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 200px;
+  transition: border-color 0.15s;
+  font-family: var(--font-body);
+}
+
+.filterSelect:hover,
+.filterSelect:focus {
+  border-color: var(--purple);
+  outline: none;
+}
+
+.filterCount {
+  font-size: 13px;
+  color: var(--muted);
+  margin-left: auto;
+}
+
+/* ── Grid ─────────────────────────────────────────────── */
+.section {
+  background: var(--bg);
+  padding: 40px 0 80px;
+}
+
+.gridHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.resultCount {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 18px;
+  background: var(--purple);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s;
+  font-family: var(--font-body);
+}
+
+.addBtn:hover {
+  background: var(--purple-hov);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* ── Professor card ────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 22px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: box-shadow 0.18s, transform 0.18s;
+  box-shadow: var(--shadow-sm);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.cardName {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--fg);
+  margin: 0;
+}
+
+.cardMeta {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cardSchool {
+  font-weight: 600;
+  color: var(--navy);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .cardSchool {
+    color: var(--purple-hi);
+  }
+}
+
+:root[data-theme='dark'] .cardSchool {
+  color: var(--purple-hi);
+}
+
+.cardDept {
+  color: var(--muted);
+}
+
+.cardRating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.starFilled {
+  color: #f59e0b;
+}
+
+.starHalf {
+  color: #f59e0b;
+  opacity: 0.6;
+}
+
+.starEmpty {
+  color: var(--border);
+}
+
+.ratingNum {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.ratingCount {
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.noRatings {
+  font-size: 13px;
+  color: var(--faint);
+  font-style: italic;
+}
+
+.cardFooter {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.viewLink {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--purple);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.viewLink:hover {
+  color: var(--purple-hov);
+}
+
+/* ── Empty state ──────────────────────────────────────── */
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px dashed var(--border);
+}
+
+.emptyIcon {
+  font-size: 42px;
+  margin-bottom: 16px;
+}
+
+.emptyTitle {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: 8px;
+}
+
+.emptyText {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+/* ── Add professor modal ──────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 31, 93, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.modal {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px 28px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 24px 80px rgba(10, 31, 93, 0.2);
+  position: relative;
+}
+
+.modalTitle {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--fg);
+  margin-bottom: 4px;
+}
+
+.modalSub {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: var(--font-body);
+}
+
+.closeBtn:hover {
+  background: var(--lav);
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.input,
+.select,
+.formTextarea {
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 9px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 14px;
+  transition: border-color 0.15s;
+  outline: none;
+  font-family: var(--font-body);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.formTextarea {
+  height: auto;
+  padding: 10px 14px;
+  resize: vertical;
+  min-height: 72px;
+}
+
+.input:focus,
+.select:focus,
+.formTextarea:focus {
+  border-color: var(--purple);
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.formActions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.cancelBtn {
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 9px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  font-family: var(--font-body);
+}
+
+.cancelBtn:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+}
+
+.submitModalBtn {
+  height: 40px;
+  padding: 0 24px;
+  background: var(--purple);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: var(--font-body);
+}
+
+.submitModalBtn:hover {
+  background: var(--purple-hov);
+}
+
+.submitModalBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loginPrompt {
+  text-align: center;
+  padding: 24px 0 8px;
+}
+
+.loginPrompt p {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.loginLink {
+  display: inline-flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 24px;
+  background: var(--purple);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 9px;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.loginLink:hover {
+  background: var(--purple-hov);
+}
+
+.successMsg {
+  text-align: center;
+  padding: 16px 0;
+  font-size: 15px;
+  color: var(--green);
+  font-weight: 600;
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 640px) {
+  .searchRow {
+    flex-direction: column;
+  }
+  .filterRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filterSelect {
+    min-width: unset;
+    width: 100%;
+  }
+  .filterCount {
+    margin-left: 0;
+  }
+  .modal {
+    padding: 28px 20px 22px;
+  }
+}

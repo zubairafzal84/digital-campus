@@ -1992,6 +1992,22 @@ export default async function SchoolPage({ params }: Props) {
             </div>
           </div>
         </section>
+
+        <section className={styles.connectSection}>
+          <div className={styles.inner}>
+            <h2 className={styles.connectH}>Rate professors at {school.name}</h2>
+            <div className={styles.connectCard}>
+              <div className={styles.connectText}>
+                <p className={styles.connectBody}>
+                  Know a great professor at {school.shortName}? Share your experience.
+                </p>
+              </div>
+              <Link href={`/professors?school=${slug}`} className={styles.btnConnectPrimary}>
+                Rate a professor →
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
       <SiteFooter />
     </>

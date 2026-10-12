@@ -13,6 +13,7 @@ const COLS = [
       { label: 'Student Deals', href: '/deals' },
       { label: 'Study Groups', href: '/study-groups' },
       { label: 'Student Profiles', href: '/students' },
+      { label: 'Rate Professors', href: '/professors' },
     ],
   },
   {

@@ -56,6 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/clubs/register`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/study-groups`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${BASE}/deals`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${BASE}/professors`, lastModified: now, changeFrequency: 'daily', priority: 0.85 },
   ]
 
   const schoolPages: MetadataRoute.Sitemap = SCHOOL_SLUGS.map((slug) => ({

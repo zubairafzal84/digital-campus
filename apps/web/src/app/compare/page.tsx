@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { SiteNav } from '@/components/layout/SiteNav'
 import { SiteFooter } from '@/components/layout/SiteFooter'
+import CompareClient from './CompareClient'
 import styles from './compare.module.css'
 
 export const metadata: Metadata = {
@@ -38,7 +39,13 @@ const ldJson = {
   ],
 }
 
-export default function ComparePage() {
+type Props = {
+  searchParams: Promise<{ a?: string; b?: string; c?: string }>
+}
+
+export default async function ComparePage({ searchParams }: Props) {
+  const { a, b, c } = await searchParams
+
   return (
     <>
       <JsonLd data={ldJson} />
@@ -56,7 +63,7 @@ export default function ComparePage() {
               <span className={styles.hi}>Universities & Colleges</span>
             </h1>
             <p className={styles.sub}>
-              Tuition, rankings, programmes, scholarships — side by side.<br />
+              Tuition, rankings, programmes, acceptance rates — side by side.<br />
               Make the right choice for your future.
             </p>
           </div>
@@ -78,34 +85,7 @@ export default function ComparePage() {
           </div>
         </section>
 
-        <section className={styles.custom}>
-          <div className={styles.inner}>
-            <p className={styles.sectionTag}>Custom comparison</p>
-            <h2 className={styles.h2}>Don't see yours? Build it.</h2>
-            <div className={styles.builder}>
-              <div className={styles.builderSlot}>
-                <label className={styles.builderLabel}>School A</label>
-                <input
-                  type="text"
-                  className={styles.builderInput}
-                  placeholder="e.g. University of Waterloo"
-                  aria-label="School A"
-                />
-              </div>
-              <span className={styles.builderVs}>vs</span>
-              <div className={styles.builderSlot}>
-                <label className={styles.builderLabel}>School B</label>
-                <input
-                  type="text"
-                  className={styles.builderInput}
-                  placeholder="e.g. University of Guelph"
-                  aria-label="School B"
-                />
-              </div>
-              <button className={styles.builderBtn}>Compare →</button>
-            </div>
-          </div>
-        </section>
+        <CompareClient initialA={a} initialB={b} initialC={c} />
       </main>
       <SiteFooter />
     </>

@@ -191,6 +191,19 @@ export default async function DashboardPage() {
             <Link href="/study-groups" className={styles.emptyLink}>Browse study rooms →</Link>
           </div>
         </section>
+
+        {/* Rate a Professor card */}
+        <section className={styles.card} aria-labelledby="professors-h">
+          <div className={styles.cardHeader}>
+            <h2 className={styles.cardH} id="professors-h">Rate a Professor</h2>
+            <Link href="/professors" className={styles.cardLink}>Browse →</Link>
+          </div>
+          <div className={styles.emptyState}>
+            <span className={styles.emptyIcon}>🎓</span>
+            <p>Share your experience with a professor.</p>
+            <Link href="/professors" className={styles.emptyLink}>Rate a professor →</Link>
+          </div>
+        </section>
       </div>
     </>
   )
