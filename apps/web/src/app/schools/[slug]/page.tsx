@@ -22,7 +22,7 @@ const SCHOOLS: Record<string, School> = {
     verified: true,
     lastUpdated: '2026-10',
     description:
-      'One of Canada's top research universities, UBC spans two campuses in Vancouver and Kelowna. Known for its world-class faculty, ocean-to-sky setting, and bilingual research output.',
+      'One of Canada’s top research universities, UBC spans two campuses in Vancouver and Kelowna. Known for its world-class faculty, ocean-to-sky setting, and bilingual research output.',
     rankings: { macleans: 3, times: 34, qs: 38 },
     faculties: ['Arts', 'Science', 'Commerce', 'Engineering', 'Law', 'Medicine', 'Forestry'],
     website: 'https://ubc.ca',
@@ -62,10 +62,190 @@ const SCHOOLS: Record<string, School> = {
     verified: true,
     lastUpdated: '2026-10',
     description:
-      'Canada's largest university and a global top-25 research institution. Three campuses across the Greater Toronto Area. Home to groundbreaking research in AI, medicine, and public policy.',
+      'Canada’s largest university and a global top-25 research institution. Three campuses across the Greater Toronto Area. Home to groundbreaking research in AI, medicine, and public policy.',
     rankings: { macleans: 1, times: 21, qs: 25 },
     faculties: ['Arts & Science', 'Engineering', 'Rotman Commerce', 'Law', 'Medicine', 'Education', 'Architecture'],
     website: 'https://utoronto.ca',
+  },
+  mcgill: {
+    slug: 'mcgill',
+    name: 'McGill University',
+    shortName: 'McGill',
+    city: 'Montréal',
+    province: 'QC',
+    type: 'University',
+    founded: 1821,
+    enrolment: 40000,
+    programmes: 300,
+    tuitionMin: 4338,
+    tuitionMax: 27000,
+    verified: true,
+    lastUpdated: '2026-10',
+    description:
+      'McGill is one of Canada’s most distinguished universities, renowned for its research in medicine, law, and natural sciences. Located in bilingual Montréal, it draws students from over 150 countries.',
+    rankings: { macleans: 4, times: 46, qs: 30 },
+    faculties: ['Arts', 'Science', 'Medicine', 'Law', 'Engineering', 'Education', 'Management', 'Music'],
+    website: 'https://mcgill.ca',
+  },
+  uwaterloo: {
+    slug: 'uwaterloo',
+    name: 'University of Waterloo',
+    shortName: 'Waterloo',
+    city: 'Waterloo',
+    province: 'ON',
+    type: 'University',
+    founded: 1959,
+    enrolment: 42000,
+    programmes: 250,
+    tuitionMin: 6700,
+    tuitionMax: 39000,
+    verified: true,
+    lastUpdated: '2026-10',
+    description:
+      'Home to the world’s largest co-operative education program, Waterloo is a global leader in computer science, engineering, and mathematics. Its graduates are among the most recruited in tech.',
+    rankings: { macleans: 6, times: 201, qs: 173 },
+    faculties: ['Mathematics', 'Engineering', 'Science', 'Arts', 'Environment', 'Health', 'Applied Health Sciences'],
+    website: 'https://uwaterloo.ca',
+  },
+  queens: {
+    slug: 'queens',
+    name: "Queen's University",
+    shortName: "Queen's",
+    city: 'Kingston',
+    province: 'ON',
+    type: 'University',
+    founded: 1841,
+    enrolment: 25000,
+    programmes: 200,
+    tuitionMin: 6500,
+    tuitionMax: 50000,
+    verified: true,
+    lastUpdated: '2026-10',
+    description:
+      "One of Canada’s oldest and most respected universities, Queen’s offers a close-knit campus community in Kingston, Ontario. Smith School of Business and the Faculty of Law are among its most acclaimed.",
+    rankings: { macleans: 5, times: 401, qs: 561 },
+    faculties: ['Arts & Science', 'Engineering', 'Smith Commerce', 'Law', 'Education', 'Health Sciences', 'Computing'],
+    website: 'https://queensu.ca',
+  },
+  ualberta: {
+    slug: 'ualberta',
+    name: 'University of Alberta',
+    shortName: 'U of A',
+    city: 'Edmonton',
+    province: 'AB',
+    type: 'University',
+    founded: 1908,
+    enrolment: 40000,
+    programmes: 400,
+    tuitionMin: 5600,
+    tuitionMax: 30000,
+    verified: true,
+    lastUpdated: '2026-10',
+    description:
+      'A leading Canadian research university, the University of Alberta is ranked among the top five in Canada. It excels in energy research, agriculture, and Indigenous studies, with strong co-op programs.',
+    rankings: { macleans: 7, times: 110, qs: 111 },
+    faculties: ['Arts', 'Science', 'Engineering', 'Business', 'Law', 'Medicine', 'Education', 'Agriculture'],
+    website: 'https://ualberta.ca',
+  },
+  uvic: {
+    slug: 'uvic',
+    name: 'University of Victoria',
+    shortName: 'UVic',
+    city: 'Victoria',
+    province: 'BC',
+    type: 'University',
+    founded: 1963,
+    enrolment: 22000,
+    programmes: 160,
+    tuitionMin: 5660,
+    tuitionMax: 31000,
+    verified: true,
+    lastUpdated: '2026-10',
+    description:
+      'UVic is a leading research university on southern Vancouver Island. Known for its co-op programs, ocean and climate science, and a commitment to reconciliation with Indigenous peoples.',
+    rankings: { macleans: 8, times: 601, qs: 651 },
+    faculties: ['Humanities', 'Science', 'Engineering', 'Business', 'Law', 'Education', 'Social Sciences', 'Fine Arts'],
+    website: 'https://uvic.ca',
+  },
+  dal: {
+    slug: 'dal',
+    name: 'Dalhousie University',
+    shortName: 'Dal',
+    city: 'Halifax',
+    province: 'NS',
+    type: 'University',
+    founded: 1818,
+    enrolment: 19000,
+    programmes: 180,
+    tuitionMin: 9000,
+    tuitionMax: 24000,
+    verified: true,
+    lastUpdated: '2026-10',
+    description:
+      "Dalhousie is Atlantic Canada’s leading research-intensive university, known for ocean sciences, law, and medicine. Halifax offers a vibrant, affordable student experience on Canada’s East Coast.",
+    rankings: { macleans: 11, times: 601, qs: 701 },
+    faculties: ['Arts & Social Sciences', 'Science', 'Engineering', 'Management', 'Law', 'Medicine', 'Health'],
+    website: 'https://dal.ca',
+  },
+  bcit: {
+    slug: 'bcit',
+    name: 'British Columbia Institute of Technology',
+    shortName: 'BCIT',
+    city: 'Burnaby',
+    province: 'BC',
+    type: 'Institute of Technology',
+    founded: 1964,
+    enrolment: 48000,
+    programmes: 150,
+    tuitionMin: 4500,
+    tuitionMax: 20000,
+    verified: true,
+    lastUpdated: '2026-10',
+    description:
+      'BCIT is BC’s largest post-secondary institution, offering applied and technical training that leads directly to careers. High employment rates and industry partnerships make it a top choice for career-focused students.',
+    rankings: { macleans: 0, times: 0, qs: 0 },
+    faculties: ['Applied & Natural Sciences', 'Business & Media', 'Computing & IT', 'Engineering', 'Health Sciences', 'Trades & Apprenticeship'],
+    website: 'https://bcit.ca',
+  },
+  seneca: {
+    slug: 'seneca',
+    name: 'Seneca Polytechnic',
+    shortName: 'Seneca',
+    city: 'Toronto',
+    province: 'ON',
+    type: 'College',
+    founded: 1967,
+    enrolment: 35000,
+    programmes: 300,
+    tuitionMin: 3800,
+    tuitionMax: 18500,
+    verified: true,
+    lastUpdated: '2026-10',
+    description:
+      "Seneca Polytechnic is one of Canada’s largest colleges, serving students across multiple Toronto-area campuses. Its business, technology, and animation programs enjoy strong industry reputations.",
+    rankings: { macleans: 0, times: 0, qs: 0 },
+    faculties: ['Business', 'Computing & IT', 'Engineering Technology', 'Communication Arts', 'Health Sciences', 'Liberal Arts'],
+    website: 'https://senecapolytechnic.ca',
+  },
+  humber: {
+    slug: 'humber',
+    name: 'Humber College',
+    shortName: 'Humber',
+    city: 'Etobicoke',
+    province: 'ON',
+    type: 'College',
+    founded: 1967,
+    enrolment: 30000,
+    programmes: 250,
+    tuitionMin: 3700,
+    tuitionMax: 17800,
+    verified: true,
+    lastUpdated: '2026-10',
+    description:
+      "Humber is one of Ontario’s largest polytechnics, offering a blend of college credentials and degree pathways. Located in Toronto’s west end, it is known for creative arts, business, and social service programs.",
+    rankings: { macleans: 0, times: 0, qs: 0 },
+    faculties: ['Business', 'Health Sciences', 'Liberal Arts & Sciences', 'Media Studies', 'Social & Community Services', 'Technology'],
+    website: 'https://humber.ca',
   },
 }
 
@@ -87,6 +267,10 @@ interface School {
   rankings: { macleans: number; times: number; qs: number }
   faculties: string[]
   website: string
+}
+
+export function generateStaticParams() {
+  return Object.keys(SCHOOLS).map((slug) => ({ slug }))
 }
 
 type Props = { params: Promise<{ slug: string }> }
@@ -188,27 +372,35 @@ export default async function SchoolPage({ params }: Props) {
                   </div>
                 </section>
 
-                <section className={styles.card}>
-                  <h2 className={styles.cardH}>Rankings</h2>
-                  <div className={styles.rankRow}>
-                    <div className={styles.rankItem}>
-                      <span className={styles.rankNum}>#{school.rankings.macleans}</span>
-                      <span className={styles.rankLabel}>Maclean's</span>
+                {(school.rankings.macleans > 0 || school.rankings.times > 0 || school.rankings.qs > 0) && (
+                  <section className={styles.card}>
+                    <h2 className={styles.cardH}>Rankings</h2>
+                    <div className={styles.rankRow}>
+                      {school.rankings.macleans > 0 && (
+                        <div className={styles.rankItem}>
+                          <span className={styles.rankNum}>#{school.rankings.macleans}</span>
+                          <span className={styles.rankLabel}>Maclean&apos;s</span>
+                        </div>
+                      )}
+                      {school.rankings.times > 0 && (
+                        <div className={styles.rankItem}>
+                          <span className={styles.rankNum}>#{school.rankings.times}</span>
+                          <span className={styles.rankLabel}>Times World</span>
+                        </div>
+                      )}
+                      {school.rankings.qs > 0 && (
+                        <div className={styles.rankItem}>
+                          <span className={styles.rankNum}>#{school.rankings.qs}</span>
+                          <span className={styles.rankLabel}>QS World</span>
+                        </div>
+                      )}
                     </div>
-                    <div className={styles.rankItem}>
-                      <span className={styles.rankNum}>#{school.rankings.times}</span>
-                      <span className={styles.rankLabel}>Times World</span>
-                    </div>
-                    <div className={styles.rankItem}>
-                      <span className={styles.rankNum}>#{school.rankings.qs}</span>
-                      <span className={styles.rankLabel}>QS World</span>
-                    </div>
-                  </div>
-                  <p className={styles.rankNote}>
-                    Rankings sourced from Maclean's Education, Times Higher Education, and QS World University Rankings.
-                    <Link href="/about#data-sources" className={styles.inlineLink}> Data sources →</Link>
-                  </p>
-                </section>
+                    <p className={styles.rankNote}>
+                      Rankings sourced from Maclean&apos;s Education, Times Higher Education, and QS World University Rankings.
+                      <Link href="/about#data-sources" className={styles.inlineLink}> Data sources →</Link>
+                    </p>
+                  </section>
+                )}
               </div>
 
               <aside className={styles.sidebar}>

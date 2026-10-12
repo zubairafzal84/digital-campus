@@ -26,7 +26,7 @@ export default function DashboardPage() {
               { href: '/dashboard', label: 'Overview', icon: '◉' },
               { href: '/dashboard/grades', label: 'Grades', icon: '📊' },
               { href: '/dashboard/clubs', label: 'Clubs', icon: '🤝' },
-              { href: '/scholarships', label: 'Scholarships', icon: '🎓' },
+              { href: '/dashboard/scholarships', label: 'Scholarships', icon: '🎓' },
               { href: '/housing', label: 'Housing', icon: '🏠' },
               { href: '/dashboard/chat', label: 'Messages', icon: '💬' },
               { href: '/dashboard/notifications', label: 'Notifications', icon: '🔔' },
