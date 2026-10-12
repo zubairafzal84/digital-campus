@@ -1,0 +1,312 @@
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  height: calc(100vh - 64px);
+}
+
+/* Thread list */
+.threads {
+  border-right: 1.5px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.threadsHeader {
+  padding: 20px 20px 14px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.h1 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.threadList {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.thread {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+  position: relative;
+}
+
+.thread:hover {
+  background: var(--lav);
+}
+
+.threadActive {
+  background: var(--lav);
+}
+
+.threadAvatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--purple);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.threadInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.threadTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.threadName {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.threadTime {
+  font-size: 11px;
+  color: var(--faint);
+  flex-shrink: 0;
+}
+
+.threadMsg {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.unreadBadge {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--purple);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Conversation */
+.convo {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.convoHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+  border-bottom: 1.5px solid var(--border);
+  flex-shrink: 0;
+  background: var(--white);
+}
+
+.convoAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--purple);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.convoName {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 1px;
+}
+
+.convoSchool {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bubble {
+  max-width: 72%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bubbleMe {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.bubbleThem {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.bubbleText {
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.bubbleMe .bubbleText {
+  background: var(--purple);
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+}
+
+.bubbleThem .bubbleText {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  color: var(--fg);
+  border-bottom-left-radius: 4px;
+}
+
+.bubbleTime {
+  font-size: 11px;
+  color: var(--faint);
+  padding: 0 4px;
+}
+
+/* Compose */
+.compose {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-top: 1.5px solid var(--border);
+  background: var(--white);
+  flex-shrink: 0;
+}
+
+.composeInput {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 24px;
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.composeInput:focus {
+  border-color: var(--purple);
+}
+
+.sendBtn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--purple);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.sendBtn:hover {
+  background: var(--purple-hi);
+}
+
+.sendBtn:active {
+  transform: scale(0.95);
+}
+
+/* Contact gate */
+.contactGate {
+  padding: 16px 24px;
+  border-top: 1.5px solid var(--border);
+  background: var(--lav);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.gateText {
+  font-size: 14px;
+  color: var(--navy);
+  font-weight: 500;
+  flex: 1;
+}
+
+.gateBtns {
+  display: flex;
+  gap: 8px;
+}
+
+.acceptBtn {
+  padding: 8px 18px;
+  background: var(--purple);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.declineBtn {
+  padding: 8px 18px;
+  background: transparent;
+  color: var(--muted);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .threads {
+    display: none;
+  }
+}
